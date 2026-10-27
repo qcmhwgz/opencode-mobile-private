@@ -28,11 +28,19 @@ jobs:
       - run: npm run private:test
       - run: npm run test:fake-server:self
       - run: npx --no-install playwright install --with-deps chromium
+      - name: Export browser test application
+        timeout-minutes: 10
+        run: npm run build:web:ci
+        env:
+          CI: 'true'
+          EXPO_PUBLIC_E2E_MODE: '1'
+          EXPO_APP_VARIANT: development
       - run: npm run test:e2e:web
         env:
           CI: 'true'
           EXPO_PUBLIC_E2E_MODE: '1'
           E2E_WORKERS: '2'
+          E2E_SKIP_BUILD: '1'
       - name: Preserve failed browser diagnostics
         if: failure()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2

@@ -67,3 +67,10 @@
 - 失败用例：`connect.spec.mjs:529`，`expiry stops data-plane traffic while preserving owned machine and profile`。用例在设置模拟凭据 8 秒有效期后才初始化页面和配对；本次等待项目页超时，整个失败用例约 42 秒，其中 URL 等待超时为 30 秒。短有效期在初始化期间耗尽是当前主要假设，尚不能仅凭本地结果确认 CI 问题已解决。
 - 未修改源码的本地针对性复跑：同一用例 4 并发、重复 4 次，**4/4 通过**，没有复现本次 CI 失败。
 - CI 调整：只把浏览器并发设为 2，并在失败时保留模拟测试诊断文件 3 天；保留全部 162 项、原有断言和 8 秒有效期，不添加自动重试。后续完整 CI 仍须通过，不能把此配置调整记为已修复或已通过。
+
+## GitHub 第二次运行记录
+
+- [运行 #2](https://github.com/qcmhwgz/opencode-mobile-private/actions/runs/40499024449)，源码 `291489b0ce6410ef831ce2473944251ca96571af`：静态检查、641 项单元测试、26 项私有边界测试和模拟服务自测通过。
+- 浏览器用例尚未开始。测试配置把冷页面打包和 Web 服务启动放在同一个 180 秒窗口，日志在 181 秒后报告 `Timed out waiting 180000ms from config.webServer`。因此未能验证首次的凭据过期用例是否已恢复，也没有生成 APK。
+- 已保留失败诊断 artifact `12731823643`，SHA-256 `24049de255a10cb7e829d6fb9f31d107805a14d84829d9a615bd91644636351e`。这是诊断 ZIP 的摘要，不是 APK 摘要。
+- 后续 CI 把 `build:web:ci` 拆成独立的、最多 10 分钟的步骤，使用与原配置相同的 E2E/development 环境；测试使用项目已有的 `E2E_SKIP_BUILD=1` 仅启动预构建页面。仍保留 180 秒服务启动检查、全部用例和原始断言。没有修改 `tests/e2e/`、`tests/fake-opencode/` 或应用源码。

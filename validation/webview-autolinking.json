@@ -1,0 +1,11 @@
+{
+  "packageName": "@expo/dom-webview",
+  "nativeProjects": [
+    "expo-dom-webview"
+  ],
+  "buildFromSource": [
+    "expo-sharing",
+    "expo-dom-webview"
+  ],
+  "proofScope": "Pinned autolinking resolution only; native compilation pending"
+}

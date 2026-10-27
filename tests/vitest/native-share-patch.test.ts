@@ -9,7 +9,7 @@ const root = path.resolve('node_modules/expo-sharing');
 describe('Android sharing build patch', () => {
   it('builds the patched Android receiver from source instead of the bundled AAR', () => {
     const pkg = JSON.parse(readFileSync('package.json', 'utf8'));
-    expect(pkg.expo.autolinking.android.buildFromSource).toEqual(['expo-sharing']);
+    expect(pkg.expo.autolinking.android.buildFromSource).toEqual(['expo-sharing', 'expo-dom-webview']);
   });
   it.each([['SimpleShareIntentDataParser.kt', false], ['ResolvingShareIntentDataParser.kt', true]])('patches %s completely and is idempotent', (name, resolved) => {
     const source = readFileSync(path.join(root, 'android/src/main/java/expo/modules/sharing/dataParsers', String(name)), 'utf8');

@@ -11,3 +11,6 @@ Cross-workspace selection uncovered two upstream state bugs: a stale project ses
 The explicit web E2E build retains generic upstream fixtures, including multiple servers and disabled production features, for protocol regression coverage. Native Android cannot disable the JS destination policy through the E2E flag, and private prebuild resets fixture flags. Web fixture tests do not prove native private policy; `tests/private` separately exercises that boundary.
 
 CI produces only unsigned candidates, requires passing gates, and records dependency provenance. Initial native lock generation is a separately selected bootstrap; subsequent builds require committed locks and strict dependency verification. Signing uses an interactive local script and an independently trusted certificate fingerprint. No user signing key is created or transmitted by this project.
+
+
+DOM WebView 的 Kotlin 补丁必须配合 Expo autolinking 的 Android `buildFromSource: ["expo-sharing", "expo-dom-webview"]`。匹配对象为原生项目名；准备脚本拒绝缺失配置或源文件 SHA-256 改动，包括已打补丁后的非预期改动。最终构建日志须确认 WebView 从源码编译，不能仅凭 node_modules 文件已修改断言补丁进入 APK。

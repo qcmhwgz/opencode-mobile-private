@@ -1,0 +1,43 @@
+
+> opencode-mobile-private-edition@1.0.98 private:test
+> vitest run tests/private --config vitest.private.config.mts tests/private/native-inputs.test.ts
+
+
+ RUN  v5.0.3 /Users/wq/Documents/Codex/2026-10-27/referenced-chatgpt-conversation-this-is-an/outputs/OpenCode-Mobile-Private-Edition
+
+ ❯ tests/private/native-inputs.test.ts (3 tests | 2 failed) 135ms
+   × rejects a patched module that can still use a prebuilt Android publication 32ms
+   × rejects changes to an already-patched native input 50ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/private/native-inputs.test.ts > rejects a patched module that can still use a prebuilt Android publication
+AssertionError: expected +0 not to be +0 // Object.is equality
+ ❯ tests/private/native-inputs.test.ts:30:30
+     28| it('rejects a patched module that can still use a prebuilt Android pub…
+     29|   const f = fixture(['expo-sharing', '@expo/dom-webview']);
+     30|   expect(f.run().status).not.toBe(0);
+       |                              ^
+     31|   expect(readFileSync(f.file, 'utf8')).toBe(original);
+     32| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/private/native-inputs.test.ts > rejects changes to an already-patched native input
+AssertionError: expected +0 not to be +0 // Object.is equality
+ ❯ tests/private/native-inputs.test.ts:47:30
+     45|   expect(f.run().status).toBe(0);
+     46|   writeFileSync(f.file, readFileSync(f.file, 'utf8') + '\n// changed n…
+     47|   expect(f.run().status).not.toBe(0);
+       |                              ^
+     48| });
+     49|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed | 2 passed (3)
+      Tests  2 failed | 27 passed (29)
+   Start at  20:45:12
+   Duration  231ms (tests 64%, transform 24%, import 9%, worker 3%)
+

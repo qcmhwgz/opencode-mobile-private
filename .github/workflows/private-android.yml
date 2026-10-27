@@ -32,6 +32,17 @@ jobs:
         env:
           CI: 'true'
           EXPO_PUBLIC_E2E_MODE: '1'
+          E2E_WORKERS: '2'
+      - name: Preserve failed browser diagnostics
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: private-browser-diagnostics-${{ github.sha }}
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: ignore
+          retention-days: 3
   unsigned-apk:
     if: github.event_name == 'workflow_dispatch'
     needs: validate

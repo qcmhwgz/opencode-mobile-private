@@ -47,7 +47,9 @@ npm run private:build -- --freeze-dependencies
 
 ## GitHub Actions
 
-在 GitHub 创建你自己的私有空仓库，把本目录内容作为仓库根目录导入，保留 `.github/workflows/private-android.yml` 和许可证。不要上传 `node_modules/`、`android/`、密钥、密码、`.env`、缓存或测试报告。当前项目没有连接到你的 GitHub 仓库，也未运行远程 Actions。
+已根据用户授权导入私有仓库 [qcmhwgz/opencode-mobile-private](https://github.com/qcmhwgz/opencode-mobile-private)，默认分支为 `main`。首次导入的 Git 文件树与本地源码完全一致。后续开发请以该仓库的最新 `main` 为准；原本地 `private-edition` 分支保留上游历史，与连接器创建的远端提交历史不同，不要直接强制推送覆盖远端。保留许可证，不上传 `node_modules/`、`android/`、密钥、密码、`.env` 或缓存。
+
+在 Actions 选择 **Private Android candidate (unsigned)**，点击 **Run workflow**。首次运行已启动，但被一个凭据 8 秒过期的浏览器用例拦截（161/162 通过），没有进入 APK 编译；详见 `SECURITY-VALIDATION.zh-CN.md`。CI 浏览器并发现限制为 2，失败时将模拟服务测试的报告、截图和追踪保留 3 天；没有修改测试断言或过期时间，也没有启用自动重试。
 
 Actions 权限只有 `contents: read`，官方 actions 固定到提交 SHA，手动运行才构建未签名 arm64 APK。流程先执行静态检查、出站限制测试、假服务测试和浏览器回归，再执行构建、未签名状态检查、合并 Manifest/DEX 检查和 SHA-256 计算。任何门禁失败都不会上传候选 APK。下载的 artifact 是未签名候选，不能直接安装。
 

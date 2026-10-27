@@ -50,9 +50,6 @@ allprojects {
     lockMode = providers.gradleProperty("privateFreezeDependencies").isPresent() ? org.gradle.api.artifacts.dsl.LockMode.DEFAULT : org.gradle.api.artifacts.dsl.LockMode.STRICT
     lockFile = rootProject.file("private-locks/" + project.path.replace(":", "_") + ".lockfile")
   }
-  configurations.configureEach {
-    resolutionStrategy.failOnChangingVersions()
-  }
 }
 `;
     return mod;
@@ -66,8 +63,7 @@ allprojects {
   <base-config cleartextTrafficPermitted="false" />
   <domain-config cleartextTrafficPermitted="true"><domain includeSubdomains="false">10.0.0.2</domain></domain-config>
 </network-security-config>`);
-    fs.writeFileSync(path.join(xml, 'private_data_extraction.xml'), `<?xml version="1.0" encoding="utf-8"?>
-<data-extraction-rules><cloud-backup disableIfNoEncryptionCapabilities="true"><exclude domain="root" path="." /></cloud-backup><device-transfer><exclude domain="root" path="." /></device-transfer></data-extraction-rules>`);
+    fs.copyFileSync(path.join(root, 'config/private/data-extraction-rules.xml'), path.join(xml, 'private_data_extraction.xml'));
     const java = path.join(root, 'android/app/src/main/java/app/opencode/mobile/privateedition');
     fs.mkdirSync(java, { recursive: true });
     fs.copyFileSync(path.join(root, 'config/private/PrivateNetwork.kt'), path.join(java, 'PrivateNetwork.kt'));

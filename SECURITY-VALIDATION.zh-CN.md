@@ -45,7 +45,7 @@
 
 ## 已实施的源码与配置约束
 
-原生 OkHttp factory 在 React 初始化之前安装，限制为 HTTP `10.0.0.2:47119`，要求活动 VPN，禁止自动重定向；固定 Expo 源码中的 Expo Fetch 也使用该 factory。JS 启动边界对 fetch、XHR、WebSocket 和外链作额外限制。网络安全 XML 只为目标 IP 开放明文 HTTP。HTTP 的机密性依赖已有 WireGuard 的正确路由，仍需在手机上验证。
+原生 OkHttp factory 在 React 初始化之前安装，限制为 HTTP `10.0.0.2:47119`，要求活动 VPN，禁止自动重定向和系统代理；SocketFactory 绑定活动 VPN，固定 Expo 源码中的 Expo Fetch 也使用同一 factory。JS 启动边界对 fetch、XHR、WebSocket 和外链作额外限制。网络安全 XML 只为目标 IP 开放明文 HTTP。HTTP 的机密性依赖已有 WireGuard，VPN 绑定、断线与分流仍需在手机上验证。
 
 关闭云连接、购买、更新、语音、通知、小组件、后台任务、浏览器及分享集成，排除对应原生模块；删除商店发布与更新模块。部分上游源码/类型依赖保留，运行时入口关闭，不能声称已逐行移除所有相关源码。网络使用统计是应用本地计数，并非遥测发送。
 
@@ -74,3 +74,13 @@
 - 浏览器用例尚未开始。测试配置把冷页面打包和 Web 服务启动放在同一个 180 秒窗口，日志在 181 秒后报告 `Timed out waiting 180000ms from config.webServer`。因此未能验证首次的凭据过期用例是否已恢复，也没有生成 APK。
 - 已保留失败诊断 artifact `12731823643`，SHA-256 `24049de255a10cb7e829d6fb9f31d107805a14d84829d9a615bd91644636351e`。这是诊断 ZIP 的摘要，不是 APK 摘要。
 - 后续 CI 把 `build:web:ci` 拆成独立的、最多 10 分钟的步骤，使用与原配置相同的 E2E/development 环境；测试使用项目已有的 `E2E_SKIP_BUILD=1` 仅启动预构建页面。仍保留 180 秒服务启动检查、全部用例和原始断言。没有修改 `tests/e2e/`、`tests/fake-opencode/` 或应用源码。
+
+## GitHub 第三次运行与后续加固
+
+- [运行 #3](https://github.com/qcmhwgz/opencode-mobile-private/actions/runs/40500456591)，源码 `9ff36da9b7378ea4691ca677465b9247a155e99e`：641 项单元测试、26 项私有边界测试、模拟服务自测，以及 **162/162 浏览器测试全部通过**。原凭据过期用例通过；独立页面打包实际耗时 184 秒，超过原先与服务启动共享的 180 秒预算。
+- 原生构建已下载并校验 Gradle 9.3.1、安装 NDK 27.1.12297006，完成构建插件编译，但在解析 `releaseRuntimeClasspath` 时失败：`Both dependency locking and fail on changing versions are enabled. You must choose between the two modes.` 未生成 APK 或完整原生锁。
+- 修正私有 Gradle 配置，移除不兼容的 `failOnChangingVersions()`，保留全配置依赖锁、后续严格锁模式和 SHA-256 依赖验证。首次冻结仍需要审查，不能将生成摘要本身视为供应链审计；不得接受未审查的 SNAPSHOT 或 changing 输入。参见 [Gradle 锁定文档](https://docs.gradle.org/current/userguide/dependency_locking.html)。
+- 备份/设备迁移规则显式排除云备份与设备迁移各自的 9 个存储域，不注册跨平台迁移。原生客户端禁止系统代理，并通过活动 VPN 的 SocketFactory 创建连接。后者依据 [Android Network 文档](https://developer.android.com/reference/android/net/Network#getSocketFactory()) 的网络绑定语义实施；尚未完成本版原生编译和手机断网验收。
+- 新增 7 项 Python 资源策略测试，覆盖遗漏存储域、迁移包含规则、额外连接目标、错误资源引用和资源别名等拒绝路径；本地通过。工程生成后，实际 XML 规则检查通过。云备份/D2D 域定义参见 [Android 官方说明](https://developer.android.com/identity/data/autobackup)。
+- 编译了一个**仅包含资源的测试样本**，用于测试真实 `aapt2`/`apkanalyzer` 解码与检查器。发现当前 apkanalyzer 会省略网络 XML 的域名正文，因此以 aapt2 校验同一 domain 节点中的正文；资源检查通过，但样本因没有 native ABI 被完整 APK 检查器正确拒绝。它不是可安装应用，也不构成本项目 APK 已通过审计的证据。
+- 后续 APK 核验会解析实际编译的备份/网络 XML、资源表及 Manifest 引用，同时保留既有权限、导出组件、DEX 和 ABI 检查。所有加固仍须进入新的实际构建并通过检查后才能宣布产物验证通过。

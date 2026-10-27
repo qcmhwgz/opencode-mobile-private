@@ -1,0 +1,30 @@
+{
+  "purpose": "SDK binary XML decoding and resource-policy checker test only",
+  "fixtureIsInstallableApplication": false,
+  "fixtureFullAuditExpectedOutcome": "rejected because native ABI is missing",
+  "fixtureAudit": {
+    "apk": "resource-fixture.apk",
+    "sha256": "447ffa9e6779cff6b5b35917fd1c49e8758f54a5cda7291ae7d7af0045f30b44",
+    "permissions": [],
+    "exported": [],
+    "abis": [],
+    "resource_checks": {
+      "private_network_security": {
+        "failures": []
+      },
+      "private_data_extraction": {
+        "failures": []
+      }
+    },
+    "failures": [
+      "Unexpected ABIs: "
+    ],
+    "limitations": [
+      "No device traffic capture, authenticated server acceptance or signer verification in this check."
+    ]
+  },
+  "currentApplicationApkBuilt": false,
+  "kotlinVpnBindingCompiled": false,
+  "phoneTrafficVerified": false,
+  "gradleConflictFix": "Generated configuration retains strict dependency locks and removes the incompatible resolution flag; actual Gradle resolution remains to be verified in CI."
+}

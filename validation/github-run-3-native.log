@@ -1,0 +1,395 @@
+﻿2026-10-27T12:20:04.4672573Z Current runner version: '2.338.0'
+2026-10-27T12:20:04.4728167Z ##[group]Runner Image Provisioner
+2026-10-27T12:20:04.4729373Z Hosted Compute Agent
+2026-10-27T12:20:04.4730388Z Version: 20261021.618
+2026-10-27T12:20:04.4731403Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+2026-10-27T12:20:04.4732563Z Build Date: 2026-10-21T00:45:21Z
+2026-10-27T12:20:04.4733858Z Worker ID: {b58516e1-24d6-48f6-b2d6-3c010ae2618a}
+2026-10-27T12:20:04.4734939Z Region: northcentralus
+2026-10-27T12:20:04.4735841Z Cloud: Azure
+2026-10-27T12:20:04.4736688Z ##[endgroup]
+2026-10-27T12:20:04.4738802Z ##[group]Operating System
+2026-10-27T12:20:04.4739848Z Ubuntu
+2026-10-27T12:20:04.4740646Z 24.04.5
+2026-10-27T12:20:04.4741657Z LTS
+2026-10-27T12:20:04.4742508Z ##[endgroup]
+2026-10-27T12:20:04.4743286Z ##[group]Runner Image
+2026-10-27T12:20:04.4744674Z Image: ubuntu-24.04
+2026-10-27T12:20:04.4745550Z Version: 20261012.334.1
+2026-10-27T12:20:04.4747689Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261012.334/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-27T12:20:04.4750150Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261012.334
+2026-10-27T12:20:04.4751849Z ##[endgroup]
+2026-10-27T12:20:04.4753566Z ##[group]GITHUB_TOKEN Permissions
+2026-10-27T12:20:04.4757231Z Contents: read
+2026-10-27T12:20:04.4758132Z Metadata: read
+2026-10-27T12:20:04.4759481Z ##[endgroup]
+2026-10-27T12:20:04.4762696Z Secret source: Actions
+2026-10-27T12:20:04.4764548Z Cache mode: write
+2026-10-27T12:20:04.4765864Z Prepare workflow directory
+2026-10-27T12:20:04.5317597Z Prepare all required actions
+2026-10-27T12:20:04.5387376Z Getting action download info
+2026-10-27T12:20:04.8974421Z Download action repository 'actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683' (SHA:11bd71901bbe5b1630ceea73d27597364c9af683)
+2026-10-27T12:20:05.0089552Z Download action repository 'actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)
+2026-10-27T12:20:05.1067474Z Download action repository 'actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00' (SHA:c5195efecf7bdfc987ee8bae7a71cb8b11521c00)
+2026-10-27T12:20:05.7256418Z Download action repository 'actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2026-10-27T12:20:05.9623138Z Complete job name: unsigned-apk
+2026-10-27T12:20:06.0412591Z ##[group]Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+2026-10-27T12:20:06.0413890Z with:
+2026-10-27T12:20:06.0414406Z   persist-credentials: false
+2026-10-27T12:20:06.0415036Z   repository: qcmhwgz/opencode-mobile-private
+2026-10-27T12:20:06.0419611Z   token: ***
+2026-10-27T12:20:06.0420111Z   ssh-strict: true
+2026-10-27T12:20:06.0420600Z   ssh-user: git
+2026-10-27T12:20:06.0421055Z   clean: true
+2026-10-27T12:20:06.0421550Z   sparse-checkout-cone-mode: true
+2026-10-27T12:20:06.0422134Z   fetch-depth: 1
+2026-10-27T12:20:06.0422608Z   fetch-tags: false
+2026-10-27T12:20:06.0423089Z   show-progress: true
+2026-10-27T12:20:06.0423806Z   lfs: false
+2026-10-27T12:20:06.0424449Z   submodules: false
+2026-10-27T12:20:06.0424949Z   set-safe-directory: true
+2026-10-27T12:20:06.0425762Z env:
+2026-10-27T12:20:06.0426223Z   EXPO_NO_TELEMETRY: 1
+2026-10-27T12:20:06.0426719Z   EXPO_NO_DOTENV: 1
+2026-10-27T12:20:06.0427183Z ##[endgroup]
+2026-10-27T12:20:06.1848982Z Syncing repository: qcmhwgz/opencode-mobile-private
+2026-10-27T12:20:06.1852596Z ##[group]Getting Git version info
+2026-10-27T12:20:06.1854448Z Working directory is '/home/runner/work/opencode-mobile-private/opencode-mobile-private'
+2026-10-27T12:20:06.1856579Z [command]/usr/bin/git version
+2026-10-27T12:20:06.1857460Z git version 2.55.0
+2026-10-27T12:20:06.1860196Z ##[endgroup]
+2026-10-27T12:20:06.1894709Z Temporarily overriding HOME='/home/runner/work/_temp/dff11191-bbda-4225-a3a5-045f67a0c31f' before making global git config changes
+2026-10-27T12:20:06.1913413Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-27T12:20:06.1917248Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/opencode-mobile-private/opencode-mobile-private
+2026-10-27T12:20:06.1995988Z Deleting the contents of '/home/runner/work/opencode-mobile-private/opencode-mobile-private'
+2026-10-27T12:20:06.2001021Z ##[group]Initializing the repository
+2026-10-27T12:20:06.2003127Z [command]/usr/bin/git init /home/runner/work/opencode-mobile-private/opencode-mobile-private
+2026-10-27T12:20:06.2102858Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-27T12:20:06.2127724Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-27T12:20:06.2155437Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-27T12:20:06.2157366Z hint: call:
+2026-10-27T12:20:06.2161301Z hint:
+2026-10-27T12:20:06.2162865Z hint: 	git config --global init.defaultBranch <name>
+2026-10-27T12:20:06.2165131Z hint:
+2026-10-27T12:20:06.2195592Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-27T12:20:06.2198021Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-27T12:20:06.2216950Z hint:
+2026-10-27T12:20:06.2234741Z hint: 	git branch -m <name>
+2026-10-27T12:20:06.2256902Z hint:
+2026-10-27T12:20:06.2275106Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-27T12:20:06.2282991Z Initialized empty Git repository in /home/runner/work/opencode-mobile-private/opencode-mobile-private/.git/
+2026-10-27T12:20:06.2347727Z [command]/usr/bin/git remote add origin https://github.com/qcmhwgz/opencode-mobile-private
+2026-10-27T12:20:06.2385726Z ##[endgroup]
+2026-10-27T12:20:06.2387561Z ##[group]Disabling automatic garbage collection
+2026-10-27T12:20:06.2388958Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-27T12:20:06.2391980Z ##[endgroup]
+2026-10-27T12:20:06.2393396Z ##[group]Setting up auth
+2026-10-27T12:20:06.2395135Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-27T12:20:06.2400199Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-27T12:20:06.2809151Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-27T12:20:06.2855103Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-27T12:20:06.3123235Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-27T12:20:06.3177543Z ##[endgroup]
+2026-10-27T12:20:06.3180053Z ##[group]Fetching the repository
+2026-10-27T12:20:06.3191371Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +9ff36da9b7378ea4691ca677465b9247a155e99e:refs/remotes/origin/main
+2026-10-27T12:20:07.2586220Z From https://github.com/qcmhwgz/opencode-mobile-private
+2026-10-27T12:20:07.2605781Z  * [new ref]         9ff36da9b7378ea4691ca677465b9247a155e99e -> origin/main
+2026-10-27T12:20:07.2614046Z ##[endgroup]
+2026-10-27T12:20:07.2616035Z ##[group]Determining the checkout info
+2026-10-27T12:20:07.2618222Z ##[endgroup]
+2026-10-27T12:20:07.2619757Z [command]/usr/bin/git sparse-checkout disable
+2026-10-27T12:20:07.2699470Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-27T12:20:07.2740370Z ##[group]Checking out the ref
+2026-10-27T12:20:07.2744849Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2026-10-27T12:20:07.3417988Z Switched to a new branch 'main'
+2026-10-27T12:20:07.3420461Z branch 'main' set up to track 'origin/main'.
+2026-10-27T12:20:07.3438347Z ##[endgroup]
+2026-10-27T12:20:07.3485369Z [command]/usr/bin/git log -1 --format=%H
+2026-10-27T12:20:07.3528360Z 9ff36da9b7378ea4691ca677465b9247a155e99e
+2026-10-27T12:20:07.3542399Z ##[group]Removing auth
+2026-10-27T12:20:07.3544856Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-27T12:20:07.3585396Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-27T12:20:07.3854990Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-27T12:20:07.3888398Z http.https://github.com/.extraheader
+2026-10-27T12:20:07.3899280Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-10-27T12:20:07.3953347Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-27T12:20:07.4209820Z ##[endgroup]
+2026-10-27T12:20:07.4692058Z ##[group]Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+2026-10-27T12:20:07.4693909Z with:
+2026-10-27T12:20:07.4694824Z   node-version: 22.21.1
+2026-10-27T12:20:07.4695878Z   always-auth: false
+2026-10-27T12:20:07.4696895Z   check-latest: false
+2026-10-27T12:20:07.4707268Z   token: ***
+2026-10-27T12:20:07.4708188Z env:
+2026-10-27T12:20:07.4709092Z   EXPO_NO_TELEMETRY: 1
+2026-10-27T12:20:07.4710127Z   EXPO_NO_DOTENV: 1
+2026-10-27T12:20:07.4711083Z ##[endgroup]
+2026-10-27T12:20:07.6217806Z Attempting to download 22.21.1...
+2026-10-27T12:20:07.6333291Z (node:2068) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-27T12:20:07.6338843Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-27T12:20:08.5265103Z Acquiring 22.21.1 - x64 from https://github.com/actions/node-versions/releases/download/22.21.1-18894912842/node-22.21.1-linux-x64.tar.gz
+2026-10-27T12:20:09.0708927Z Extracting ...
+2026-10-27T12:20:09.0896910Z [command]/usr/bin/tar xz --strip 1 --warning=no-unknown-keyword --overwrite -C /home/runner/work/_temp/a7da26d3-0603-45a8-ad4e-5e8831163cba -f /home/runner/work/_temp/f19d43e5-0ab9-4d6f-a78c-ce850d73d03f
+2026-10-27T12:20:10.5372974Z Adding to the cache ...
+2026-10-27T12:20:12.8716928Z ##[group]Environment details
+2026-10-27T12:20:13.1587116Z node: v22.21.1
+2026-10-27T12:20:13.1588186Z npm: 10.9.4
+2026-10-27T12:20:13.1601804Z yarn: 1.22.22
+2026-10-27T12:20:13.1602851Z ##[endgroup]
+2026-10-27T12:20:13.1858441Z ##[group]Run actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+2026-10-27T12:20:13.1858866Z with:
+2026-10-27T12:20:13.1859083Z   distribution: temurin
+2026-10-27T12:20:13.1859333Z   java-version: 17.0.17+10
+2026-10-27T12:20:13.1859579Z   java-package: jdk
+2026-10-27T12:20:13.1859815Z   check-latest: false
+2026-10-27T12:20:13.1860066Z   server-id: github
+2026-10-27T12:20:13.1860301Z   server-username: GITHUB_ACTOR
+2026-10-27T12:20:13.1860569Z   server-password: GITHUB_TOKEN
+2026-10-27T12:20:13.1860850Z   overwrite-settings: true
+2026-10-27T12:20:13.1861098Z   job-status: success
+2026-10-27T12:20:13.1863901Z   token: ***
+2026-10-27T12:20:13.1864115Z env:
+2026-10-27T12:20:13.1864324Z   EXPO_NO_TELEMETRY: 1
+2026-10-27T12:20:13.1864560Z   EXPO_NO_DOTENV: 1
+2026-10-27T12:20:13.1864780Z ##[endgroup]
+2026-10-27T12:20:13.3476977Z ##[group]Installed distributions
+2026-10-27T12:20:13.3741102Z Trying to resolve the latest version from remote
+2026-10-27T12:20:13.3818686Z (node:2105) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-27T12:20:13.3820351Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-27T12:20:13.7120816Z Resolved latest version as 17.0.17+10
+2026-10-27T12:20:13.7121807Z Trying to download...
+2026-10-27T12:20:13.7123931Z Downloading Java 17.0.17+10 (Temurin-Hotspot) from https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.17%2B10/OpenJDK17U-jdk_x64_linux_hotspot_17.0.17_10.tar.gz ...
+2026-10-27T12:20:14.9118543Z Extracting Java archive...
+2026-10-27T12:20:14.9356344Z [command]/usr/bin/tar xz --warning=no-unknown-keyword --overwrite -C /home/runner/work/_temp/c2cc426b-8b10-4ded-be19-660e38698b3c -f /home/runner/work/_temp/e01ea5ce-8914-4ecd-83b2-ed640447fc02
+2026-10-27T12:20:19.3470508Z Java 17.0.17+10 was downloaded
+2026-10-27T12:20:19.3476529Z Setting Java 17.0.17+10 as the default
+2026-10-27T12:20:19.3483372Z Creating toolchains.xml for JDK version 17.0.17+10 from temurin
+2026-10-27T12:20:19.3559488Z Writing to /home/runner/.m2/toolchains.xml
+2026-10-27T12:20:19.3574681Z 
+2026-10-27T12:20:19.3575174Z Java configuration:
+2026-10-27T12:20:19.3575844Z   Distribution: temurin
+2026-10-27T12:20:19.3582279Z   Version: 17.0.17+10
+2026-10-27T12:20:19.3583249Z   Path: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.17-10/x64
+2026-10-27T12:20:19.3602468Z 
+2026-10-27T12:20:19.3603324Z ##[endgroup]
+2026-10-27T12:20:19.3608987Z Creating settings.xml with server-id: github
+2026-10-27T12:20:19.3624497Z Writing to /home/runner/.m2/settings.xml
+2026-10-27T12:20:19.4812967Z ##[group]Run npm ci --ignore-scripts --no-audit --no-fund
+2026-10-27T12:20:19.4813499Z [36;1mnpm ci --ignore-scripts --no-audit --no-fund[0m
+2026-10-27T12:20:19.5909265Z shell: /usr/bin/bash -e {0}
+2026-10-27T12:20:19.5909566Z env:
+2026-10-27T12:20:19.5909790Z   EXPO_NO_TELEMETRY: 1
+2026-10-27T12:20:19.5910025Z   EXPO_NO_DOTENV: 1
+2026-10-27T12:20:19.5910375Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.17-10/x64
+2026-10-27T12:20:19.5910896Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.17-10/x64
+2026-10-27T12:20:19.5911306Z ##[endgroup]
+2026-10-27T12:20:35.1805338Z npm warn deprecated eslint@9.39.5: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+2026-10-27T12:20:42.6754873Z 
+2026-10-27T12:20:42.6765369Z added 1003 packages in 23s
+2026-10-27T12:20:42.7622575Z ##[group]Run if [ "$FREEZE_NATIVE" = "true" ]; then
+2026-10-27T12:20:42.7623010Z [36;1mif [ "$FREEZE_NATIVE" = "true" ]; then[0m
+2026-10-27T12:20:42.7623400Z [36;1m  npm run private:build -- --freeze-dependencies[0m
+2026-10-27T12:20:42.7624199Z [36;1melse[0m
+2026-10-27T12:20:42.7624446Z [36;1m  npm run private:build[0m
+2026-10-27T12:20:42.7624699Z [36;1mfi[0m
+2026-10-27T12:20:42.7693895Z shell: /usr/bin/bash -e {0}
+2026-10-27T12:20:42.7694148Z env:
+2026-10-27T12:20:42.7694346Z   EXPO_NO_TELEMETRY: 1
+2026-10-27T12:20:42.7694574Z   EXPO_NO_DOTENV: 1
+2026-10-27T12:20:42.7694899Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.17-10/x64
+2026-10-27T12:20:42.7695402Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.17-10/x64
+2026-10-27T12:20:42.7695784Z   FREEZE_NATIVE: true
+2026-10-27T12:20:42.7696011Z ##[endgroup]
+2026-10-27T12:20:42.8736855Z 
+2026-10-27T12:20:42.8738285Z > opencode-mobile-private-edition@1.0.98 private:build
+2026-10-27T12:20:42.8739702Z > node scripts/private/build.mjs --freeze-dependencies
+2026-10-27T12:20:42.8740385Z 
+2026-10-27T12:20:43.6095883Z - Creating native directory (./android)
+2026-10-27T12:20:44.3212876Z ✔ Created native directory
+2026-10-27T12:20:44.3214809Z - Updating package.json
+2026-10-27T12:20:44.3239891Z ✔ Updated package.json | no changes
+2026-10-27T12:20:44.3254794Z - Running prebuild
+2026-10-27T12:20:46.9076866Z Expo-secure-store tried to apply Android Auto Backup rules, but other backup rules are already present. Refer to the expo-secure-store docs (https://docs.expo.dev/versions/latest/sdk/securestore/) to configure your backup rules.
+2026-10-27T12:20:46.9078641Z - Running prebuild
+2026-10-27T12:20:46.9295211Z ✔ Finished prebuild
+2026-10-27T12:20:46.9482514Z Private Android project generated. No APK has been built yet.
+2026-10-27T12:20:47.0910184Z Downloading https://services.gradle.org/distributions/gradle-9.3.1-bin.zip
+2026-10-27T12:20:49.3563091Z .............10%.............20%.............30%.............40%.............50%.............60%.............70%.............80%.............90%.............100%
+2026-10-27T12:20:51.0231524Z 
+2026-10-27T12:20:51.0258580Z Welcome to Gradle 9.3.1!
+2026-10-27T12:20:51.0304023Z 
+2026-10-27T12:20:51.0315043Z Here are the highlights of this release:
+2026-10-27T12:20:51.0316063Z  - Test reporting improvements
+2026-10-27T12:20:51.0316754Z  - Error and warning improvements
+2026-10-27T12:20:51.0317367Z  - Build authoring improvements
+2026-10-27T12:20:51.0317808Z 
+2026-10-27T12:20:51.0318353Z For more details see https://docs.gradle.org/9.3.1/release-notes.html
+2026-10-27T12:20:51.0318917Z 
+2026-10-27T12:20:51.1236039Z To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.3.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+2026-10-27T12:20:52.7225224Z Daemon will be stopped at the end of the build 
+2026-10-27T12:22:07.0285772Z > Task :gradle-plugin:settings-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+2026-10-27T12:22:07.0304930Z > Task :expo-gradle-plugin:expo-autolinking-plugin-shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
+2026-10-27T12:22:07.0324598Z > Task :gradle-plugin:shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
+2026-10-27T12:22:07.4225821Z > Task :expo-gradle-plugin:expo-autolinking-settings-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+2026-10-27T12:22:07.5225966Z > Task :expo-gradle-plugin:expo-autolinking-settings-plugin:pluginDescriptors
+2026-10-27T12:22:07.5255085Z > Task :expo-gradle-plugin:expo-autolinking-settings-plugin:processResources
+2026-10-27T12:22:07.5256291Z > Task :gradle-plugin:settings-plugin:pluginDescriptors
+2026-10-27T12:22:07.6211322Z > Task :gradle-plugin:settings-plugin:processResources
+2026-10-27T12:22:16.2215514Z > Task :expo-gradle-plugin:expo-autolinking-plugin-shared:processResources NO-SOURCE
+2026-10-27T12:22:27.9224202Z > Task :gradle-plugin:shared:processResources NO-SOURCE
+2026-10-27T12:22:28.0218707Z > Task :gradle-plugin:shared:compileKotlin
+2026-10-27T12:22:28.0244787Z > Task :gradle-plugin:shared:compileJava NO-SOURCE
+2026-10-27T12:22:28.0314671Z > Task :gradle-plugin:shared:classes UP-TO-DATE
+2026-10-27T12:22:28.0334465Z > Task :gradle-plugin:shared:jar
+2026-10-27T12:22:28.5211903Z > Task :expo-gradle-plugin:expo-autolinking-plugin-shared:compileKotlin
+2026-10-27T12:22:28.5215492Z > Task :expo-gradle-plugin:expo-autolinking-plugin-shared:compileJava NO-SOURCE
+2026-10-27T12:22:28.5216935Z > Task :expo-gradle-plugin:expo-autolinking-plugin-shared:classes UP-TO-DATE
+2026-10-27T12:22:28.5218107Z > Task :expo-gradle-plugin:expo-autolinking-plugin-shared:jar
+2026-10-27T12:22:48.1225054Z > Task :gradle-plugin:settings-plugin:compileKotlin
+2026-10-27T12:22:48.1241166Z > Task :gradle-plugin:settings-plugin:compileJava NO-SOURCE
+2026-10-27T12:22:48.1284393Z > Task :gradle-plugin:settings-plugin:classes
+2026-10-27T12:22:48.1324429Z > Task :gradle-plugin:settings-plugin:jar
+2026-10-27T12:22:49.2214227Z > Task :expo-gradle-plugin:expo-autolinking-settings-plugin:compileKotlin
+2026-10-27T12:22:49.2306051Z > Task :expo-gradle-plugin:expo-autolinking-settings-plugin:compileJava NO-SOURCE
+2026-10-27T12:22:49.2308722Z > Task :expo-gradle-plugin:expo-autolinking-settings-plugin:classes
+2026-10-27T12:22:49.3253202Z > Task :expo-gradle-plugin:expo-autolinking-settings-plugin:jar
+2026-10-27T12:23:10.6236694Z > Task :gradle-plugin:react-native-gradle-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+2026-10-27T12:23:10.6296876Z > Task :expo-module-gradle-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+2026-10-27T12:23:10.6343271Z > Task :expo-module-gradle-plugin:pluginDescriptors
+2026-10-27T12:23:10.6384340Z > Task :expo-module-gradle-plugin:processResources
+2026-10-27T12:23:10.6404762Z > Task :expo-gradle-plugin:expo-autolinking-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+2026-10-27T12:23:16.5215773Z > Task :expo-gradle-plugin:expo-autolinking-plugin:compileKotlin
+2026-10-27T12:23:16.5285561Z > Task :expo-gradle-plugin:expo-autolinking-plugin:compileJava NO-SOURCE
+2026-10-27T12:23:16.5307336Z > Task :expo-gradle-plugin:expo-autolinking-plugin:pluginDescriptors
+2026-10-27T12:23:16.5345250Z > Task :expo-gradle-plugin:expo-autolinking-plugin:processResources
+2026-10-27T12:23:16.5431896Z > Task :expo-gradle-plugin:expo-autolinking-plugin:classes
+2026-10-27T12:23:16.5484448Z > Task :expo-gradle-plugin:expo-autolinking-plugin:jar
+2026-10-27T12:23:16.5485761Z > Task :expo-gradle-plugin:expo-max-sdk-override-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+2026-10-27T12:23:18.4209964Z > Task :expo-gradle-plugin:expo-max-sdk-override-plugin:pluginDescriptors
+2026-10-27T12:23:18.4224913Z > Task :expo-gradle-plugin:expo-max-sdk-override-plugin:processResources
+2026-10-27T12:23:18.4242260Z > Task :gradle-plugin:react-native-gradle-plugin:pluginDescriptors
+2026-10-27T12:23:18.4264639Z > Task :gradle-plugin:react-native-gradle-plugin:processResources
+2026-10-27T12:23:22.9210053Z > Task :expo-gradle-plugin:expo-max-sdk-override-plugin:compileKotlin
+2026-10-27T12:23:22.9255309Z > Task :expo-gradle-plugin:expo-max-sdk-override-plugin:compileJava NO-SOURCE
+2026-10-27T12:23:22.9272434Z > Task :expo-gradle-plugin:expo-max-sdk-override-plugin:classes
+2026-10-27T12:23:22.9303582Z > Task :expo-gradle-plugin:expo-max-sdk-override-plugin:jar
+2026-10-27T12:23:28.1221885Z > Task :gradle-plugin:react-native-gradle-plugin:compileKotlin
+2026-10-27T12:23:28.1227447Z > Task :gradle-plugin:react-native-gradle-plugin:compileJava NO-SOURCE
+2026-10-27T12:23:28.1260300Z > Task :gradle-plugin:react-native-gradle-plugin:classes
+2026-10-27T12:23:28.1269263Z > Task :gradle-plugin:react-native-gradle-plugin:jar
+2026-10-27T12:23:31.1219603Z 
+2026-10-27T12:23:31.1244689Z > Task :expo-module-gradle-plugin:compileKotlin
+2026-10-27T12:23:31.1277240Z w: file:///home/runner/work/opencode-mobile-private/opencode-mobile-private/node_modules/expo/node_modules/expo-modules-core/expo-module-gradle-plugin/src/main/kotlin/expo/modules/plugin/android/AndroidLibraryExtension.kt:9:24 'var targetSdk: Int?' is deprecated. Will be removed from library DSL in v9.0. Use testOptions.targetSdk or/and lint.targetSdk instead.
+2026-10-27T12:23:31.2225234Z 
+2026-10-27T12:23:31.2244881Z > Task :expo-module-gradle-plugin:compileJava NO-SOURCE
+2026-10-27T12:23:31.2274369Z > Task :expo-module-gradle-plugin:classes
+2026-10-27T12:23:31.3245104Z > Task :expo-module-gradle-plugin:jar
+2026-10-27T12:23:47.2228628Z 
+2026-10-27T12:23:47.2254758Z > Configure project :
+2026-10-27T12:23:47.2255819Z [32m[ExpoRootProject][0m Using the following versions:
+2026-10-27T12:23:47.2274319Z   - buildTools:  [32m36.0.0[0m
+2026-10-27T12:23:47.2294311Z   - minSdk:      [32m24[0m
+2026-10-27T12:23:47.2321351Z   - compileSdk:  [32m36[0m
+2026-10-27T12:23:47.2351429Z   - targetSdk:   [32m36[0m
+2026-10-27T12:23:47.2394547Z   - ndk:         [32m27.1.12297006[0m
+2026-10-27T12:23:47.2404858Z   - kotlin:      [32m2.1.20[0m
+2026-10-27T12:23:47.2414347Z   - ksp:         [32m2.1.20-2.0.1[0m
+2026-10-27T12:24:13.1525506Z 
+2026-10-27T12:24:13.1526183Z > Configure project :app
+2026-10-27T12:24:13.1735952Z WARNING: The option setting 'android.r8.optimizedResourceShrinking=true' is experimental.
+2026-10-27T12:24:13.1827829Z The current default is 'false'.
+2026-10-27T12:24:13.1879964Z  ℹ️  [33mApplying gradle plugin[0m '[32mexpo-max-sdk-override-plugin[0m'
+2026-10-27T12:24:13.1934811Z   [expo-max-sdk-override-plugin] This plugin will find all permissions declared with `android:maxSdkVersion`. If there exists a declaration with the `android:maxSdkVersion` annotation and another one without, the plugin will remove the annotation from the final merged manifest. In order to see a log with the changes run a clean build of the app.
+2026-10-27T12:24:13.1974814Z Checking the license for package NDK (Side by side) 27.1.12297006 in /usr/local/lib/android/sdk/licenses
+2026-10-27T12:24:13.2116668Z License for package NDK (Side by side) 27.1.12297006 accepted.
+2026-10-27T12:24:13.2305878Z Preparing "Install NDK (Side by side) 27.1.12297006 v.27.1.12297006".
+2026-10-27T12:24:13.2485840Z "Install NDK (Side by side) 27.1.12297006 v.27.1.12297006" ready.
+2026-10-27T12:24:13.2686138Z Installing NDK (Side by side) 27.1.12297006 in /usr/local/lib/android/sdk/ndk/27.1.12297006
+2026-10-27T12:24:13.2885336Z "Install NDK (Side by side) 27.1.12297006 v.27.1.12297006" complete.
+2026-10-27T12:24:13.3038253Z "Install NDK (Side by side) 27.1.12297006 v.27.1.12297006" finished.
+2026-10-27T12:24:15.2219747Z 
+2026-10-27T12:24:15.2237423Z > Configure project :expo
+2026-10-27T12:24:15.2263987Z 
+2026-10-27T12:24:15.2264242Z Using expo modules
+2026-10-27T12:24:15.2265076Z   - [32mexpo-log-box[0m (57.0.4)
+2026-10-27T12:24:15.2294372Z   - [32mexpo-constants[0m (57.0.19)
+2026-10-27T12:24:15.2295080Z   - [32mexpo-dev-menu-interface[0m (57.0.0)
+2026-10-27T12:24:15.2324771Z   - [32mexpo-json-utils[0m (57.0.2)
+2026-10-27T12:24:15.4217712Z   - [32mexpo-manifests[0m (57.0.2)
+2026-10-27T12:24:31.7224240Z 
+2026-10-27T12:24:31.7244874Z > Configure project :expo-modules-core
+2026-10-27T12:24:31.7264704Z Linking react-native-worklets native libs into expo-modules-core build tasks
+2026-10-27T12:24:31.7265672Z task ':react-native-worklets:mergeDebugNativeLibs'
+2026-10-27T12:24:31.7315188Z task ':react-native-worklets:mergeReleaseNativeLibs'
+2026-10-27T12:24:31.7343978Z 
+2026-10-27T12:24:31.7404354Z > Configure project :expo
+2026-10-27T12:24:31.7416158Z   - [32mexpo-modules-core[0m (57.0.18)
+2026-10-27T12:24:32.3221555Z   - [32mexpo-quick-actions[0m (1.0.0)
+2026-10-27T12:24:32.5225469Z   - [32mexpo-updates-interface[0m (57.0.2)
+2026-10-27T12:24:32.5258924Z   - [33m[📦][0m [32mexpo-dom-webview[0m (57.0.1)
+2026-10-27T12:24:32.5259876Z   - [33m[📦][0m [32mexpo-ui[0m (57.0.19)
+2026-10-27T12:24:32.5260734Z   - [33m[📦][0m [32mexpo-asset[0m (57.0.18)
+2026-10-27T12:24:32.5261544Z   - [33m[📦][0m [32mexpo-audio[0m (57.0.5)
+2026-10-27T12:24:32.5262819Z   - [33m[📦][0m [32mexpo-clipboard[0m (57.0.2)
+2026-10-27T12:24:32.5263592Z   - [33m[📦][0m [32mexpo-crypto[0m (57.0.4)
+2026-10-27T12:24:32.5270032Z   - [33m[📦][0m [32mexpo-document-picker[0m (57.0.2)
+2026-10-27T12:24:32.5284521Z   - [33m[📦][0m [32mexpo-file-system[0m (57.0.7)
+2026-10-27T12:24:32.5305344Z   - [33m[📦][0m [32mexpo-font[0m (57.0.4)
+2026-10-27T12:24:32.5325419Z   - [33m[📦][0m [32mexpo-haptics[0m (57.0.3)
+2026-10-27T12:24:32.5354430Z   - [33m[📦][0m [32mexpo-image[0m (57.0.5)
+2026-10-27T12:24:32.5355336Z   - [33m[📦][0m [32mexpo-image-loader[0m (57.0.1)
+2026-10-27T12:24:32.5374728Z   - [33m[📦][0m [32mexpo-image-manipulator[0m (57.0.21)
+2026-10-27T12:24:32.5394593Z   - [33m[📦][0m [32mexpo-intent-launcher[0m (57.0.1)
+2026-10-27T12:24:32.5414503Z   - [33m[📦][0m [32mexpo-keep-awake[0m (57.0.2)
+2026-10-27T12:24:32.5415465Z   - [33m[📦][0m [32mexpo-linking[0m (57.0.10)
+2026-10-27T12:24:32.5434456Z   - [33m[📦][0m [32mexpo-localization[0m (57.0.2)
+2026-10-27T12:24:32.5441948Z   - [33m[📦][0m [32mexpo-router[0m (57.0.22)
+2026-10-27T12:24:32.5442642Z   - [33m[📦][0m [32mexpo-secure-store[0m (57.0.4)
+2026-10-27T12:24:32.5464691Z   - [33m[📦][0m [32mexpo-splash-screen[0m (57.0.9)
+2026-10-27T12:24:32.5484359Z   - [33m[📦][0m [32mexpo-status-bar[0m (57.0.1)
+2026-10-27T12:24:32.5485256Z   - [33m[📦][0m [32mexpo-system-ui[0m (57.0.4)
+2026-10-27T12:24:32.5504493Z   - [33m[📦][0m [32mexpo-video[0m (57.0.5)
+2026-10-27T12:24:32.5507057Z   - [33m[📦][0m [32munimodules-app-loader[0m (57.0.2)
+2026-10-27T12:24:32.5544110Z 
+2026-10-27T12:25:48.1226547Z 
+2026-10-27T12:25:48.1226596Z 
+2026-10-27T12:25:48.1244767Z FAILURE: Build failed with an exception.
+2026-10-27T12:25:48.1246653Z [Incubating] Problems report is available at: file:///home/runner/work/opencode-mobile-private/opencode-mobile-private/android/build/reports/problems/problems-report.html
+2026-10-27T12:25:48.1264188Z 
+2026-10-27T12:25:48.1264207Z 
+2026-10-27T12:25:48.1269833Z * What went wrong:
+2026-10-27T12:25:48.1270762Z Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+2026-10-27T12:25:48.1272647Z Could not determine the dependencies of task ':app:mergeReleaseNativeLibs'.
+2026-10-27T12:25:48.1274242Z > Could not resolve all dependencies for configuration ':app:releaseRuntimeClasspath'.
+2026-10-27T12:25:48.1275708Z    > Both dependency locking and fail on changing versions are enabled. You must choose between the two modes.
+2026-10-27T12:25:48.1276630Z 
+2026-10-27T12:25:48.1276952Z * Try:
+2026-10-27T12:25:48.1277655Z > Run with --stacktrace option to get the stack trace.
+2026-10-27T12:25:48.1278607Z > Run with --info or --debug option to get more log output.
+2026-10-27T12:25:48.1279742Z > Run with --scan to get full insights from a Build Scan (powered by Develocity).
+2026-10-27T12:25:48.1280747Z > Get more help at https://help.gradle.org.
+2026-10-27T12:25:48.1281297Z 
+2026-10-27T12:25:48.1281653Z BUILD FAILED in 5m 1s
+2026-10-27T12:25:48.1284484Z 
+2026-10-27T12:25:48.1309867Z You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+2026-10-27T12:25:48.1313238Z 
+2026-10-27T12:25:48.1325319Z For more on this, please refer to https://docs.gradle.org/9.3.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+2026-10-27T12:25:48.1326621Z 28 actionable tasks: 28 executed
+2026-10-27T12:25:48.7415728Z ##[error]Process completed with exit code 1.
+2026-10-27T12:25:48.7591785Z Post job cleanup.
+2026-10-27T12:25:49.0399587Z (node:2856) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-27T12:25:49.0401219Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-27T12:25:49.0835857Z Post job cleanup.
+2026-10-27T12:25:49.2364432Z [command]/usr/bin/git version
+2026-10-27T12:25:49.2464151Z git version 2.55.0
+2026-10-27T12:25:49.2635557Z Temporarily overriding HOME='/home/runner/work/_temp/20b1dcf3-7d52-44fc-9219-420f98a824ef' before making global git config changes
+2026-10-27T12:25:49.2659676Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-27T12:25:49.2685656Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/opencode-mobile-private/opencode-mobile-private
+2026-10-27T12:25:49.2751004Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-27T12:25:49.2759758Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-27T12:25:49.3305233Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-27T12:25:49.3459496Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-27T12:25:49.4416939Z Cleaning up orphan processes
+2026-10-27T12:25:49.5009593Z Terminate orphan process: pid (2469) (java)
+2026-10-27T12:25:49.5047490Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683, actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00, actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+

@@ -26,6 +26,7 @@ jobs:
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - run: npm run test:ci:static
       - run: npm run private:test
+      - run: python3 -m unittest discover -s tests/private -p '*_test.py'
       - run: npm run test:fake-server:self
       - run: npx --no-install playwright install --with-deps chromium
       - name: Export browser test application
@@ -90,17 +91,30 @@ jobs:
             echo 'Refusing an unexpectedly signed CI artifact'
             exit 1
           fi
-          python3 scripts/private/audit-apk.py "$APK"
+          python3 scripts/private/audit-apk.py "$APK" --aapt2 "$BUILD_TOOLS/aapt2"
           mkdir -p output
           cp "$APK" output/OpenCode-Mobile-Private-unsigned.apk
           cp private-apk-audit.json output/
-          cp private-source.json package-lock.json private-native-inputs.json output/
+          cp private-source.json package-lock.json private-native-inputs.json private-toolchain.json output/
           mkdir -p output/native-dependencies
           cp -R config/private/gradle-locks output/native-dependencies/
           cp config/private/verification-metadata.xml output/native-dependencies/
           printf '%s\n' "$FREEZE_NATIVE" > output/NATIVE_LOCK_BOOTSTRAP.txt
           git rev-parse HEAD > output/SOURCE_COMMIT.txt
           (cd output && sha256sum OpenCode-Mobile-Private-unsigned.apk > SHA256SUMS)
+      - name: Preserve failed native diagnostics
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: private-native-diagnostics-${{ github.sha }}
+          path: |
+            android/build/reports/
+            android/app/build/outputs/logs/
+            android/gradle/verification-metadata.xml
+            android/private-locks/
+            private-apk-audit.json
+          if-no-files-found: ignore
+          retention-days: 3
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: opencode-mobile-private-unsigned-${{ github.sha }}

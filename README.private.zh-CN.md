@@ -8,7 +8,7 @@
 
 保留项目、已有会话与历史分页、SSE 与轮询恢复、Diff、PTY 终端、工具权限审批及问题回答。SDK 固定为 `@opencode/client 2.0.16`；假服务测试不能代替对真实 2.1.4 的验证。
 
-原生 HTTP/XHR/Expo Fetch/终端 WebSocket 限制为 `10.0.0.2:47119`，拒绝自动重定向，并检查存在活动 VPN。手机需要开启已有 WireGuard，并让该应用和目标地址经过 VPN。无需在本应用内保存 WireGuard 私钥。VPN 检查仍需在你的分流配置和手机上验收。
+原生 HTTP/XHR/Expo Fetch/终端 WebSocket 限制为 `10.0.0.2:47119`，拒绝自动重定向和系统代理，检查存在活动 VPN，并使用绑定该 VPN 的 SocketFactory。手机需要开启已有 WireGuard，并让该应用和目标地址经过 VPN。无需在本应用内保存 WireGuard 私钥。VPN 绑定、断线和分流行为仍需在你的手机上验收。
 
 关闭 Cloud Link、购买、商店更新与 OTA、语音、推送通知、桌面小组件、外链跳转及对外分享。移除更新原生模块；购买、ML Kit、Firebase 通知、安装来源、语音、开发客户端及小组件原生库被排除出 Android 自动链接，相关 JavaScript 使用不可用实现。原上游相关源码和构建期类型包部分保留以减少协议功能改动，不能把“源码仍有外部 URL 字符串”和“运行时已发出请求”混为一谈。
 
@@ -24,6 +24,7 @@
 npm ci --ignore-scripts --no-audit --no-fund
 npm run test:ci:static
 npm run private:test
+python3 -m unittest discover -s tests/private -p '*_test.py'
 npm run test:fake-server:self
 npx --no-install playwright install chromium
 npm run test:e2e:web:isolated
@@ -49,7 +50,7 @@ npm run private:build -- --freeze-dependencies
 
 已根据用户授权导入私有仓库 [qcmhwgz/opencode-mobile-private](https://github.com/qcmhwgz/opencode-mobile-private)，默认分支为 `main`。首次导入的 Git 文件树与本地源码完全一致。后续开发请以该仓库的最新 `main` 为准；原本地 `private-edition` 分支保留上游历史，与连接器创建的远端提交历史不同，不要直接强制推送覆盖远端。保留许可证，不上传 `node_modules/`、`android/`、密钥、密码、`.env` 或缓存。
 
-在 Actions 选择 **Private Android candidate (unsigned)**，点击 **Run workflow**。首次运行已启动，但被一个凭据 8 秒过期的浏览器用例拦截（161/162 通过），没有进入 APK 编译；详见 `SECURITY-VALIDATION.zh-CN.md`。CI 浏览器并发现限制为 2，失败时将模拟服务测试的报告、截图和追踪保留 3 天；没有修改测试断言或过期时间，也没有启用自动重试。
+在 Actions 选择 **Private Android candidate (unsigned)**，点击 **Run workflow**。第三次运行已通过全部 162 项浏览器测试，但原生构建被依赖锁与 `failOnChangingVersions` 的配置冲突阻止；当前配置已移除冲突策略，继续使用严格依赖锁和 SHA-256 校验，详见 `SECURITY-VALIDATION.zh-CN.md`。CI 浏览器并发限制为 2，先独立打包测试页面；失败时将测试诊断保留 3 天，没有修改测试断言或过期时间，也没有启用自动重试。
 
 Actions 权限只有 `contents: read`，官方 actions 固定到提交 SHA，手动运行才构建未签名 arm64 APK。流程先执行静态检查、出站限制测试、假服务测试和浏览器回归，再执行构建、未签名状态检查、合并 Manifest/DEX 检查和 SHA-256 计算。任何门禁失败都不会上传候选 APK。下载的 artifact 是未签名候选，不能直接安装。
 
@@ -84,7 +85,8 @@ python3 scripts/private/sign.py \
 脚本交互读取密码，执行 16 KB 对齐、v2/v3 签名、最终签名校验、证书指纹匹配、对齐复查，最后才写出 APK、`.signature.txt` 和 `.apk.sha256`。拒绝调试密钥别名、证书不匹配和覆盖现有输出。不得把成功运行该脚本之前的文件称为“已验证签名的 Release”。
 
 ```sh
-python3 scripts/private/audit-apk.py output/OpenCode-Mobile-Private-release.apk
+python3 scripts/private/audit-apk.py output/OpenCode-Mobile-Private-release.apk \
+  --aapt2 /你的AndroidSDK/build-tools/36.0.0/aapt2
 ```
 
 此检查需要 SDK 的 `apkanalyzer`，它核查合并后的权限、导出组件、ABI 和若干禁止的原生命名空间。它不能替代真机渗透测试或流量捕获。

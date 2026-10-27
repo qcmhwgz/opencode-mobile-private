@@ -1,0 +1,13 @@
+
+> opencode-mobile-private-edition@1.0.98 private:test
+> vitest run tests/private --config vitest.private.config.mts
+
+
+ RUN  v5.0.3 /Users/wq/Documents/Codex/2026-10-27/referenced-chatgpt-conversation-this-is-an/outputs/OpenCode-Mobile-Private-Edition
+
+
+ Test Files  2 passed (2)
+      Tests  26 passed (26)
+   Start at  20:32:50
+   Duration  95ms (transform 48%, tests 29%, import 18%, worker 5%)
+

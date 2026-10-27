@@ -1,0 +1,934 @@
+﻿2026-10-27T12:00:58.5738252Z Current runner version: '2.338.0'
+2026-10-27T12:00:58.5822821Z ##[group]Runner Image Provisioner
+2026-10-27T12:00:58.5824626Z Hosted Compute Agent
+2026-10-27T12:00:58.5825669Z Version: 20261021.618
+2026-10-27T12:00:58.5826755Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+2026-10-27T12:00:58.5828032Z Build Date: 2026-10-21T00:45:21Z
+2026-10-27T12:00:58.5829109Z Worker ID: {45c75556-afe5-462d-9956-ce14170e2eb6}
+2026-10-27T12:00:58.5830254Z Region: eastus
+2026-10-27T12:00:58.5851773Z Cloud: Azure
+2026-10-27T12:00:58.5853736Z ##[endgroup]
+2026-10-27T12:00:58.5856527Z ##[group]Operating System
+2026-10-27T12:00:58.5857683Z Ubuntu
+2026-10-27T12:00:58.5858818Z 24.04.5
+2026-10-27T12:00:58.5859732Z LTS
+2026-10-27T12:00:58.5860639Z ##[endgroup]
+2026-10-27T12:00:58.5862140Z ##[group]Runner Image
+2026-10-27T12:00:58.5863243Z Image: ubuntu-24.04
+2026-10-27T12:00:58.5864376Z Version: 20261012.334.1
+2026-10-27T12:00:58.5866887Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261012.334/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-27T12:00:58.5869911Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261012.334
+2026-10-27T12:00:58.5892234Z ##[endgroup]
+2026-10-27T12:00:58.5894565Z ##[group]GITHUB_TOKEN Permissions
+2026-10-27T12:00:58.5898366Z Contents: read
+2026-10-27T12:00:58.5899504Z Metadata: read
+2026-10-27T12:00:58.5900501Z ##[endgroup]
+2026-10-27T12:00:58.5904318Z Secret source: Actions
+2026-10-27T12:00:58.5906023Z Cache mode: write
+2026-10-27T12:00:58.5907758Z Prepare workflow directory
+2026-10-27T12:00:58.6969591Z Prepare all required actions
+2026-10-27T12:00:58.7045924Z Getting action download info
+2026-10-27T12:00:58.9432073Z Download action repository 'actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683' (SHA:11bd71901bbe5b1630ceea73d27597364c9af683)
+2026-10-27T12:00:59.0869298Z Download action repository 'actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)
+2026-10-27T12:00:59.1836644Z Download action repository 'actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2026-10-27T12:00:59.4095955Z Complete job name: validate
+2026-10-27T12:00:59.4927757Z ##[group]Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+2026-10-27T12:00:59.4929845Z with:
+2026-10-27T12:00:59.4930657Z   persist-credentials: false
+2026-10-27T12:00:59.4931984Z   repository: qcmhwgz/opencode-mobile-private
+2026-10-27T12:00:59.4940652Z   token: ***
+2026-10-27T12:00:59.4941714Z   ssh-strict: true
+2026-10-27T12:00:59.4942503Z   ssh-user: git
+2026-10-27T12:00:59.4943231Z   clean: true
+2026-10-27T12:00:59.4944000Z   sparse-checkout-cone-mode: true
+2026-10-27T12:00:59.4945005Z   fetch-depth: 1
+2026-10-27T12:00:59.4945816Z   fetch-tags: false
+2026-10-27T12:00:59.4946653Z   show-progress: true
+2026-10-27T12:00:59.4947486Z   lfs: false
+2026-10-27T12:00:59.4948250Z   submodules: false
+2026-10-27T12:00:59.4949064Z   set-safe-directory: true
+2026-10-27T12:00:59.4950289Z env:
+2026-10-27T12:00:59.4951035Z   EXPO_NO_TELEMETRY: 1
+2026-10-27T12:00:59.4952217Z   EXPO_NO_DOTENV: 1
+2026-10-27T12:00:59.4952987Z ##[endgroup]
+2026-10-27T12:00:59.9183576Z Syncing repository: qcmhwgz/opencode-mobile-private
+2026-10-27T12:00:59.9187861Z ##[group]Getting Git version info
+2026-10-27T12:00:59.9189707Z Working directory is '/home/runner/work/opencode-mobile-private/opencode-mobile-private'
+2026-10-27T12:00:59.9192914Z [command]/usr/bin/git version
+2026-10-27T12:00:59.9194352Z git version 2.55.0
+2026-10-27T12:00:59.9197952Z ##[endgroup]
+2026-10-27T12:00:59.9213990Z Temporarily overriding HOME='/home/runner/work/_temp/2102b7b8-a94e-47fb-be33-3c4298ccb4f1' before making global git config changes
+2026-10-27T12:00:59.9216595Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-27T12:00:59.9219308Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/opencode-mobile-private/opencode-mobile-private
+2026-10-27T12:00:59.9223126Z Deleting the contents of '/home/runner/work/opencode-mobile-private/opencode-mobile-private'
+2026-10-27T12:00:59.9225812Z ##[group]Initializing the repository
+2026-10-27T12:00:59.9227340Z [command]/usr/bin/git init /home/runner/work/opencode-mobile-private/opencode-mobile-private
+2026-10-27T12:00:59.9229260Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-27T12:00:59.9230954Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-27T12:00:59.9233766Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-27T12:00:59.9235919Z hint: call:
+2026-10-27T12:00:59.9236673Z hint:
+2026-10-27T12:00:59.9237564Z hint: 	git config --global init.defaultBranch <name>
+2026-10-27T12:00:59.9239163Z hint:
+2026-10-27T12:00:59.9240233Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-27T12:00:59.9244880Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-27T12:00:59.9247177Z hint:
+2026-10-27T12:00:59.9247958Z hint: 	git branch -m <name>
+2026-10-27T12:00:59.9248812Z hint:
+2026-10-27T12:00:59.9250499Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-27T12:00:59.9257406Z Initialized empty Git repository in /home/runner/work/opencode-mobile-private/opencode-mobile-private/.git/
+2026-10-27T12:00:59.9261499Z [command]/usr/bin/git remote add origin https://github.com/qcmhwgz/opencode-mobile-private
+2026-10-27T12:00:59.9264886Z ##[endgroup]
+2026-10-27T12:00:59.9266553Z ##[group]Disabling automatic garbage collection
+2026-10-27T12:00:59.9267869Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-27T12:00:59.9270516Z ##[endgroup]
+2026-10-27T12:00:59.9271989Z ##[group]Setting up auth
+2026-10-27T12:00:59.9273242Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-27T12:00:59.9277121Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-27T12:00:59.9737748Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-27T12:00:59.9745250Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-27T12:01:00.0067563Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-27T12:01:00.0307515Z ##[endgroup]
+2026-10-27T12:01:00.0309392Z ##[group]Fetching the repository
+2026-10-27T12:01:00.0312661Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +9ff36da9b7378ea4691ca677465b9247a155e99e:refs/remotes/origin/main
+2026-10-27T12:01:00.8375144Z From https://github.com/qcmhwgz/opencode-mobile-private
+2026-10-27T12:01:00.8383483Z  * [new ref]         9ff36da9b7378ea4691ca677465b9247a155e99e -> origin/main
+2026-10-27T12:01:00.8390448Z ##[endgroup]
+2026-10-27T12:01:00.8393217Z ##[group]Determining the checkout info
+2026-10-27T12:01:00.8396271Z ##[endgroup]
+2026-10-27T12:01:00.8398317Z [command]/usr/bin/git sparse-checkout disable
+2026-10-27T12:01:00.8464818Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-27T12:01:00.8506747Z ##[group]Checking out the ref
+2026-10-27T12:01:00.8511004Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2026-10-27T12:01:00.9158610Z Switched to a new branch 'main'
+2026-10-27T12:01:00.9173245Z branch 'main' set up to track 'origin/main'.
+2026-10-27T12:01:00.9179866Z ##[endgroup]
+2026-10-27T12:01:00.9233059Z [command]/usr/bin/git log -1 --format=%H
+2026-10-27T12:01:00.9277438Z 9ff36da9b7378ea4691ca677465b9247a155e99e
+2026-10-27T12:01:00.9288402Z ##[group]Removing auth
+2026-10-27T12:01:00.9294177Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-27T12:01:00.9339706Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-27T12:01:00.9592041Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-27T12:01:00.9625217Z http.https://github.com/.extraheader
+2026-10-27T12:01:00.9640370Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-10-27T12:01:00.9684935Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-27T12:01:00.9933751Z ##[endgroup]
+2026-10-27T12:01:01.0418802Z ##[group]Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+2026-10-27T12:01:01.0420540Z with:
+2026-10-27T12:01:01.0421644Z   node-version: 22.21.1
+2026-10-27T12:01:01.0422707Z   always-auth: false
+2026-10-27T12:01:01.0423677Z   check-latest: false
+2026-10-27T12:01:01.0434790Z   token: ***
+2026-10-27T12:01:01.0435694Z env:
+2026-10-27T12:01:01.0436580Z   EXPO_NO_TELEMETRY: 1
+2026-10-27T12:01:01.0437615Z   EXPO_NO_DOTENV: 1
+2026-10-27T12:01:01.0438546Z ##[endgroup]
+2026-10-27T12:01:01.2046523Z Attempting to download 22.21.1...
+2026-10-27T12:01:01.2254093Z (node:2076) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-27T12:01:01.2259242Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-27T12:01:01.9014857Z Acquiring 22.21.1 - x64 from https://github.com/actions/node-versions/releases/download/22.21.1-18894912842/node-22.21.1-linux-x64.tar.gz
+2026-10-27T12:01:02.4499279Z Extracting ...
+2026-10-27T12:01:02.4656330Z [command]/usr/bin/tar xz --strip 1 --warning=no-unknown-keyword --overwrite -C /home/runner/work/_temp/dfa32b62-1148-4b87-bc5d-deb750888b93 -f /home/runner/work/_temp/7c8386d0-5e2c-4762-a53b-db2fa22e998a
+2026-10-27T12:01:03.8511792Z Adding to the cache ...
+2026-10-27T12:01:06.6402522Z ##[group]Environment details
+2026-10-27T12:01:06.9393427Z node: v22.21.1
+2026-10-27T12:01:06.9394324Z npm: 10.9.4
+2026-10-27T12:01:06.9394884Z yarn: 1.22.22
+2026-10-27T12:01:06.9395963Z ##[endgroup]
+2026-10-27T12:01:06.9607379Z ##[group]Run npm ci --ignore-scripts --no-audit --no-fund
+2026-10-27T12:01:06.9607867Z [36;1mnpm ci --ignore-scripts --no-audit --no-fund[0m
+2026-10-27T12:01:06.9915250Z shell: /usr/bin/bash -e {0}
+2026-10-27T12:01:06.9915606Z env:
+2026-10-27T12:01:06.9915872Z   EXPO_NO_TELEMETRY: 1
+2026-10-27T12:01:06.9916163Z   EXPO_NO_DOTENV: 1
+2026-10-27T12:01:06.9916426Z ##[endgroup]
+2026-10-27T12:01:24.3124124Z npm warn deprecated eslint@9.39.5: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+2026-10-27T12:01:32.7565537Z 
+2026-10-27T12:01:32.7566527Z added 1003 packages in 26s
+2026-10-27T12:01:32.8405388Z ##[group]Run npm run test:ci:static
+2026-10-27T12:01:32.8405741Z [36;1mnpm run test:ci:static[0m
+2026-10-27T12:01:32.8471038Z shell: /usr/bin/bash -e {0}
+2026-10-27T12:01:32.8471527Z env:
+2026-10-27T12:01:32.8471735Z   EXPO_NO_TELEMETRY: 1
+2026-10-27T12:01:32.8471965Z   EXPO_NO_DOTENV: 1
+2026-10-27T12:01:32.8472177Z ##[endgroup]
+2026-10-27T12:01:32.9540588Z 
+2026-10-27T12:01:32.9542127Z > opencode-mobile-private-edition@1.0.98 test:ci:static
+2026-10-27T12:01:32.9543342Z > node ./tests/run-static.mjs
+2026-10-27T12:01:32.9543993Z 
+2026-10-27T12:01:32.9864932Z 
+2026-10-27T12:01:32.9866218Z [static] lint: node node_modules/eslint/bin/eslint.js . --cache --cache-strategy content
+2026-10-27T12:01:32.9905825Z 
+2026-10-27T12:01:32.9925219Z [static] typecheck: node node_modules/typescript/bin/tsc --noEmit --incremental --tsBuildInfoFile tsconfig.app.tsbuildinfo
+2026-10-27T12:01:32.9957045Z 
+2026-10-27T12:01:32.9983759Z [static] typecheck:tests: node node_modules/typescript/bin/tsc -p tsconfig.tests.json --incremental --tsBuildInfoFile tsconfig.tests.tsbuildinfo
+2026-10-27T12:01:33.0021986Z 
+2026-10-27T12:01:33.0052913Z [static] vitest: node node_modules/vitest/vitest.mjs run
+2026-10-27T12:02:25.2763160Z [static] typecheck:tests: ok (52.3s)
+2026-10-27T12:02:39.8562710Z [static] typecheck: ok (66.9s)
+2026-10-27T12:03:59.2460565Z [static] lint: ok (146.3s)
+2026-10-27T12:04:15.0242686Z 
+2026-10-27T12:04:15.0244626Z [1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/runner/work/opencode-mobile-private/opencode-mobile-private[39m
+2026-10-27T12:04:15.0245945Z 
+2026-10-27T12:04:15.0247691Z  [32m✓[39m tests/vitest/provider-runtime.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 4016[2mms[22m[39m
+2026-10-27T12:04:15.0249296Z    [32m✓[39m provider runtime actions [2m(1)[22m
+2026-10-27T12:04:15.0250490Z      [33m[2m✓[22m[39m provider runtime actions[33m 4000[2mms[22m[39m
+2026-10-27T12:04:15.0252793Z  [32m✓[39m tests/vitest/connect.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 22221[2mms[22m[39m
+2026-10-27T12:04:15.0254460Z    [32m✓[39m connect and Cloud Link pairing [2m(1)[22m
+2026-10-27T12:04:15.0255761Z      [33m[2m✓[22m[39m connect and Cloud Link pairing[33m 22211[2mms[22m[39m
+2026-10-27T12:04:15.0257466Z  [32m✓[39m tests/vitest/widget-flow.test.ts [2m([22m[2m22 tests[22m[2m)[22m[33m 14069[2mms[22m[39m
+2026-10-27T12:04:15.0258910Z    [32m✓[39m widget provider lifecycle [2m(6)[22m
+2026-10-27T12:04:15.0260681Z      [33m[2m✓[22m[39m loads independently of the library and refreshes global events, polling and resume[33m 1028[2mms[22m[39m
+2026-10-27T12:04:15.0264423Z      [33m[2m✓[22m[39m retains data and timestamps after failed surface reads and removes settled requests on success[33m 367[2mms[22m[39m
+2026-10-27T12:04:15.0268010Z      [33m[2m✓[22m[39m keeps the safety poll active after a catalog failure while retaining the last snapshot[33m 392[2mms[22m[39m
+2026-10-27T12:04:15.0270639Z    [32m✓[39m compiled native widgets [2m(6)[22m
+2026-10-27T12:04:15.0272367Z      [33m[2m✓[22m[39m serializes visible content, empty states and redaction with dev=true[33m 4369[2mms[22m[39m
+2026-10-27T12:04:15.0274091Z      [33m[2m✓[22m[39m serializes visible content, empty states and redaction with dev=false[33m 1526[2mms[22m[39m
+2026-10-27T12:04:15.0275932Z      [33m[2m✓[22m[39m dispatches foreground and headless updates with native boundaries only, dev=true[33m 1870[2mms[22m[39m
+2026-10-27T12:04:15.0277775Z      [33m[2m✓[22m[39m dispatches foreground and headless updates with native boundaries only, dev=false[33m 1610[2mms[22m[39m
+2026-10-27T12:04:15.0279763Z      [33m[2m✓[22m[39m awaits every placed instance and catches individual failures without skipping other widgets[33m 1233[2mms[22m[39m
+2026-10-27T12:04:15.0281854Z      [33m[2m✓[22m[39m does not dispatch widgets on web, Expo Go or E2E[33m 905[2mms[22m[39m
+2026-10-27T12:04:15.0284105Z  [32m✓[39m tests/vitest/connect-recovery.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 12529[2mms[22m[39m
+2026-10-27T12:04:15.0285466Z    [32m✓[39m connect recovery [2m(1)[22m
+2026-10-27T12:04:15.0286499Z      [33m[2m✓[22m[39m connect recovery[33m 12525[2mms[22m[39m
+2026-10-27T12:04:15.0288011Z  [32m✓[39m tests/vitest/connection-profiles.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 874[2mms[22m[39m
+2026-10-27T12:04:15.0289316Z    [32m✓[39m connection profiles [2m(1)[22m
+2026-10-27T12:04:15.0290795Z      [33m[2m✓[22m[39m validates profiles, resolves scoped credentials, and serializes one transaction[33m 870[2mms[22m[39m
+2026-10-27T12:04:15.0293150Z  [32m✓[39m tests/vitest/optimistic-flows.test.ts [2m([22m[2m11 tests[22m[2m)[22m[33m 1323[2mms[22m[39m
+2026-10-27T12:04:15.0295135Z  [32m✓[39m tests/vitest/notifications-background.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 656[2mms[22m[39m
+2026-10-27T12:04:15.0296704Z    [32m✓[39m background notification monitor [2m(1)[22m
+2026-10-27T12:04:15.0298548Z      [33m[2m✓[22m[39m keeps records scoped per connection across credential, concurrency, and failure cases[33m 653[2mms[22m[39m
+2026-10-27T12:04:15.0301052Z  [32m✓[39m tests/vitest/services-management.test.ts [2m([22m[2m24 tests[22m[2m)[22m[32m 88[2mms[22m[39m
+2026-10-27T12:04:15.0303323Z  [32m✓[39m tests/vitest/workspaces.test.ts [2m([22m[2m9 tests[22m[2m)[22m[33m 1017[2mms[22m[39m
+2026-10-27T12:04:15.0305169Z  [32m✓[39m tests/vitest/app-updates.test.ts [2m([22m[2m18 tests[22m[2m)[22m[33m 2236[2mms[22m[39m
+2026-10-27T12:04:15.0306540Z    [32m✓[39m provider update safety [2m(12)[22m
+2026-10-27T12:04:15.0308141Z      [33m[2m✓[22m[39m opens only native consent at a safe moment and still requires an explicit restart[33m 646[2mms[22m[39m
+2026-10-27T12:04:15.0310137Z  [32m✓[39m tests/vitest/activity-group.test.ts [2m([22m[2m18 tests[22m[2m)[22m[33m 1521[2mms[22m[39m
+2026-10-27T12:04:15.0312736Z  [32m✓[39m tests/vitest/session-cache.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 396[2mms[22m[39m
+2026-10-27T12:04:15.0314049Z    [32m✓[39m session cache storage [2m(1)[22m
+2026-10-27T12:04:15.0315612Z      [33m[2m✓[22m[39m scopes caches by connection, validates envelopes, and fails safe[33m 394[2mms[22m[39m
+2026-10-27T12:04:15.0317252Z  [32m✓[39m tests/vitest/feed.test.ts [2m([22m[2m13 tests[22m[2m)[22m[33m 1381[2mms[22m[39m
+2026-10-27T12:04:15.0318515Z    [32m✓[39m provider-owned prompt inbox [2m(6)[22m
+2026-10-27T12:04:15.0320161Z      [33m[2m✓[22m[39m pins submissions, keeps confirmed inbox state on failure, and removes delivered duplicates[33m 408[2mms[22m[39m
+2026-10-27T12:04:15.0322455Z  [32m✓[39m tests/vitest/connection-protocol.test.ts [2m([22m[2m34 tests[22m[2m)[22m[33m 538[2mms[22m[39m
+2026-10-27T12:04:15.0324487Z  [32m✓[39m tests/vitest/transcript-policy.test.ts [2m([22m[2m14 tests[22m[2m)[22m[33m 1323[2mms[22m[39m
+2026-10-27T12:04:15.0325964Z    [32m✓[39m transcript refresh policy [2m(14)[22m
+2026-10-27T12:04:15.0327380Z      [33m[2m✓[22m[39m retains outer session hydration when a nested empty transcript read finishes[33m 338[2mms[22m[39m
+2026-10-27T12:04:15.0329010Z  [32m✓[39m tests/vitest/audit-races.test.ts [2m([22m[2m13 tests[22m[2m)[22m[33m 1810[2mms[22m[39m
+2026-10-27T12:04:15.0330090Z    [32m✓[39m composer admission races [2m(5)[22m
+2026-10-27T12:04:15.0331786Z      [33m[2m✓[22m[39m preserves newer text and files, then explicitly merges a failed input once[33m 324[2mms[22m[39m
+2026-10-27T12:04:15.0333641Z  [32m✓[39m tests/vitest/persistence-hydration.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 972[2mms[22m[39m
+2026-10-27T12:04:15.0334979Z    [32m✓[39m persistence hydration and write-back [2m(1)[22m
+2026-10-27T12:04:15.0336452Z      [33m[2m✓[22m[39m hydrates independently, validates fields, orders writes, and recovers from failures[33m 969[2mms[22m[39m
+2026-10-27T12:04:15.0338444Z  [32m✓[39m tests/vitest/activity-notifications.test.ts [2m([22m[2m15 tests[22m[2m)[22m[32m 138[2mms[22m[39m
+2026-10-27T12:04:15.0340070Z  [32m✓[39m tests/vitest/terminal.test.ts [2m([22m[2m14 tests[22m[2m)[22m[32m 44[2mms[22m[39m
+2026-10-27T12:04:15.0341826Z  [32m✓[39m tests/vitest/v2-mappers.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 19[2mms[22m[39m
+2026-10-27T12:04:15.0343398Z  [32m✓[39m tests/vitest/share-flow.test.ts [2m([22m[2m23 tests[22m[2m)[22m[33m 1337[2mms[22m[39m
+2026-10-27T12:04:15.0344859Z  [32m✓[39m tests/vitest/speech-input.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 705[2mms[22m[39m
+2026-10-27T12:04:15.0346589Z    [33m[2m✓[22m[39m isolates recognition owners through competing starts, cancellation and network fallback[33m 578[2mms[22m[39m
+2026-10-27T12:04:15.0348313Z  [32m✓[39m tests/vitest/session-reads.test.ts [2m([22m[2m11 tests[22m[2m)[22m[32m 60[2mms[22m[39m
+2026-10-27T12:04:15.0349901Z  [32m✓[39m tests/vitest/extensions.test.ts [2m([22m[2m10 tests[22m[2m)[22m[32m 52[2mms[22m[39m
+2026-10-27T12:04:15.0352115Z  [32m✓[39m tests/vitest/connect-activation.test.ts [2m([22m[2m32 tests[22m[2m)[22m[32m 47[2mms[22m[39m
+2026-10-27T12:04:15.0353820Z  [32m✓[39m tests/vitest/provider-utils.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 8[2mms[22m[39m
+2026-10-27T12:04:15.0355366Z  [32m✓[39m tests/vitest/i18n.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 227[2mms[22m[39m
+2026-10-27T12:04:15.0357813Z  [32m✓[39m tests/vitest/architecture.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 862[2mms[22m[39m
+2026-10-27T12:04:15.0358864Z    [32m✓[39m architecture ratchets [2m(1)[22m
+2026-10-27T12:04:15.0360147Z      [33m[2m✓[22m[39m keeps the provider, file sizes, context surface, and SDK boundary in bounds[33m 858[2mms[22m[39m
+2026-10-27T12:04:15.0363260Z  [32m✓[39m tests/vitest/notifications.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 486[2mms[22m[39m
+2026-10-27T12:04:15.0364485Z    [32m✓[39m pending notification storage [2m(1)[22m
+2026-10-27T12:04:15.0365803Z      [33m[2m✓[22m[39m scopes records by connection, migrates legacy entries, and strips secrets[33m 483[2mms[22m[39m
+2026-10-27T12:04:15.0367065Z  [32m✓[39m tests/vitest/connection-dialog.test.ts [2m([22m[2m5 tests[22m[2m)[22m[33m 1294[2mms[22m[39m
+2026-10-27T12:04:15.0367669Z    [32m✓[39m manual connection form [2m(5)[22m
+2026-10-27T12:04:15.0368410Z      [33m[2m✓[22m[39m shows V2 details without a username and preserves values when changing the address[33m 564[2mms[22m[39m
+2026-10-27T12:04:15.0369293Z  [32m✓[39m tests/vitest/native-inputs.test.ts [2m([22m[2m10 tests[22m[2m)[22m[33m 825[2mms[22m[39m
+2026-10-27T12:04:15.0370096Z  [32m✓[39m tests/vitest/provider-events.test.ts [2m([22m[2m10 tests[22m[2m)[22m[32m 24[2mms[22m[39m
+2026-10-27T12:04:15.0370864Z  [32m✓[39m tests/vitest/favorites.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 503[2mms[22m[39m
+2026-10-27T12:04:15.0371751Z    [32m✓[39m favorite session storage [2m(1)[22m
+2026-10-27T12:04:15.0372470Z      [33m[2m✓[22m[39m validates, scopes, caps, and strips secrets from persisted favorites[33m 500[2mms[22m[39m
+2026-10-27T12:04:15.0373282Z  [32m✓[39m tests/vitest/onboarding.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 461[2mms[22m[39m
+2026-10-27T12:04:15.0373820Z    [32m✓[39m onboarding state [2m(1)[22m
+2026-10-27T12:04:15.0374496Z      [33m[2m✓[22m[39m parses versions, decides completion, and migrates existing installs[33m 458[2mms[22m[39m
+2026-10-27T12:04:15.0375278Z  [32m✓[39m tests/vitest/usage.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 40[2mms[22m[39m
+2026-10-27T12:04:15.0376044Z  [32m✓[39m tests/vitest/read-deadline.test.ts [2m([22m[2m9 tests[22m[2m)[22m[32m 121[2mms[22m[39m
+2026-10-27T12:04:15.0376844Z  [32m✓[39m tests/vitest/transcript-list.test.ts [2m([22m[2m10 tests[22m[2m)[22m[33m 1499[2mms[22m[39m
+2026-10-27T12:04:15.0377651Z    [32m✓[39m transcript empty state [2m(10)[22m
+2026-10-27T12:04:15.0378386Z      [33m[2m✓[22m[39m only offers starter prompts for a session that has no transcript content[33m 324[2mms[22m[39m
+2026-10-27T12:04:15.0379190Z  [32m✓[39m tests/vitest/format.test.ts [2m([22m[2m12 tests[22m[2m)[22m[32m 13[2mms[22m[39m
+2026-10-27T12:04:15.0379953Z  [32m✓[39m tests/vitest/transcript-rows.test.ts [2m([22m[2m12 tests[22m[2m)[22m[32m 18[2mms[22m[39m
+2026-10-27T12:04:15.0380770Z  [32m✓[39m tests/vitest/anr-regressions.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 851[2mms[22m[39m
+2026-10-27T12:04:15.0382686Z    [32m✓[39m ANR regression checks [2m(1)[22m
+2026-10-27T12:04:15.0383539Z      [33m[2m✓[22m[39m reuses one Intl.Collator and keeps the Android content-capture opt-out idempotent[33m 848[2mms[22m[39m
+2026-10-27T12:04:15.0384479Z  [32m✓[39m tests/vitest/record-preservation.test.ts [2m([22m[2m14 tests[22m[2m)[22m[32m 15[2mms[22m[39m
+2026-10-27T12:04:15.0385346Z  [32m✓[39m tests/vitest/connection-headers.test.ts [2m([22m[2m7 tests[22m[2m)[22m[33m 650[2mms[22m[39m
+2026-10-27T12:04:15.0386353Z  [32m✓[39m tests/vitest/share-ui.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 577[2mms[22m[39m
+2026-10-27T12:04:15.0387282Z    [33m[2m✓[22m[39m only navigates after a successful provider handoff and wires Change to an existing destination[33m 346[2mms[22m[39m
+2026-10-27T12:04:15.0388210Z  [32m✓[39m tests/vitest/connection-scope.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 131[2mms[22m[39m
+2026-10-27T12:04:15.0389055Z  [32m✓[39m tests/vitest/connection-scan-flow.test.ts [2m([22m[2m5 tests[22m[2m)[22m[33m 1573[2mms[22m[39m
+2026-10-27T12:04:15.0389643Z    [32m✓[39m local QR scan flow [2m(5)[22m
+2026-10-27T12:04:15.0390259Z      [33m[2m✓[22m[39m pairs a scanned code and saves with the redeemed credentials[33m 580[2mms[22m[39m
+2026-10-27T12:04:15.0391072Z  [32m✓[39m tests/vitest/connect-onboarding.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 703[2mms[22m[39m
+2026-10-27T12:04:15.0392260Z  [32m✓[39m tests/vitest/connection-password.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 738[2mms[22m[39m
+2026-10-27T12:04:15.0393099Z  [32m✓[39m tests/vitest/network-resilience.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 206[2mms[22m[39m
+2026-10-27T12:04:15.0393889Z  [32m✓[39m tests/vitest/wake-phrase.test.ts [2m([22m[2m14 tests[22m[2m)[22m[32m 15[2mms[22m[39m
+2026-10-27T12:04:15.0394675Z  [32m✓[39m tests/vitest/swipe-dismiss.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 270[2mms[22m[39m
+2026-10-27T12:04:15.0395520Z  [32m✓[39m tests/vitest/connection-classification.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 14[2mms[22m[39m
+2026-10-27T12:04:15.0396355Z  [32m✓[39m tests/vitest/last-session.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 382[2mms[22m[39m
+2026-10-27T12:04:15.0396956Z    [32m✓[39m last-session storage scoping [2m(1)[22m
+2026-10-27T12:04:15.0397672Z      [33m[2m✓[22m[39m keys remembered sessions by connection scope and rejects legacy flat maps[33m 379[2mms[22m[39m
+2026-10-27T12:04:15.0398531Z  [32m✓[39m tests/vitest/composer-context.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 13[2mms[22m[39m
+2026-10-27T12:04:15.0399327Z  [32m✓[39m tests/vitest/realtime-helpers.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 11[2mms[22m[39m
+2026-10-27T12:04:15.0400153Z  [32m✓[39m tests/vitest/services-target.test.ts [2m([22m[2m9 tests[22m[2m)[22m[32m 13[2mms[22m[39m
+2026-10-27T12:04:15.0400922Z  [32m✓[39m tests/vitest/mcp-oauth.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 18[2mms[22m[39m
+2026-10-27T12:04:15.0402049Z  [32m✓[39m tests/vitest/pending-interactions.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 10[2mms[22m[39m
+2026-10-27T12:04:15.0402885Z  [32m✓[39m tests/vitest/connect-install.test.ts [2m([22m[2m5 tests[22m[2m)[22m[33m 422[2mms[22m[39m
+2026-10-27T12:04:15.0403800Z  [32m✓[39m tests/vitest/project.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 30[2mms[22m[39m
+2026-10-27T12:04:15.0404707Z  [32m✓[39m tests/vitest/activity-notification-platform.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 10[2mms[22m[39m
+2026-10-27T12:04:15.0405581Z  [32m✓[39m tests/vitest/widget-snapshot.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 11[2mms[22m[39m
+2026-10-27T12:04:15.0406361Z  [32m✓[39m tests/vitest/project-file.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 14[2mms[22m[39m
+2026-10-27T12:04:15.0407135Z  [32m✓[39m tests/vitest/activity-diff.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 342[2mms[22m[39m
+2026-10-27T12:04:15.0407949Z  [32m✓[39m tests/vitest/chat-composer-notices.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 246[2mms[22m[39m
+2026-10-27T12:04:15.0408742Z  [32m✓[39m tests/vitest/appearance.test.ts [2m([22m[2m19 tests[22m[2m)[22m[32m 15[2mms[22m[39m
+2026-10-27T12:04:15.0409511Z  [32m✓[39m tests/vitest/config-plugins.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+2026-10-27T12:04:15.0410301Z  [32m✓[39m tests/vitest/pending-prompts.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 140[2mms[22m[39m
+2026-10-27T12:04:15.0411234Z  [32m✓[39m tests/vitest/active-sessions.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 4[2mms[22m[39m
+2026-10-27T12:04:15.0412433Z  [32m✓[39m tests/vitest/connect-camera-gate.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 152[2mms[22m[39m
+2026-10-27T12:04:15.0413268Z  [32m✓[39m tests/vitest/native-share-patch.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 28[2mms[22m[39m
+2026-10-27T12:04:15.0414062Z  [32m✓[39m tests/vitest/voice-errors.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 4[2mms[22m[39m
+2026-10-27T12:04:15.0414827Z  [32m✓[39m tests/vitest/native-intent.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 140[2mms[22m[39m
+2026-10-27T12:04:15.0415621Z  [32m✓[39m tests/vitest/diff-turn-selection.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+2026-10-27T12:04:15.0416437Z  [32m✓[39m tests/vitest/provider-flow.test.ts [2m([22m[2m9 tests[22m[2m)[22m[32m 8[2mms[22m[39m
+2026-10-27T12:04:15.0417246Z  [32m✓[39m tests/vitest/diff-normalization.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+2026-10-27T12:04:15.0418030Z  [32m✓[39m tests/vitest/chat-markdown.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 146[2mms[22m[39m
+2026-10-27T12:04:15.0418842Z  [32m✓[39m tests/vitest/transcript-accumulate.test.ts [2m([22m[2m10 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+2026-10-27T12:04:15.0419713Z  [32m✓[39m tests/vitest/ios-personal-team-config.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 151[2mms[22m[39m
+2026-10-27T12:04:15.0420578Z  [32m✓[39m tests/vitest/transcript-read-errors.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 161[2mms[22m[39m
+2026-10-27T12:04:15.0421669Z  [32m✓[39m tests/vitest/files-panel.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 138[2mms[22m[39m
+2026-10-27T12:04:15.0422547Z  [32m✓[39m tests/vitest/quick-action-items.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+2026-10-27T12:04:15.0423312Z  [32m✓[39m tests/vitest/share.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+2026-10-27T12:04:15.0424072Z  [32m✓[39m tests/vitest/revert-notice.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 118[2mms[22m[39m
+2026-10-27T12:04:15.0424851Z  [32m✓[39m tests/vitest/chat-dictation.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 60[2mms[22m[39m
+2026-10-27T12:04:15.0425657Z  [32m✓[39m tests/vitest/connection-retry.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 197[2mms[22m[39m
+2026-10-27T12:04:15.0426488Z  [32m✓[39m tests/vitest/transcript-visibility.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+2026-10-27T12:04:15.0427405Z  [32m✓[39m tests/vitest/connect-subscription-management.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 410[2mms[22m[39m
+2026-10-27T12:04:15.0428450Z  [32m✓[39m tests/vitest/widget-storage.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+2026-10-27T12:04:15.0429293Z  [32m✓[39m tests/vitest/onboarding-navigation.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+2026-10-27T12:04:15.0430117Z  [32m✓[39m tests/vitest/session-selection.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 116[2mms[22m[39m
+2026-10-27T12:04:15.0430924Z  [32m✓[39m tests/vitest/provider-accounts.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 29[2mms[22m[39m
+2026-10-27T12:04:15.0432114Z  [32m✓[39m tests/vitest/session-settlement.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+2026-10-27T12:04:15.0432932Z  [32m✓[39m tests/vitest/chat-appearance.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 114[2mms[22m[39m
+2026-10-27T12:04:15.0433717Z  [32m✓[39m tests/vitest/project-patch.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 61[2mms[22m[39m
+2026-10-27T12:04:15.0434487Z  [32m✓[39m tests/vitest/support.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 160[2mms[22m[39m
+2026-10-27T12:04:15.0435259Z  [32m✓[39m tests/vitest/typecheck-ratchet.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 3[2mms[22m[39m
+2026-10-27T12:04:15.0436238Z  [32m✓[39m tests/vitest/connection-errors.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 4[2mms[22m[39m
+2026-10-27T12:04:15.0437037Z  [32m✓[39m tests/vitest/notification-route.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+2026-10-27T12:04:15.0437796Z  [32m✓[39m tests/vitest/haptics.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 74[2mms[22m[39m
+2026-10-27T12:04:15.0438527Z  [32m✓[39m tests/vitest/session-link.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+2026-10-27T12:04:15.0439287Z  [32m✓[39m tests/vitest/chat-view-utils.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 4[2mms[22m[39m
+2026-10-27T12:04:15.0440008Z  [32m✓[39m tests/vitest/color.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+2026-10-27T12:04:15.0440351Z 
+2026-10-27T12:04:15.0440674Z [2m Test Files [22m [1m[32m102 passed[39m[22m[90m (102)[39m
+2026-10-27T12:04:15.0441198Z [2m      Tests [22m [1m[32m641 passed[39m[22m[90m (641)[39m
+2026-10-27T12:04:15.0441942Z [2m   Start at [22m 12:01:34
+2026-10-27T12:04:15.0442451Z [2m   Duration [22m 160.88s[2m (tests 60%, import 35%, transform 4%)[22m
+2026-10-27T12:04:15.0442741Z 
+2026-10-27T12:04:15.0443262Z [2m    Isolate [22m [33m102 workers spawned[39m[2m · ~176ms startup each (spawn + environment, per file)[22m
+2026-10-27T12:04:15.0444288Z [2m            [22m [2mat least ~17.73s faster with [22m[33misolate: false[39m[2m — reuses workers across files instead of one per file[22m
+2026-10-27T12:04:15.0444756Z 
+2026-10-27T12:04:15.0444883Z [static] vitest: ok (162.0s)
+2026-10-27T12:04:15.0445042Z 
+2026-10-27T12:04:15.0445199Z [static] all static checks passed.
+2026-10-27T12:04:15.0487942Z ##[group]Run npm run private:test
+2026-10-27T12:04:15.0488258Z [36;1mnpm run private:test[0m
+2026-10-27T12:04:15.0550706Z shell: /usr/bin/bash -e {0}
+2026-10-27T12:04:15.0550981Z env:
+2026-10-27T12:04:15.0551171Z   EXPO_NO_TELEMETRY: 1
+2026-10-27T12:04:15.0551563Z   EXPO_NO_DOTENV: 1
+2026-10-27T12:04:15.0551770Z ##[endgroup]
+2026-10-27T12:04:15.1628047Z 
+2026-10-27T12:04:15.1629150Z > opencode-mobile-private-edition@1.0.98 private:test
+2026-10-27T12:04:15.1630584Z > vitest run tests/private --config vitest.private.config.mts
+2026-10-27T12:04:15.1631752Z 
+2026-10-27T12:04:15.6062057Z 
+2026-10-27T12:04:15.6093644Z [1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/runner/work/opencode-mobile-private/opencode-mobile-private[39m
+2026-10-27T12:04:15.6094563Z 
+2026-10-27T12:04:15.9413252Z  [32m✓[39m tests/private/policy.test.ts [2m([22m[2m25 tests[22m[2m)[22m[32m 18[2mms[22m[39m
+2026-10-27T12:04:16.1792027Z  [32m✓[39m tests/private/runtime.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 49[2mms[22m[39m
+2026-10-27T12:04:16.1851896Z 
+2026-10-27T12:04:16.1873053Z [2m Test Files [22m [1m[32m2 passed[39m[22m[90m (2)[39m
+2026-10-27T12:04:16.1902787Z [2m      Tests [22m [1m[32m26 passed[39m[22m[90m (26)[39m
+2026-10-27T12:04:16.1923852Z [2m   Start at [22m 12:04:15
+2026-10-27T12:04:16.1942843Z [2m   Duration [22m 554ms[2m (transform 43%, tests 32%, import 20%, worker 5%)[22m
+2026-10-27T12:04:16.1952247Z 
+2026-10-27T12:04:16.2288981Z ##[group]Run npm run test:fake-server:self
+2026-10-27T12:04:16.2289340Z [36;1mnpm run test:fake-server:self[0m
+2026-10-27T12:04:16.2353357Z shell: /usr/bin/bash -e {0}
+2026-10-27T12:04:16.2353641Z env:
+2026-10-27T12:04:16.2353851Z   EXPO_NO_TELEMETRY: 1
+2026-10-27T12:04:16.2354084Z   EXPO_NO_DOTENV: 1
+2026-10-27T12:04:16.2354299Z ##[endgroup]
+2026-10-27T12:04:16.3472519Z 
+2026-10-27T12:04:16.3473639Z > opencode-mobile-private-edition@1.0.98 test:fake-server:self
+2026-10-27T12:04:16.3474809Z > node ./tests/fake-opencode/self-test.mjs
+2026-10-27T12:04:16.3475441Z 
+2026-10-27T12:04:16.6603045Z Fake OpenCode server listening on http://127.0.0.1:4196 (happy-path)
+2026-10-27T12:04:18.7542763Z Fake OpenCode V2 server listening on http://127.0.0.1:4197 (happy-path)
+2026-10-27T12:04:19.9889559Z Fake OpenCode 1.18.3 server self-test passed.
+2026-10-27T12:04:19.9899500Z Fake OpenCode 2.0 server self-test passed.
+2026-10-27T12:04:24.0114076Z ##[group]Run npx --no-install playwright install --with-deps chromium
+2026-10-27T12:04:24.0114983Z [36;1mnpx --no-install playwright install --with-deps chromium[0m
+2026-10-27T12:04:24.0208050Z shell: /usr/bin/bash -e {0}
+2026-10-27T12:04:24.0208534Z env:
+2026-10-27T12:04:24.0208888Z   EXPO_NO_TELEMETRY: 1
+2026-10-27T12:04:24.0209300Z   EXPO_NO_DOTENV: 1
+2026-10-27T12:04:24.0209665Z ##[endgroup]
+2026-10-27T12:04:24.9123623Z Installing dependencies...
+2026-10-27T12:04:24.9194386Z Switching to root user to install dependencies...
+2026-10-27T12:04:25.1013037Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+2026-10-27T12:04:25.1733068Z Get:6 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
+2026-10-27T12:04:25.2087092Z Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
+2026-10-27T12:04:25.2127114Z Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+2026-10-27T12:04:25.2223106Z Get:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+2026-10-27T12:04:25.2313895Z Get:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+2026-10-27T12:04:25.3170666Z Get:7 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [598 kB]
+2026-10-27T12:04:25.3403030Z Get:8 https://packages.microsoft.com/ubuntu/24.04/prod noble/main armhf Packages [12.4 kB]
+2026-10-27T12:04:25.3436161Z Get:9 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [661 kB]
+2026-10-27T12:04:25.4633506Z Get:10 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1401 kB]
+2026-10-27T12:04:25.4876637Z Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [310 kB]
+2026-10-27T12:04:25.4903451Z Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1706 kB]
+2026-10-27T12:04:25.5114150Z Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [343 kB]
+2026-10-27T12:04:25.5162869Z Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1805 kB]
+2026-10-27T12:04:25.5384338Z Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [411 kB]
+2026-10-27T12:04:25.8093822Z Get:16 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [1146 kB]
+2026-10-27T12:04:25.8174873Z Get:17 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [231 kB]
+2026-10-27T12:04:25.8183907Z Get:18 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1223 kB]
+2026-10-27T12:04:25.8305030Z Get:19 http://azure.archive.ubuntu.com/ubuntu noble-security/universe Translation-en [246 kB]
+2026-10-27T12:04:25.8754126Z Get:20 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1713 kB]
+2026-10-27T12:04:25.8831081Z Get:21 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [392 kB]
+2026-10-27T12:04:29.8140174Z Fetched 12.6 MB in 2s (7681 kB/s)
+2026-10-27T12:04:30.9013434Z Reading package lists...
+2026-10-27T12:04:30.9292676Z Reading package lists...
+2026-10-27T12:04:31.1912764Z Building dependency tree...
+2026-10-27T12:04:31.1932278Z Reading state information...
+2026-10-27T12:04:31.4539429Z libasound2t64 is already the newest version (1.2.11-1ubuntu0.3).
+2026-10-27T12:04:31.4540492Z libasound2t64 set to manually installed.
+2026-10-27T12:04:31.4542168Z libatk-bridge2.0-0t64 is already the newest version (2.52.0-1build1).
+2026-10-27T12:04:31.4543466Z libatk-bridge2.0-0t64 set to manually installed.
+2026-10-27T12:04:31.4544524Z libatk1.0-0t64 is already the newest version (2.52.0-1build1).
+2026-10-27T12:04:31.4545543Z libatk1.0-0t64 set to manually installed.
+2026-10-27T12:04:31.4546458Z libatspi2.0-0t64 is already the newest version (2.52.0-1build1).
+2026-10-27T12:04:31.4547842Z libatspi2.0-0t64 set to manually installed.
+2026-10-27T12:04:31.4548744Z libcairo2 is already the newest version (1.18.0-3build1).
+2026-10-27T12:04:31.4549943Z libcairo2 set to manually installed.
+2026-10-27T12:04:31.4550869Z libcups2t64 is already the newest version (2.4.7-1.2ubuntu7.14).
+2026-10-27T12:04:31.4551975Z libcups2t64 set to manually installed.
+2026-10-27T12:04:31.4552911Z libdbus-1-3 is already the newest version (1.14.10-4ubuntu4.1).
+2026-10-27T12:04:31.4553739Z libdbus-1-3 set to manually installed.
+2026-10-27T12:04:31.4554796Z libdrm2 is already the newest version (2.4.125-1ubuntu0.1~24.04.2).
+2026-10-27T12:04:31.4555849Z libdrm2 set to manually installed.
+2026-10-27T12:04:31.4556814Z libgbm1 is already the newest version (25.2.8-0ubuntu0.24.04.4).
+2026-10-27T12:04:31.4557791Z libgbm1 set to manually installed.
+2026-10-27T12:04:31.4558669Z libnspr4 is already the newest version (2:4.35-1.1build1).
+2026-10-27T12:04:31.4559483Z libnspr4 set to manually installed.
+2026-10-27T12:04:31.4560353Z libpango-1.0-0 is already the newest version (1.52.1+ds-1build1).
+2026-10-27T12:04:31.4561182Z libpango-1.0-0 set to manually installed.
+2026-10-27T12:04:31.4562423Z libx11-6 is already the newest version (2:1.8.7-1ubuntu0.1).
+2026-10-27T12:04:31.4563051Z libx11-6 set to manually installed.
+2026-10-27T12:04:31.4563626Z libxcb1 is already the newest version (1.15-1ubuntu2).
+2026-10-27T12:04:31.4564837Z libxcb1 set to manually installed.
+2026-10-27T12:04:31.4565517Z libxcomposite1 is already the newest version (1:0.4.5-1build3).
+2026-10-27T12:04:31.4566238Z libxcomposite1 set to manually installed.
+2026-10-27T12:04:31.4567416Z libxdamage1 is already the newest version (1:1.1.6-1build1).
+2026-10-27T12:04:31.4568104Z libxdamage1 set to manually installed.
+2026-10-27T12:04:31.4572403Z libxext6 is already the newest version (2:1.3.4-1build2).
+2026-10-27T12:04:31.4572852Z libxext6 set to manually installed.
+2026-10-27T12:04:31.4573270Z libxfixes3 is already the newest version (1:6.0.0-2build1).
+2026-10-27T12:04:31.4573685Z libxfixes3 set to manually installed.
+2026-10-27T12:04:31.4574404Z libxkbcommon0 is already the newest version (1.6.0-1build1).
+2026-10-27T12:04:31.4575163Z libxkbcommon0 set to manually installed.
+2026-10-27T12:04:31.4575981Z libxrandr2 is already the newest version (2:1.5.2-2build1).
+2026-10-27T12:04:31.4576649Z libxrandr2 set to manually installed.
+2026-10-27T12:04:31.4577153Z fonts-noto-color-emoji is already the newest version (2.047-0ubuntu0.24.04.1).
+2026-10-27T12:04:31.4577721Z libfontconfig1 is already the newest version (2.15.0-1.1ubuntu2).
+2026-10-27T12:04:31.4578147Z libfontconfig1 set to manually installed.
+2026-10-27T12:04:31.4579018Z libfreetype6 is already the newest version (2.13.2+dfsg-1ubuntu0.2).
+2026-10-27T12:04:31.4579803Z libfreetype6 set to manually installed.
+2026-10-27T12:04:31.4580582Z fonts-liberation is already the newest version (1:2.1.5-3).
+2026-10-27T12:04:31.4581512Z fonts-liberation set to manually installed.
+2026-10-27T12:04:31.4582272Z The following additional packages will be installed:
+2026-10-27T12:04:31.4583096Z   gir1.2-glib-2.0 libglib2.0-bin libglib2.0-data libnss3-tools
+2026-10-27T12:04:31.4583811Z   xfonts-encodings xfonts-utils xserver-common
+2026-10-27T12:04:31.4584369Z Suggested packages:
+2026-10-27T12:04:31.4584750Z   low-memory-monitor
+2026-10-27T12:04:31.4585168Z Recommended packages:
+2026-10-27T12:04:31.4585704Z   fonts-ipafont-mincho fonts-tlwg-loma xfonts-base
+2026-10-27T12:04:31.4838775Z The following NEW packages will be installed:
+2026-10-27T12:04:31.4840251Z   fonts-freefont-ttf fonts-ipafont-gothic fonts-tlwg-loma-otf fonts-unifont
+2026-10-27T12:04:31.4852128Z   fonts-wqy-zenhei xfonts-cyrillic xfonts-encodings xfonts-scalable
+2026-10-27T12:04:31.4853046Z   xfonts-utils
+2026-10-27T12:04:31.4860589Z The following packages will be upgraded:
+2026-10-27T12:04:31.4863408Z   gir1.2-glib-2.0 libglib2.0-0t64 libglib2.0-bin libglib2.0-data libnss3
+2026-10-27T12:04:31.4871776Z   libnss3-tools xserver-common xvfb
+2026-10-27T12:04:31.5140848Z 8 upgraded, 9 newly installed, 0 to remove and 96 not upgraded.
+2026-10-27T12:04:31.5142750Z Need to get 25.9 MB of archives.
+2026-10-27T12:04:31.5148266Z After this operation, 79.5 MB of additional disk space will be used.
+2026-10-27T12:04:31.5152363Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+2026-10-27T12:04:31.5495283Z Get:2 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-ipafont-gothic all 00303-21ubuntu1 [3513 kB]
+2026-10-27T12:04:31.5854621Z Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libglib2.0-data all 2.80.0-6ubuntu3.10 [50.2 kB]
+2026-10-27T12:04:31.6005205Z Get:4 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libglib2.0-bin amd64 2.80.0-6ubuntu3.10 [97.9 kB]
+2026-10-27T12:04:31.6156877Z Get:5 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 gir1.2-glib-2.0 amd64 2.80.0-6ubuntu3.10 [183 kB]
+2026-10-27T12:04:31.6317094Z Get:6 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libglib2.0-0t64 amd64 2.80.0-6ubuntu3.10 [1548 kB]
+2026-10-27T12:04:31.6559576Z Get:7 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 fonts-freefont-ttf all 20211204+svn4273-2 [5641 kB]
+2026-10-27T12:04:31.7035468Z Get:8 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-tlwg-loma-otf all 1:0.7.3-1 [107 kB]
+2026-10-27T12:04:31.7190299Z Get:9 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-unifont all 1:15.1.01-1build1 [2993 kB]
+2026-10-27T12:04:31.7510675Z Get:10 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-wqy-zenhei all 0.9.45-8 [7472 kB]
+2026-10-27T12:04:31.8244257Z Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libnss3 amd64 2:3.98-1ubuntu0.3 [1445 kB]
+2026-10-27T12:04:31.8472950Z Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libnss3-tools amd64 2:3.98-1ubuntu0.3 [615 kB]
+2026-10-27T12:04:31.8662206Z Get:13 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-encodings all 1:1.0.5-0ubuntu2 [578 kB]
+2026-10-27T12:04:31.8843553Z Get:14 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-utils amd64 1:7.7+6build3 [94.4 kB]
+2026-10-27T12:04:31.9015866Z Get:15 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 xfonts-cyrillic all 1:1.0.5+nmu1 [384 kB]
+2026-10-27T12:04:31.9185453Z Get:16 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-scalable all 1:1.0.3-1.3 [304 kB]
+2026-10-27T12:04:31.9350166Z Get:17 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 xserver-common all 2:21.1.12-1ubuntu1.9 [35.0 kB]
+2026-10-27T12:04:31.9512778Z Get:18 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 xvfb amd64 2:21.1.12-1ubuntu1.9 [877 kB]
+2026-10-27T12:04:32.2419756Z Fetched 25.9 MB in 0s (57.1 MB/s)
+2026-10-27T12:04:32.2693350Z Selecting previously unselected package fonts-ipafont-gothic.
+2026-10-27T12:04:32.3015451Z (Reading database ... 
+2026-10-27T12:04:32.3015987Z (Reading database ... 5%
+2026-10-27T12:04:32.3018359Z (Reading database ... 10%
+2026-10-27T12:04:32.3019001Z (Reading database ... 15%
+2026-10-27T12:04:32.3019512Z (Reading database ... 20%
+2026-10-27T12:04:32.3019961Z (Reading database ... 25%
+2026-10-27T12:04:32.3020396Z (Reading database ... 30%
+2026-10-27T12:04:32.3021042Z (Reading database ... 35%
+2026-10-27T12:04:32.3023283Z (Reading database ... 40%
+2026-10-27T12:04:32.3023620Z (Reading database ... 45%
+2026-10-27T12:04:32.3023879Z (Reading database ... 50%
+2026-10-27T12:04:32.3066227Z (Reading database ... 55%
+2026-10-27T12:04:32.4173295Z (Reading database ... 60%
+2026-10-27T12:04:32.6219774Z (Reading database ... 65%
+2026-10-27T12:04:32.8123326Z (Reading database ... 70%
+2026-10-27T12:04:33.0161620Z (Reading database ... 75%
+2026-10-27T12:04:33.1641184Z (Reading database ... 80%
+2026-10-27T12:04:33.3663815Z (Reading database ... 85%
+2026-10-27T12:04:33.5220076Z (Reading database ... 90%
+2026-10-27T12:04:33.6802499Z (Reading database ... 95%
+2026-10-27T12:04:33.6803030Z (Reading database ... 100%
+2026-10-27T12:04:33.6803788Z (Reading database ... 203540 files and directories currently installed.)
+2026-10-27T12:04:33.6832581Z Preparing to unpack .../00-fonts-ipafont-gothic_00303-21ubuntu1_all.deb ...
+2026-10-27T12:04:33.6927284Z Unpacking fonts-ipafont-gothic (00303-21ubuntu1) ...
+2026-10-27T12:04:33.9541141Z Preparing to unpack .../01-libglib2.0-data_2.80.0-6ubuntu3.10_all.deb ...
+2026-10-27T12:04:33.9566947Z Unpacking libglib2.0-data (2.80.0-6ubuntu3.10) over (2.80.0-6ubuntu3.9) ...
+2026-10-27T12:04:33.9928356Z Preparing to unpack .../02-libglib2.0-bin_2.80.0-6ubuntu3.10_amd64.deb ...
+2026-10-27T12:04:33.9952478Z Unpacking libglib2.0-bin (2.80.0-6ubuntu3.10) over (2.80.0-6ubuntu3.9) ...
+2026-10-27T12:04:34.0453941Z Preparing to unpack .../03-gir1.2-glib-2.0_2.80.0-6ubuntu3.10_amd64.deb ...
+2026-10-27T12:04:34.0482868Z Unpacking gir1.2-glib-2.0:amd64 (2.80.0-6ubuntu3.10) over (2.80.0-6ubuntu3.9) ...
+2026-10-27T12:04:34.0915757Z Preparing to unpack .../04-libglib2.0-0t64_2.80.0-6ubuntu3.10_amd64.deb ...
+2026-10-27T12:04:34.0988907Z Unpacking libglib2.0-0t64:amd64 (2.80.0-6ubuntu3.10) over (2.80.0-6ubuntu3.9) ...
+2026-10-27T12:04:34.1482876Z Selecting previously unselected package fonts-freefont-ttf.
+2026-10-27T12:04:34.1611956Z Preparing to unpack .../05-fonts-freefont-ttf_20211204+svn4273-2_all.deb ...
+2026-10-27T12:04:34.1622474Z Unpacking fonts-freefont-ttf (20211204+svn4273-2) ...
+2026-10-27T12:04:34.2534294Z Selecting previously unselected package fonts-tlwg-loma-otf.
+2026-10-27T12:04:34.2664678Z Preparing to unpack .../06-fonts-tlwg-loma-otf_1%3a0.7.3-1_all.deb ...
+2026-10-27T12:04:34.2673347Z Unpacking fonts-tlwg-loma-otf (1:0.7.3-1) ...
+2026-10-27T12:04:34.2904399Z Selecting previously unselected package fonts-unifont.
+2026-10-27T12:04:34.3038479Z Preparing to unpack .../07-fonts-unifont_1%3a15.1.01-1build1_all.deb ...
+2026-10-27T12:04:34.3047250Z Unpacking fonts-unifont (1:15.1.01-1build1) ...
+2026-10-27T12:04:34.4224667Z Selecting previously unselected package fonts-wqy-zenhei.
+2026-10-27T12:04:34.4356805Z Preparing to unpack .../08-fonts-wqy-zenhei_0.9.45-8_all.deb ...
+2026-10-27T12:04:34.4460400Z Unpacking fonts-wqy-zenhei (0.9.45-8) ...
+2026-10-27T12:04:34.9504299Z Preparing to unpack .../09-libnss3_2%3a3.98-1ubuntu0.3_amd64.deb ...
+2026-10-27T12:04:34.9528856Z Unpacking libnss3:amd64 (2:3.98-1ubuntu0.3) over (2:3.98-1ubuntu0.2) ...
+2026-10-27T12:04:35.0070102Z Preparing to unpack .../10-libnss3-tools_2%3a3.98-1ubuntu0.3_amd64.deb ...
+2026-10-27T12:04:35.0092683Z Unpacking libnss3-tools (2:3.98-1ubuntu0.3) over (2:3.98-1ubuntu0.2) ...
+2026-10-27T12:04:35.0543878Z Selecting previously unselected package xfonts-encodings.
+2026-10-27T12:04:35.0672039Z Preparing to unpack .../11-xfonts-encodings_1%3a1.0.5-0ubuntu2_all.deb ...
+2026-10-27T12:04:35.0683666Z Unpacking xfonts-encodings (1:1.0.5-0ubuntu2) ...
+2026-10-27T12:04:35.0997076Z Selecting previously unselected package xfonts-utils.
+2026-10-27T12:04:35.1130324Z Preparing to unpack .../12-xfonts-utils_1%3a7.7+6build3_amd64.deb ...
+2026-10-27T12:04:35.1138711Z Unpacking xfonts-utils (1:7.7+6build3) ...
+2026-10-27T12:04:35.1462220Z Selecting previously unselected package xfonts-cyrillic.
+2026-10-27T12:04:35.1596074Z Preparing to unpack .../13-xfonts-cyrillic_1%3a1.0.5+nmu1_all.deb ...
+2026-10-27T12:04:35.1603748Z Unpacking xfonts-cyrillic (1:1.0.5+nmu1) ...
+2026-10-27T12:04:35.1978655Z Selecting previously unselected package xfonts-scalable.
+2026-10-27T12:04:35.2114945Z Preparing to unpack .../14-xfonts-scalable_1%3a1.0.3-1.3_all.deb ...
+2026-10-27T12:04:35.2132446Z Unpacking xfonts-scalable (1:1.0.3-1.3) ...
+2026-10-27T12:04:35.2518668Z Preparing to unpack .../15-xserver-common_2%3a21.1.12-1ubuntu1.9_all.deb ...
+2026-10-27T12:04:35.2551860Z Unpacking xserver-common (2:21.1.12-1ubuntu1.9) over (2:21.1.12-1ubuntu1.8) ...
+2026-10-27T12:04:35.2976978Z Preparing to unpack .../16-xvfb_2%3a21.1.12-1ubuntu1.9_amd64.deb ...
+2026-10-27T12:04:35.3022601Z Unpacking xvfb (2:21.1.12-1ubuntu1.9) over (2:21.1.12-1ubuntu1.8) ...
+2026-10-27T12:04:35.3613488Z Setting up fonts-wqy-zenhei (0.9.45-8) ...
+2026-10-27T12:04:35.3744663Z Setting up fonts-freefont-ttf (20211204+svn4273-2) ...
+2026-10-27T12:04:35.3765972Z Setting up libnss3:amd64 (2:3.98-1ubuntu0.3) ...
+2026-10-27T12:04:35.3788031Z Setting up libglib2.0-0t64:amd64 (2.80.0-6ubuntu3.10) ...
+2026-10-27T12:04:35.3897849Z Setting up libglib2.0-data (2.80.0-6ubuntu3.10) ...
+2026-10-27T12:04:35.3917385Z Setting up fonts-tlwg-loma-otf (1:0.7.3-1) ...
+2026-10-27T12:04:35.3937658Z Setting up xfonts-encodings (1:1.0.5-0ubuntu2) ...
+2026-10-27T12:04:35.3955756Z Setting up gir1.2-glib-2.0:amd64 (2.80.0-6ubuntu3.10) ...
+2026-10-27T12:04:35.3975443Z Setting up fonts-ipafont-gothic (00303-21ubuntu1) ...
+2026-10-27T12:04:35.4046389Z update-alternatives: using /usr/share/fonts/opentype/ipafont-gothic/ipag.ttf to provide /usr/share/fonts/truetype/fonts-japanese-gothic.ttf (fonts-japanese-gothic.ttf) in auto mode
+2026-10-27T12:04:35.4064552Z Setting up xserver-common (2:21.1.12-1ubuntu1.9) ...
+2026-10-27T12:04:35.4091752Z Setting up libnss3-tools (2:3.98-1ubuntu0.3) ...
+2026-10-27T12:04:35.4112056Z Setting up fonts-unifont (1:15.1.01-1build1) ...
+2026-10-27T12:04:35.4130536Z Setting up xvfb (2:21.1.12-1ubuntu1.9) ...
+2026-10-27T12:04:35.4149733Z Setting up libglib2.0-bin (2.80.0-6ubuntu3.10) ...
+2026-10-27T12:04:35.4168977Z Setting up xfonts-utils (1:7.7+6build3) ...
+2026-10-27T12:04:35.4214601Z Setting up xfonts-cyrillic (1:1.0.5+nmu1) ...
+2026-10-27T12:04:35.4547575Z Setting up xfonts-scalable (1:1.0.3-1.3) ...
+2026-10-27T12:04:35.4871164Z Processing triggers for libc-bin (2.39-0ubuntu8.9) ...
+2026-10-27T12:04:35.5218221Z Processing triggers for man-db (2.12.0-4build2) ...
+2026-10-27T12:04:35.5241047Z Not building database; man-db/auto-update is not 'true'.
+2026-10-27T12:04:35.5256634Z Processing triggers for fontconfig (2.15.0-1.1ubuntu2) ...
+2026-10-27T12:04:36.1819195Z 
+2026-10-27T12:04:36.1832611Z Running kernel seems to be up-to-date.
+2026-10-27T12:04:36.1851827Z 
+2026-10-27T12:04:36.1852238Z Restarting services...
+2026-10-27T12:04:36.2323546Z  systemctl restart packagekit.service php8.3-fpm.service polkit.service udisks2.service
+2026-10-27T12:04:36.4698777Z 
+2026-10-27T12:04:36.4712691Z Service restarts being deferred:
+2026-10-27T12:04:36.4713274Z  systemctl restart ModemManager.service
+2026-10-27T12:04:36.4713891Z  systemctl restart networkd-dispatcher.service
+2026-10-27T12:04:36.4714244Z 
+2026-10-27T12:04:36.4714491Z No containers need to be restarted.
+2026-10-27T12:04:36.4714778Z 
+2026-10-27T12:04:36.4715062Z No user sessions are running outdated binaries.
+2026-10-27T12:04:36.4715409Z 
+2026-10-27T12:04:36.4715888Z No VM guests are running outdated hypervisor (qemu) binaries on this host.
+2026-10-27T12:04:37.7273555Z Downloading Chrome for Testing 153.0.8010.12 (playwright chromium v1243) from https://cdn.playwright.dev/builds/cft/153.0.8010.12/linux64/chrome-linux64.zip
+2026-10-27T12:04:38.1692369Z |                                                                                |   0% of 186.8 MiB
+2026-10-27T12:04:38.4501903Z |■■■■■■■■                                                                        |  10% of 186.8 MiB
+2026-10-27T12:04:38.5915429Z |■■■■■■■■■■■■■■■■                                                                |  20% of 186.8 MiB
+2026-10-27T12:04:38.6931958Z |■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 186.8 MiB
+2026-10-27T12:04:38.8034084Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 186.8 MiB
+2026-10-27T12:04:38.8962882Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 186.8 MiB
+2026-10-27T12:04:38.9972585Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 186.8 MiB
+2026-10-27T12:04:39.0870459Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 186.8 MiB
+2026-10-27T12:04:39.1746168Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 186.8 MiB
+2026-10-27T12:04:39.2669799Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 186.8 MiB
+2026-10-27T12:04:39.3547849Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 186.8 MiB
+2026-10-27T12:04:42.9626761Z Chrome for Testing 153.0.8010.12 (playwright chromium v1243) downloaded to /home/runner/.cache/ms-playwright/chromium-1243
+2026-10-27T12:04:42.9632696Z Downloading FFmpeg (playwright ffmpeg v1011) from https://cdn.playwright.dev/dbazure/download/playwright/builds/ffmpeg/1011/ffmpeg-linux.zip
+2026-10-27T12:04:43.3693213Z |                                                                                |   0% of 2.3 MiB
+2026-10-27T12:04:43.3743829Z |■■■■■■■■                                                                        |  10% of 2.3 MiB
+2026-10-27T12:04:43.3784866Z |■■■■■■■■■■■■■■■■                                                                |  20% of 2.3 MiB
+2026-10-27T12:04:43.3802278Z |■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 2.3 MiB
+2026-10-27T12:04:43.3827120Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 2.3 MiB
+2026-10-27T12:04:43.3855596Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 2.3 MiB
+2026-10-27T12:04:43.3867596Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 2.3 MiB
+2026-10-27T12:04:43.3907168Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 2.3 MiB
+2026-10-27T12:04:43.3936838Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 2.3 MiB
+2026-10-27T12:04:43.3940141Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 2.3 MiB
+2026-10-27T12:04:43.3965126Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 2.3 MiB
+2026-10-27T12:04:43.5023382Z FFmpeg (playwright ffmpeg v1011) downloaded to /home/runner/.cache/ms-playwright/ffmpeg-1011
+2026-10-27T12:04:43.5028525Z Downloading Chrome Headless Shell 153.0.8010.12 (playwright chromium-headless-shell v1243) from https://cdn.playwright.dev/builds/cft/153.0.8010.12/linux64/chrome-headless-shell-linux64.zip
+2026-10-27T12:04:43.9384263Z |                                                                                |   0% of 114.3 MiB
+2026-10-27T12:04:44.2257033Z |■■■■■■■■                                                                        |  10% of 114.3 MiB
+2026-10-27T12:04:44.3160068Z |■■■■■■■■■■■■■■■■                                                                |  20% of 114.3 MiB
+2026-10-27T12:04:44.3871786Z |■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 114.3 MiB
+2026-10-27T12:04:44.4612317Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 114.3 MiB
+2026-10-27T12:04:44.5224503Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 114.3 MiB
+2026-10-27T12:04:44.5849461Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 114.3 MiB
+2026-10-27T12:04:44.6421231Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 114.3 MiB
+2026-10-27T12:04:44.6985934Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 114.3 MiB
+2026-10-27T12:04:44.7569491Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 114.3 MiB
+2026-10-27T12:04:44.8223810Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 114.3 MiB
+2026-10-27T12:04:47.3734921Z Chrome Headless Shell 153.0.8010.12 (playwright chromium-headless-shell v1243) downloaded to /home/runner/.cache/ms-playwright/chromium_headless_shell-1243
+2026-10-27T12:04:47.3989820Z ##[group]Run npm run build:web:ci
+2026-10-27T12:04:47.3990140Z [36;1mnpm run build:web:ci[0m
+2026-10-27T12:04:47.4053446Z shell: /usr/bin/bash -e {0}
+2026-10-27T12:04:47.4053714Z env:
+2026-10-27T12:04:47.4054003Z   EXPO_NO_TELEMETRY: 1
+2026-10-27T12:04:47.4054227Z   EXPO_NO_DOTENV: 1
+2026-10-27T12:04:47.4054421Z   CI: true
+2026-10-27T12:04:47.4054632Z   EXPO_PUBLIC_E2E_MODE: 1
+2026-10-27T12:04:47.4054872Z   EXPO_APP_VARIANT: development
+2026-10-27T12:04:47.4055114Z ##[endgroup]
+2026-10-27T12:04:47.5162511Z 
+2026-10-27T12:04:47.5163747Z > opencode-mobile-private-edition@1.0.98 build:web:ci
+2026-10-27T12:04:47.5165112Z > expo export --platform web --output-dir dist-e2e --clear
+2026-10-27T12:04:47.5165860Z 
+2026-10-27T12:04:48.6138251Z React Compiler enabled
+2026-10-27T12:04:48.7066232Z Starting Metro Bundler
+2026-10-27T12:04:48.7066887Z 
+2026-10-27T12:04:48.7076138Z warning: Bundler cache is empty, rebuilding (this may take a minute)
+2026-10-27T12:04:48.7310845Z Static rendering is enabled. Learn more: https://docs.expo.dev/router/web/static-rendering/
+2026-10-27T12:07:49.9811627Z λ Bundled 180522ms node_modules/expo/node_modules/@expo/cli/node_modules/@expo/router-server/node/render.js (2476 modules)
+2026-10-27T12:07:50.7825530Z [expo-notifications] Listening to push token changes is not yet fully supported on web. Adding a listener will have no effect.
+2026-10-27T12:07:50.9189329Z Web Bundled 181461ms index.js (2452 modules)
+2026-10-27T12:07:51.0630296Z 
+2026-10-27T12:07:51.0635639Z › web bundles (7):
+2026-10-27T12:07:51.0642761Z _expo/static/css/terminal-b69410178766e39b27a671d0cbc1194f.css (1.7KB)
+2026-10-27T12:07:51.0644992Z _expo/static/css/xterm-8a7c4e0dca731c11dbe6bdff98fb667c.css (3.9KB)
+2026-10-27T12:07:51.0649162Z _expo/static/js/web/index-0419a320a805262850995f9329974ebd.js (2.1KB)
+2026-10-27T12:07:51.0651539Z _expo/static/js/web/index-09275a7a2591a674eba7c2955485ebf0.js (45KB)
+2026-10-27T12:07:51.0653030Z _expo/static/js/web/index-217ebc770f42b9244a7c90e5d72c6f3d.js (13KB)
+2026-10-27T12:07:51.0695746Z _expo/static/js/web/index-ea7ab1920caad9ca76e3de894e8ee0b9.js (6.2MB)
+2026-10-27T12:07:51.0699828Z _expo/static/js/web/md4c-2bb5887f62250fad260ebeb0899505e4.js (263KB)
+2026-10-27T12:07:51.0700645Z 
+2026-10-27T12:07:51.0703084Z › Static routes (21):
+2026-10-27T12:07:51.0704305Z /pair (24KB)
+2026-10-27T12:07:51.0705786Z /share (24KB)
+2026-10-27T12:07:51.0726312Z / (index) (24KB)
+2026-10-27T12:07:51.0727350Z /service (24KB)
+2026-10-27T12:07:51.0728000Z /_sitemap (23KB)
+2026-10-27T12:07:51.0728999Z /projects (24KB)
+2026-10-27T12:07:51.0735099Z /settings (24KB)
+2026-10-27T12:07:51.0735476Z /terminal (24KB)
+2026-10-27T12:07:51.0735860Z /+not-found (23KB)
+2026-10-27T12:07:51.0736208Z /(tabs) (24KB)
+2026-10-27T12:07:51.0736582Z /session/[id] (24KB)
+2026-10-27T12:07:51.0736991Z /onboarding/ai (24KB)
+2026-10-27T12:07:51.0737439Z /(tabs)/projects (24KB)
+2026-10-27T12:07:51.0737854Z /(tabs)/settings (24KB)
+2026-10-27T12:07:51.0738254Z /(tabs)/terminal (24KB)
+2026-10-27T12:07:51.0738691Z /onboarding (24KB)
+2026-10-27T12:07:51.0739102Z /onboarding/ready (24KB)
+2026-10-27T12:07:51.0739569Z /onboarding/connect (24KB)
+2026-10-27T12:07:51.0740042Z /onboarding/general (24KB)
+2026-10-27T12:07:51.0740496Z /onboarding/project (24KB)
+2026-10-27T12:07:51.0741051Z /onboarding/permissions (24KB)
+2026-10-27T12:07:51.1153004Z 
+2026-10-27T12:07:51.1154070Z Exported: dist-e2e
+2026-10-27T12:07:51.2664484Z ##[group]Run npm run test:e2e:web
+2026-10-27T12:07:51.2665055Z [36;1mnpm run test:e2e:web[0m
+2026-10-27T12:07:51.2759306Z shell: /usr/bin/bash -e {0}
+2026-10-27T12:07:51.2760496Z env:
+2026-10-27T12:07:51.2760864Z   EXPO_NO_TELEMETRY: 1
+2026-10-27T12:07:51.2761588Z   EXPO_NO_DOTENV: 1
+2026-10-27T12:07:51.2761961Z   CI: true
+2026-10-27T12:07:51.2762303Z   EXPO_PUBLIC_E2E_MODE: 1
+2026-10-27T12:07:51.2762695Z   E2E_WORKERS: 2
+2026-10-27T12:07:51.2763038Z   E2E_SKIP_BUILD: 1
+2026-10-27T12:07:51.2763386Z ##[endgroup]
+2026-10-27T12:07:51.5321876Z 
+2026-10-27T12:07:51.5324758Z > opencode-mobile-private-edition@1.0.98 test:e2e:web
+2026-10-27T12:07:51.5325853Z > playwright test
+2026-10-27T12:07:51.5326678Z 
+2026-10-27T12:07:55.1018261Z 
+2026-10-27T12:07:55.1033060Z Running 162 tests using 2 workers
+2026-10-27T12:07:55.1033712Z 
+2026-10-27T12:08:02.5703854Z   ✓    1 [chromium] › tests/e2e/app-updates.spec.mjs:53:1 › a draft suppresses the ready offer until cleared (5.5s)
+2026-10-27T12:08:03.7407073Z   ✓    2 [chromium] › tests/e2e/app-updates.spec.mjs:22:1 › downloads without installing; open sheets suppress the ready offer (6.6s)
+2026-10-27T12:08:09.2735861Z   ✓    3 [chromium] › tests/e2e/app-updates.spec.mjs:62:1 › Later survives reload and a downloaded update is recovered without completing (6.7s)
+2026-10-27T12:08:09.3763593Z   ✓    4 [chromium] › tests/e2e/app-updates.spec.mjs:75:1 › cancelled native consent does not repeatedly offer the same update (5.6s)
+2026-10-27T12:08:13.1755539Z   ✓    5 [chromium] › tests/e2e/app-updates.spec.mjs:84:1 › App Store navigation remains explicit and uses store-specific copy (3.9s)
+2026-10-27T12:08:14.3488083Z   ✓    6 [chromium] › tests/e2e/app-updates.spec.mjs:94:1 › the nonmodal banner fits a small screen and keeps navigation usable (4.9s)
+2026-10-27T12:08:14.7865621Z Fake OpenCode V2 server listening on http://127.0.0.1:37675 (inbox)
+2026-10-27T12:08:22.0893514Z   ✓    7 [chromium] › tests/e2e/chat.spec.mjs:10:1 › attachment tiles preview images, text and documents above the related message (8.8s)
+2026-10-27T12:08:28.7015000Z   ✓    9 [chromium] › tests/e2e/chat.spec.mjs:116:1 › happy path keeps the main chat flow stable @smoke (6.6s)
+2026-10-27T12:08:34.1502484Z   ✓   10 [chromium] › tests/e2e/chat.spec.mjs:134:1 › tab navigation preserves the mounted app and an unsent chat draft @smoke (5.4s)
+2026-10-27T12:08:36.3098354Z   ✓    8 [chromium] › tests/e2e/chat.spec.mjs:55:1 › OpenCode 2 keeps steer and append prompts pinned until delivery and recovers them after reload (21.9s)
+2026-10-27T12:08:42.6289755Z   ✓   11 [chromium] › tests/e2e/chat.spec.mjs:160:1 › returning to the chat tab keeps the loaded transcript without a skeleton (8.4s)
+2026-10-27T12:08:43.7703940Z   ✓   12 [chromium] › tests/e2e/chat.spec.mjs:175:1 › chat renders GFM tables, ordered lists, and tappable links (7.4s)
+2026-10-27T12:08:50.9571263Z   ✓   14 [chromium] › tests/e2e/chat.spec.mjs:267:1 › overlay sheets dismiss on a downward header swipe (7.1s)
+2026-10-27T12:08:53.1373594Z   ✓   13 [chromium] › tests/e2e/chat.spec.mjs:212:1 › changes chip preserves the composer and hides for an empty scope (10.5s)
+2026-10-27T12:08:58.7513906Z   ✓   15 [chromium] › tests/e2e/chat.spec.mjs:281:1 › modal bottom sheets dismiss on a downward header swipe (7.7s)
+2026-10-27T12:08:59.1453687Z   ✓   16 [chromium] › tests/e2e/chat.spec.mjs:292:1 › composer exposes agent selection without losing drafts (5.9s)
+2026-10-27T12:09:05.1573685Z   ✓   18 [chromium] › tests/e2e/chat.spec.mjs:385:1 › starter examples fill without sending and library empty copy follows visible chats (6.0s)
+2026-10-27T12:09:05.5922420Z Fake OpenCode server listening on http://127.0.0.1:33405 (happy-path)
+2026-10-27T12:09:09.4270301Z   ✓   17 [chromium] › tests/e2e/chat.spec.mjs:329:1 › model variants follow the server catalog, reach sessions, and persist per model (10.6s)
+2026-10-27T12:09:14.3502642Z   ✓   20 [chromium] › tests/e2e/chat.spec.mjs:441:1 › commands execute through the primary chat action (4.8s)
+2026-10-27T12:09:22.1432310Z   ✓   19 [chromium] › tests/e2e/chat.spec.mjs:401:1 › completed progress stays compact and activity patches keep their turn after a later response (16.9s)
+2026-10-27T12:09:22.9213521Z   ✓   21 [chromium] › tests/e2e/chat.spec.mjs:449:1 › V2 composer suggestions insert commands, context, and shell commands (8.5s)
+2026-10-27T12:09:29.4690389Z   ✓   22 [chromium] › tests/e2e/compat.spec.mjs:10:3 › v1 compatibility retains the happy-path prompt lifecycle (7.3s)
+2026-10-27T12:09:31.9367292Z   ✓   23 [chromium] › tests/e2e/compat.spec.mjs:10:3 › v1 compatibility retains the permission prompt lifecycle (8.9s)
+2026-10-27T12:09:37.6643411Z   ✓   24 [chromium] › tests/e2e/compat.spec.mjs:10:3 › v1 compatibility retains the question prompt lifecycle (8.2s)
+2026-10-27T12:09:43.0754000Z   ✓   25 [chromium] › tests/e2e/compat.spec.mjs:10:3 › v1 compatibility retains the stream-disconnect prompt lifecycle (11.1s)
+2026-10-27T12:09:45.4193425Z   ✓   26 [chromium] › tests/e2e/compat.spec.mjs:26:3 › v2 MCP OAuth completes through auto authorization (7.7s)
+2026-10-27T12:09:51.5045794Z   ✓   27 [chromium] › tests/e2e/compat.spec.mjs:26:3 › v2 MCP OAuth completes through code authorization (8.4s)
+2026-10-27T12:09:57.7719976Z   ✓   29 [chromium] › tests/e2e/connect.spec.mjs:173:1 › Cloud Link delayed activation stays calm and explicit Retry reuses credentials (6.2s)
+2026-10-27T12:10:03.4544274Z   ✓   28 [chromium] › tests/e2e/connect.spec.mjs:158:1 › Cloud Link waits beyond 15 seconds without recovery controls and connects automatically @smoke (18.0s)
+2026-10-27T12:10:03.6745969Z   ✓   30 [chromium] › tests/e2e/connect.spec.mjs:192:1 › Cloud Link delayed activation can scan the regenerated QR without deleting the saved profile (5.9s)
+2026-10-27T12:10:09.1872620Z   ✓   31 [chromium] › tests/e2e/connect.spec.mjs:208:3 › Subscription Settings shows verified access and opens management without a camera (dark) (5.7s)
+2026-10-27T12:10:09.3202966Z   ✓   32 [chromium] › tests/e2e/connect.spec.mjs:208:3 › Subscription Settings shows verified access and opens management without a camera (light) (5.6s)
+2026-10-27T12:10:15.1998485Z   ✓   34 [chromium] › tests/e2e/connect.spec.mjs:249:3 › Subscription Settings purchases without a QR and guards pending actions (pending) (5.9s)
+2026-10-27T12:10:15.2398831Z   ✓   33 [chromium] › tests/e2e/connect.spec.mjs:249:3 › Subscription Settings purchases without a QR and guards pending actions (completed) (6.0s)
+2026-10-27T12:10:21.9622524Z   ✓   35 [chromium] › tests/e2e/connect.spec.mjs:278:1 › Subscription Settings retries catalog failures and restores access without purchasing (6.7s)
+2026-10-27T12:10:28.3029629Z   ✓   36 [chromium] › tests/e2e/connect.spec.mjs:298:1 › Cloud Link trusts only fixed environments and has no manual control-plane configuration (13.0s)
+2026-10-27T12:10:29.1333841Z   ✓   37 [chromium] › tests/e2e/connect.spec.mjs:323:3 › a remembered legacy preference https://api.getopencode.app resets to the new production endpoint (7.1s)
+2026-10-27T12:10:34.8445038Z   ✓   38 [chromium] › tests/e2e/connect.spec.mjs:323:3 › a remembered legacy preference https://apistaging.getopencode.app resets to the new production endpoint (6.5s)
+2026-10-27T12:10:35.7687895Z   ✓   39 [chromium] › tests/e2e/connect.spec.mjs:343:1 › a real buyer with a remembered staging preference automatically uses production (6.6s)
+2026-10-27T12:10:41.5291188Z   ✓   40 [chromium] › tests/e2e/connect.spec.mjs:359:1 › purchase completes then automatically pairs, saves securely, and connects with Basic auth @smoke (6.6s)
+2026-10-27T12:10:41.7715784Z   ✓   41 [chromium] › tests/e2e/connect.spec.mjs:387:1 › Restore continues the exact pending QR without purchasing (6.0s)
+2026-10-27T12:10:48.5495445Z   ✓   43 [chromium] › tests/e2e/connect.spec.mjs:400:3 › secure session failure retries without another purchase (6.7s)
+2026-10-27T12:10:48.5904859Z   ✓   42 [chromium] › tests/e2e/connect.spec.mjs:400:3 › failed verification retries without another purchase (7.0s)
+2026-10-27T12:10:55.7814992Z   ✓   45 [chromium] › tests/e2e/connect.spec.mjs:416:3 › a Google test buyer automatically uses staging through restore (7.1s)
+2026-10-27T12:10:56.0693683Z   ✓   44 [chromium] › tests/e2e/connect.spec.mjs:416:3 › a Google test buyer automatically uses staging through purchase (7.5s)
+2026-10-27T12:11:01.8054539Z   ✓   47 [chromium] › tests/e2e/connect.spec.mjs:442:3 › pending purchases grant and finalize nothing (5.7s)
+2026-10-27T12:11:02.6959355Z   ✓   46 [chromium] › tests/e2e/connect.spec.mjs:416:3 › a Google test buyer automatically uses staging through restart (6.8s)
+2026-10-27T12:11:07.2345083Z   ✓   48 [chromium] › tests/e2e/connect.spec.mjs:442:3 › canceled purchases grant and finalize nothing (5.4s)
+2026-10-27T12:11:11.0387049Z   ✓   49 [chromium] › tests/e2e/connect.spec.mjs:453:1 › unfinished native purchase recovery after restart never synchronizes or purchases (8.3s)
+2026-10-27T12:11:14.5734053Z   ✓   50 [chromium] › tests/e2e/connect.spec.mjs:465:1 › an expired QR preserves the subscription and accepts a fresh QR without repurchase (7.3s)
+2026-10-27T12:11:18.3386709Z   ✓   51 [chromium] › tests/e2e/connect.spec.mjs:477:3 › ambiguous pairing recovers the same owned machine (lostResponse) (7.2s)
+2026-10-27T12:11:20.6314227Z   ✓   52 [chromium] › tests/e2e/connect.spec.mjs:477:3 › ambiguous pairing recovers the same owned machine (reconciliation) (6.0s)
+2026-10-27T12:11:25.3414884Z   ✓   53 [chromium] › tests/e2e/connect.spec.mjs:489:1 › second-device Restore lists durable machines; access mismatch saves nothing (7.0s)
+2026-10-27T12:11:29.1162005Z   ✓   54 [chromium] › tests/e2e/connect.spec.mjs:503:1 › second-device Restore reconnects the same owned machine without a QR (8.4s)
+2026-10-27T12:11:31.8383680Z   ✓   55 [chromium] › tests/e2e/connect.spec.mjs:516:1 › secure profile-save recovery does not replay pairing or purchase (6.4s)
+2026-10-27T12:11:36.5886212Z   ✓   57 [chromium] › tests/e2e/connect.spec.mjs:541:1 › fresh-install subscription pairing continues onboarding (4.7s)
+2026-10-27T12:11:42.3242302Z   ✓   58 [chromium] › tests/e2e/connect.spec.mjs:549:1 › renewal rotates credentials while preserving profile, machine, hostname and scoped favorites (5.7s)
+2026-10-27T12:11:45.8823606Z   ✓   56 [chromium] › tests/e2e/connect.spec.mjs:529:1 › expiry stops data-plane traffic while preserving owned machine and profile (16.7s)
+2026-10-27T12:11:50.0772404Z   ✓   59 [chromium] › tests/e2e/connect.spec.mjs:590:1 › live renewal preserves the machine connection and selected session across panel reopening (7.7s)
+2026-10-27T12:11:51.5732299Z   ✓   60 [chromium] › tests/e2e/connect.spec.mjs:641:1 › a subscriber opening a QR link pairs automatically without a purchase overlay (5.7s)
+2026-10-27T12:11:57.2813041Z   ✓   61 [chromium] › tests/e2e/connect.spec.mjs:662:1 › guided setup can close or go back without purchasing and Manual stays available (7.1s)
+2026-10-27T12:11:57.8090057Z   ✓   62 [chromium] › tests/e2e/connect.spec.mjs:687:1 › closing an incoming pairing link clears its QR and starts guided setup when reopened from the chooser (6.2s)
+2026-10-27T12:12:03.0336527Z   ✓   63 [chromium] › tests/e2e/connect.spec.mjs:699:1 › an existing subscriber selecting Cloud Link opens the pairing screen without a purchase overlay (5.7s)
+2026-10-27T12:12:06.2316833Z   ✓   64 [chromium] › tests/e2e/connect.spec.mjs:722:1 › a subscriber can reopen pairing after connecting without a subscription overlay (8.4s)
+2026-10-27T12:12:10.0996456Z   ✓   65 [chromium] › tests/e2e/connect.spec.mjs:739:1 › invalid and untrusted QR links can be replaced with a valid subscriber link (7.0s)
+2026-10-27T12:12:14.0172113Z   ✓   66 [chromium] › tests/e2e/connect.spec.mjs:755:1 › Settings has one creation entry with Scan QR, Manual and Cloud Link methods (7.7s)
+2026-10-27T12:12:14.5583565Z   ✓   67 [chromium] › tests/e2e/connect.spec.mjs:796:1 › store setup errors keep subscription recovery separate from pairing settings (4.4s)
+2026-10-27T12:12:19.8026069Z   ✓   69 [chromium] › tests/e2e/connect.spec.mjs:865:3 › guided pending checkout stays on subscription and never pairs (5.2s)
+2026-10-27T12:12:23.2716630Z   ✓   68 [chromium] › tests/e2e/connect.spec.mjs:813:1 › guided Cloud Link uses consistent illustrated steps, store pricing and explicit checkout (9.2s)
+2026-10-27T12:12:24.8654187Z   ✓   70 [chromium] › tests/e2e/connect.spec.mjs:865:3 › guided canceled checkout stays on subscription and never pairs (5.0s)
+2026-10-27T12:12:28.6661034Z   ✓   71 [chromium] › tests/e2e/connect.spec.mjs:878:1 › guided subscription keeps actions accessible on a narrow light screen (5.4s)
+2026-10-27T12:12:40.8182092Z   ✓   72 [chromium] › tests/e2e/connect.spec.mjs:900:1 › a paired device adds, edits and removes an exposed service (15.9s)
+2026-10-27T12:12:41.3453765Z   ✓   73 [chromium] › tests/e2e/connect.spec.mjs:968:1 › exposed services stay available while a different connection is active (12.6s)
+2026-10-27T12:12:49.2719302Z   ✓   75 [chromium] › tests/e2e/diffs.spec.mjs:27:1 › files changed switches between turn, uncommitted, and branch diffs (7.8s)
+2026-10-27T12:12:52.0902251Z   ✓   74 [chromium] › tests/e2e/diffs.spec.mjs:9:1 › files changed follows the latest user turn (11.2s)
+2026-10-27T12:12:52.4471983Z Fake OpenCode V2 server listening on http://127.0.0.1:41541 (happy-path)
+2026-10-27T12:12:53.2766212Z   ✓   76 [chromium] › tests/e2e/diffs.spec.mjs:50:1 › v1 compatibility renders diff lines from before/after contents (4.0s)
+2026-10-27T12:13:00.1483884Z   ✓   78 [chromium] › tests/e2e/diffs.spec.mjs:104:1 › project shows changed files, deleted scope, search states and failure recovery (6.8s)
+2026-10-27T12:13:04.2969411Z   ✓   77 [chromium] › tests/e2e/diffs.spec.mjs:71:1 › OpenCode 2 files changed reads location-scoped VCS diffs (12.2s)
+2026-10-27T12:13:12.3179127Z   ✓   79 [chromium] › tests/e2e/extensions.spec.mjs:19:1 › project extensions add plugins, skills and slash commands (12.1s)
+2026-10-27T12:13:22.3109189Z   ✓   81 [chromium] › tests/e2e/extensions.spec.mjs:102:1 › general extensions are shared with the project and can be restored from backup (9.9s)
+2026-10-27T12:13:23.3353662Z   ✓   80 [chromium] › tests/e2e/extensions.spec.mjs:54:1 › project extensions can be removed and leave no active entries (19.0s)
+2026-10-27T12:13:29.8905114Z   ✓   82 [chromium] › tests/e2e/interactions.spec.mjs:10:3 › incoming permission dismisses changes and its source picker (7.5s)
+2026-10-27T12:13:31.1165535Z   ✓   83 [chromium] › tests/e2e/interactions.spec.mjs:10:3 › incoming question dismisses changes and its source picker (7.7s)
+2026-10-27T12:13:37.8266620Z   ✓   84 [chromium] › tests/e2e/interactions.spec.mjs:34:1 › permission requests unblock the agent flow @smoke (7.9s)
+2026-10-27T12:13:38.7763951Z   ✓   85 [chromium] › tests/e2e/interactions.spec.mjs:48:1 › assistant questions unblock the agent flow @smoke (7.6s)
+2026-10-27T12:13:45.9589528Z   ✓   87 [chromium] › tests/e2e/interactions.spec.mjs:87:1 › question submission failure keeps the answer and allows retry (7.1s)
+2026-10-27T12:13:46.3316433Z Fake OpenCode V2 server listening on http://127.0.0.1:45687 (permission)
+2026-10-27T12:13:46.4145119Z   ✓   86 [chromium] › tests/e2e/interactions.spec.mjs:62:1 › multi-step questions keep drafts across dismissal and submit conditional custom answers (8.6s)
+2026-10-27T12:13:46.9435795Z Fake OpenCode V2 server listening on http://127.0.0.1:42281 (question)
+2026-10-27T12:13:56.9424386Z   ✓   88 [chromium] › tests/e2e/interactions.spec.mjs:99:1 › OpenCode 2 permission requests unblock the agent flow (11.0s)
+2026-10-27T12:13:57.2173542Z   ✓   89 [chromium] › tests/e2e/interactions.spec.mjs:116:1 › OpenCode 2 questions unblock the agent flow (10.8s)
+2026-10-27T12:13:57.4525658Z Fake OpenCode V2 server listening on http://127.0.0.1:41219 (happy-path)
+2026-10-27T12:13:57.7083117Z Fake OpenCode V2 server listening on http://127.0.0.1:37581 (happy-path)
+2026-10-27T12:14:03.5438915Z   ✓   90 [chromium] › tests/e2e/manual-connection.spec.mjs:34:1 › protected V2 asks for credentials without claiming V1, rejects a wrong password and saves a hostname default once (6.5s)
+2026-10-27T12:14:03.9786496Z   ✓   91 [chromium] › tests/e2e/manual-connection.spec.mjs:56:1 › confirmed V2 hides Username, preserves values through Change and saves a custom name (6.7s)
+2026-10-27T12:14:10.5439604Z   ✓   92 [chromium] › tests/e2e/manual-connection.spec.mjs:76:1 › protected V1 custom username remains available after an inconclusive probe (6.9s)
+2026-10-27T12:14:11.0745719Z   ✓   93 [chromium] › tests/e2e/manual-connection.spec.mjs:91:1 › retry after project discovery fails reuses the saved profile (7.0s)
+2026-10-27T12:14:11.6880607Z Fake OpenCode V2 server listening on http://127.0.0.1:39945 (happy-path)
+2026-10-27T12:14:17.6310922Z   ✓   94 [chromium] › tests/e2e/manual-connection.spec.mjs:107:1 › editing a saved profile preserves its username and leaves the active connection alone (7.0s)
+2026-10-27T12:14:18.0243828Z   ✓   95 [chromium] › tests/e2e/manual-connection.spec.mjs:135:1 › sends custom gateway headers on probe, API and SSE without persisting their values (6.9s)
+2026-10-27T12:14:18.2512870Z Fake OpenCode V2 server listening on http://127.0.0.1:44425 (happy-path)
+2026-10-27T12:14:18.2724646Z Fake OpenCode V2 server listening on http://127.0.0.1:38445 (happy-path)
+2026-10-27T12:14:18.8359371Z Fake OpenCode V2 server listening on http://127.0.0.1:42225 (happy-path)
+2026-10-27T12:14:18.8362706Z Fake OpenCode V2 server listening on http://127.0.0.1:38461 (happy-path)
+2026-10-27T12:14:26.7036417Z   ✓   97 [chromium] › tests/e2e/multi-server.spec.mjs:74:1 › V2 creates a chat on the selected server and project from the New chat sheet (8.6s)
+2026-10-27T12:14:27.4423596Z Fake OpenCode V2 server listening on http://127.0.0.1:42273 (happy-path)
+2026-10-27T12:14:27.4743150Z Fake OpenCode V2 server listening on http://127.0.0.1:45657 (happy-path)
+2026-10-27T12:14:28.4812028Z   ✓   96 [chromium] › tests/e2e/multi-server.spec.mjs:45:1 › V2 mixes colliding chats, filters without navigation, and retains each draft @smoke (10.8s)
+2026-10-27T12:14:28.8472763Z Fake OpenCode V2 server listening on http://127.0.0.1:38983 (happy-path)
+2026-10-27T12:14:29.0734350Z Fake OpenCode V2 server listening on http://127.0.0.1:34307 (happy-path)
+2026-10-27T12:14:34.5815338Z   ✓   99 [chromium] › tests/e2e/multi-server.spec.mjs:146:1 › V2 settings inspection and auto-approve are independent of chat (6.1s)
+2026-10-27T12:14:35.0351737Z Fake OpenCode V2 server listening on http://127.0.0.1:46127 (permission)
+2026-10-27T12:14:35.0619818Z Fake OpenCode V2 server listening on http://127.0.0.1:39119 (permission)
+2026-10-27T12:14:42.2667835Z   ✓   98 [chromium] › tests/e2e/multi-server.spec.mjs:101:1 › V2 creates a PTY on B while chat stays on A and retains its renderer (15.5s)
+2026-10-27T12:14:42.6814795Z Fake OpenCode V2 server listening on http://127.0.0.1:36637 (happy-path)
+2026-10-27T12:14:42.8295745Z Fake OpenCode V2 server listening on http://127.0.0.1:33605 (happy-path)
+2026-10-27T12:14:44.4291717Z   ✓  100 [chromium] › tests/e2e/multi-server.spec.mjs:162:1 › V2 replies to colliding approvals only on the Settings server (9.8s)
+2026-10-27T12:14:44.9572209Z Fake OpenCode V2 server listening on http://127.0.0.1:35771 (happy-path)
+2026-10-27T12:14:49.6398339Z   ✓  101 [chromium] › tests/e2e/multi-server.spec.mjs:186:1 › V2 terminal picker is one list with server chips and colliding PTY IDs stay separate (7.3s)
+2026-10-27T12:14:50.0664763Z Fake OpenCode V2 server listening on http://127.0.0.1:32901 (happy-path)
+2026-10-27T12:14:50.1755715Z Fake OpenCode V2 server listening on http://127.0.0.1:43023 (happy-path)
+2026-10-27T12:14:53.2514197Z Fake OpenCode V2 server listening on http://127.0.0.1:41211 (happy-path)
+2026-10-27T12:14:54.3364394Z   ✓  103 [chromium] › tests/e2e/multi-server.spec.mjs:257:1 › V2 keeps server chips visible for long chat titles (4.7s)
+2026-10-27T12:14:54.8974129Z Fake OpenCode V2 server listening on http://127.0.0.1:43339 (happy-path)
+2026-10-27T12:14:55.0282977Z Fake OpenCode V2 server listening on http://127.0.0.1:36425 (happy-path)
+2026-10-27T12:14:57.5208340Z   ✓  102 [chromium] › tests/e2e/multi-server.spec.mjs:210:1 › V2 single-server mode hides redundant context and restores it when a second server is added (13.0s)
+2026-10-27T12:14:58.0333508Z Fake OpenCode V2 server listening on http://127.0.0.1:34795 (happy-path)
+2026-10-27T12:15:00.3223528Z   ✓  104 [chromium] › tests/e2e/multi-server.spec.mjs:279:1 › V2 opens a chat on another server without waiting for its session list (5.9s)
+2026-10-27T12:15:00.8937001Z Fake OpenCode V2 server listening on http://127.0.0.1:33079 (happy-path)
+2026-10-27T12:15:08.7193582Z   ✓  105 [chromium] › tests/e2e/network-resilience.spec.mjs:18:1 › 4G latency keeps chat usable and completes a prompt (11.1s)
+2026-10-27T12:15:11.1108972Z   ✓  106 [chromium] › tests/e2e/network-resilience.spec.mjs:37:1 › offline prompt is queued and delivered once after connectivity returns (10.7s)
+2026-10-27T12:15:16.8331566Z   ✓  108 [chromium] › tests/e2e/onboarding.spec.mjs:95:1 › every onboarding step can be skipped (5.6s)
+2026-10-27T12:15:18.0724926Z   ✓  107 [chromium] › tests/e2e/onboarding.spec.mjs:40:1 › fresh install walks through onboarding into a working chat @smoke (9.3s)
+2026-10-27T12:15:23.0938468Z   ✓  110 [chromium] › tests/e2e/onboarding.spec.mjs:155:1 › an existing configured installation skips onboarding (5.0s)
+2026-10-27T12:15:23.8930684Z   ✓  109 [chromium] › tests/e2e/onboarding.spec.mjs:133:1 › a failed connection keeps entered values and allows retry (7.0s)
+2026-10-27T12:15:28.2188001Z   ✓  111 [chromium] › tests/e2e/onboarding.spec.mjs:168:1 › clearing app data shows onboarding again (5.1s)
+2026-10-27T12:15:34.1223670Z   ✓  112 [chromium] › tests/e2e/onboarding.spec.mjs:179:1 › App settings groups editor and general settings and resets onboarding without wiping the connection (10.2s)
+2026-10-27T12:15:34.1724632Z   ✓  113 [chromium] › tests/e2e/onboarding.spec.mjs:222:1 › connection prevents duplicate submissions and disables Skip while validating (5.9s)
+2026-10-27T12:15:41.0399302Z   ✓  115 [chromium] › tests/e2e/onboarding.spec.mjs:314:1 › offline language choice applies immediately and survives interrupted onboarding (6.8s)
+2026-10-27T12:15:44.3066300Z   ✓  116 [chromium] › tests/e2e/onboarding.spec.mjs:329:1 › v1 compatibility onboarding hides message delivery and retains the default model picker (3.2s)
+2026-10-27T12:15:50.3953484Z   ✓  117 [chromium] › tests/e2e/onboarding.spec.mjs:340:1 › onboarding can continue when a connected server has no models (6.0s)
+2026-10-27T12:15:51.2273848Z   ✓  114 [chromium] › tests/e2e/onboarding.spec.mjs:284:1 › onboarding embeds provider setup and persists the reviewed preferences and remembered model (17.1s)
+2026-10-27T12:15:58.0853187Z   ✓  119 [chromium] › tests/e2e/onboarding.spec.mjs:395:5 › dark mobile › onboarding settings and review fit the viewport and keep navigation usable (6.8s)
+2026-10-27T12:16:02.1866344Z   ✓  120 [chromium] › tests/e2e/onboarding.spec.mjs:395:5 › light narrow › onboarding settings and review fit the viewport and keep navigation usable (4.1s)
+2026-10-27T12:16:04.2570351Z   ✓  118 [chromium] › tests/e2e/onboarding.spec.mjs:357:1 › provider removal reconciles the remembered model before review (13.8s)
+2026-10-27T12:16:09.9577293Z   ✓  122 [chromium] › tests/e2e/projects.spec.mjs:51:1 › project file search opens deterministic file content (5.6s)
+2026-10-27T12:16:13.5759163Z   ✓  121 [chromium] › tests/e2e/projects.spec.mjs:9:1 › Chat and Project use the same project picker @smoke (11.4s)
+2026-10-27T12:16:15.7673454Z   ✓  123 [chromium] › tests/e2e/projects.spec.mjs:63:1 › project files save through a conflict-checked VCS patch (5.8s)
+2026-10-27T12:16:16.3246380Z Fake OpenCode V2 server listening on http://127.0.0.1:35281 (happy-path)
+2026-10-27T12:16:23.1845894Z   ✓  124 [chromium] › tests/e2e/projects.spec.mjs:76:1 › worktrees and MCP servers can be created (9.6s)
+2026-10-27T12:16:23.7058394Z Fake OpenCode V2 server listening on http://127.0.0.1:41543 (happy-path)
+2026-10-27T12:16:30.8623988Z   ✓  126 [chromium] › tests/e2e/projects.spec.mjs:160:1 › OpenCode 2 lists every project chat across session pages (7.6s)
+2026-10-27T12:16:31.2655958Z Fake OpenCode server listening on http://127.0.0.1:39271 (happy-path)
+2026-10-27T12:16:36.8055190Z   ✓  125 [chromium] › tests/e2e/projects.spec.mjs:96:1 › OpenCode 2 adds a server project from the shared picker @smoke (21.0s)
+2026-10-27T12:16:37.2400165Z Fake OpenCode V2 server listening on http://127.0.0.1:39995 (happy-path)
+2026-10-27T12:16:55.0861653Z   ✓  128 [chromium] › tests/e2e/projects.spec.mjs:187:3 › v2 project browses scoped folders and switches worktrees across tabs (18.2s)
+2026-10-27T12:16:56.5344720Z   ✓  127 [chromium] › tests/e2e/projects.spec.mjs:187:3 › v1 project browses scoped folders and switches worktrees across tabs (25.6s)
+2026-10-27T12:17:01.9057904Z   ✓  129 [chromium] › tests/e2e/projects.spec.mjs:284:1 › project editor confirms discarded edits and keeps conflict failures recoverable (6.8s)
+2026-10-27T12:17:04.3843820Z   ✓  130 [chromium] › tests/e2e/projects.spec.mjs:304:1 › v2 file saves reject conflicts and retain drafts on write failure (7.8s)
+2026-10-27T12:17:05.0014776Z Fake OpenCode server listening on http://127.0.0.1:46855 (happy-path)
+2026-10-27T12:17:12.0108434Z   ✓  131 [chromium] › tests/e2e/realtime.spec.mjs:9:1 › polling fallback still finishes the flow when SSE is unavailable @smoke (10.1s)
+2026-10-27T12:17:12.2063207Z Fake OpenCode V2 server listening on http://127.0.0.1:45087 (retry)
+2026-10-27T12:17:15.1216421Z   ✓  132 [chromium] › tests/e2e/realtime.spec.mjs:20:1 › busy safety polling recovers completion while SSE remains connected @smoke (10.7s)
+2026-10-27T12:17:15.6619833Z Fake OpenCode server listening on http://127.0.0.1:39253 (question)
+2026-10-27T12:17:26.6093495Z   ✓  134 [chromium] › tests/e2e/realtime.spec.mjs:64:3 › v1 SSE reconnect reconciles a missed blocking question (11.5s)
+2026-10-27T12:17:26.9150691Z Fake OpenCode V2 server listening on http://127.0.0.1:43353 (question)
+2026-10-27T12:17:27.4093586Z   ✓  133 [chromium] › tests/e2e/realtime.spec.mjs:44:1 › v2 provider retry survives refresh and the safety poll recovers output (15.4s)
+2026-10-27T12:17:27.8620000Z Fake OpenCode server listening on http://127.0.0.1:41591 (question)
+2026-10-27T12:17:39.4254047Z   ✓  135 [chromium] › tests/e2e/realtime.spec.mjs:64:3 › v2 SSE reconnect reconciles a missed blocking question (12.8s)
+2026-10-27T12:17:39.6413296Z Fake OpenCode V2 server listening on http://127.0.0.1:33489 (question)
+2026-10-27T12:17:41.0651866Z   ✓  136 [chromium] › tests/e2e/realtime.spec.mjs:105:3 › v1 silently stalled event stream is re-established and reconciles a missed blocker (13.6s)
+2026-10-27T12:17:41.7036197Z Fake OpenCode V2 server listening on http://127.0.0.1:40873 (retry)
+2026-10-27T12:17:51.1434117Z   ✓  137 [chromium] › tests/e2e/realtime.spec.mjs:105:3 › v2 silently stalled event stream is re-established and reconciles a missed blocker (11.7s)
+2026-10-27T12:17:56.4183657Z   ✓  139 [chromium] › tests/e2e/sessions.spec.mjs:11:1 › sessions can be renamed and require confirmation before deletion (5.2s)
+2026-10-27T12:17:57.2643859Z   ✓  138 [chromium] › tests/e2e/realtime.spec.mjs:145:1 › v2 network drop recovers the retained session without replaying the prompt (16.1s)
+2026-10-27T12:18:02.9630689Z   ✓  140 [chromium] › tests/e2e/sessions.spec.mjs:30:1 › favorites open sessions in the current project (6.5s)
+2026-10-27T12:18:07.4969343Z   ✓  141 [chromium] › tests/e2e/sessions.spec.mjs:54:1 › favorites switch projects and open cross-project sessions @smoke (10.1s)
+2026-10-27T12:18:11.5529596Z   ✓  142 [chromium] › tests/e2e/sessions.spec.mjs:97:1 › favorites report sessions that are missing (8.5s)
+2026-10-27T12:18:19.2151134Z   ✓  144 [chromium] › tests/e2e/sessions.spec.mjs:165:1 › chat library lists recently used sessions from other projects and switches on tap (7.6s)
+2026-10-27T12:18:19.5541176Z   ✓  143 [chromium] › tests/e2e/sessions.spec.mjs:117:1 › rapid favorite taps across projects settle on the last target (12.0s)
+2026-10-27T12:18:25.0116027Z   ✓  146 [chromium] › tests/e2e/sessions.spec.mjs:236:1 › chat library lists running sessions from other projects (5.4s)
+2026-10-27T12:18:27.7950290Z   ✓  145 [chromium] › tests/e2e/sessions.spec.mjs:199:1 › chat library navigation does not wait for the session list (8.5s)
+2026-10-27T12:18:36.1807128Z   ✓  148 [chromium] › tests/e2e/settings.spec.mjs:12:1 › settings can configure an additional provider against the fake server @smoke (8.3s)
+2026-10-27T12:18:40.8642352Z   ✓  149 [chromium] › tests/e2e/settings.spec.mjs:29:1 › V1 providers retain API-key login alongside OAuth metadata (4.6s)
+2026-10-27T12:18:43.6049702Z Fake OpenCode server listening on http://127.0.0.1:39059 (happy-path)
+2026-10-27T12:18:52.9901813Z   ✓  147 [chromium] › tests/e2e/sessions.spec.mjs:260:1 › saved connections keep sessions, caches, and model preferences separate (27.9s)
+2026-10-27T12:18:53.2517942Z   ✓  150 [chromium] › tests/e2e/settings.spec.mjs:50:1 › chat model picker searches and groups models by provider (12.4s)
+2026-10-27T12:18:56.7246665Z   ✓  152 [chromium] › tests/e2e/settings.spec.mjs:126:1 › deep links report sessions that are missing (3.4s)
+2026-10-27T12:18:57.2183798Z Fake OpenCode server listening on http://127.0.0.1:44037 (happy-path)
+2026-10-27T12:19:01.2148830Z   ✓  151 [chromium] › tests/e2e/settings.spec.mjs:92:1 › deep links switch projects and open a specific session (8.2s)
+2026-10-27T12:19:07.1279063Z   ✓  153 [chromium] › tests/e2e/settings.spec.mjs:142:1 › settings explain root-vs-api mismatches and reconnect through a prefixed API base URL (10.4s)
+2026-10-27T12:19:07.5748043Z Fake OpenCode server listening on http://127.0.0.1:38487 (happy-path)
+2026-10-27T12:19:07.8458837Z   ✓  154 [chromium] › tests/e2e/settings.spec.mjs:178:1 › settings do not suggest a duplicated /api base when the API prefix is already set (6.6s)
+2026-10-27T12:19:12.7153447Z   ✓  156 [chromium] › tests/e2e/share.spec.mjs:13:1 › share route opens empty and returns to chat without submitting (4.8s)
+2026-10-27T12:19:17.7256578Z   ✓  155 [chromium] › tests/e2e/settings.spec.mjs:193:1 › a 1.x server exposing /api compatibility routes still connects as 1.x (10.6s)
+2026-10-27T12:19:17.9532974Z Fake OpenCode V2 server listening on http://127.0.0.1:43817 (happy-path)
+2026-10-27T12:19:29.3104100Z   ✓  157 [chromium] › tests/e2e/terminal.spec.mjs:9:1 › terminal streams input and output over the PTY websocket (16.6s)
+2026-10-27T12:19:29.5630404Z Fake OpenCode V2 server listening on http://127.0.0.1:44095 (happy-path)
+2026-10-27T12:19:33.3231043Z   ✓  158 [chromium] › tests/e2e/terminal.spec.mjs:47:1 › OpenCode 2 terminal streams input and output over the PTY websocket @smoke (15.5s)
+2026-10-27T12:19:33.9205202Z Fake OpenCode V2 server listening on http://127.0.0.1:36469 (happy-path)
+2026-10-27T12:19:40.6842513Z   ✓  159 [chromium] › tests/e2e/v2.spec.mjs:9:1 › connects to an OpenCode 2 server and completes a prompt @smoke (11.3s)
+2026-10-27T12:19:41.1733919Z Fake OpenCode V2 server listening on http://127.0.0.1:39763 (happy-path)
+2026-10-27T12:19:49.6861940Z   ✓  160 [chromium] › tests/e2e/v2.spec.mjs:64:3 › OpenCode 2 connects OpenCode Go using an API key (16.3s)
+2026-10-27T12:19:49.9033003Z Fake OpenCode V2 server listening on http://127.0.0.1:44245 (happy-path)
+2026-10-27T12:19:55.4434776Z   ✓  161 [chromium] › tests/e2e/v2.spec.mjs:64:3 › OpenCode 2 connects OpenRouter using an API key (14.7s)
+2026-10-27T12:19:57.3103256Z   ✓  162 [chromium] › tests/e2e/v2.spec.mjs:103:1 › OpenCode 2 lists provider accounts and switches the active one (7.6s)
+2026-10-27T12:19:58.0502252Z 
+2026-10-27T12:19:58.0509023Z   162 passed (12.1m)
+2026-10-27T12:19:58.3880380Z Post job cleanup.
+2026-10-27T12:19:58.5193148Z (node:6477) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-27T12:19:58.5194711Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-27T12:19:58.5474420Z Post job cleanup.
+2026-10-27T12:19:58.6645877Z [command]/usr/bin/git version
+2026-10-27T12:19:58.6715710Z git version 2.55.0
+2026-10-27T12:19:58.6787478Z Temporarily overriding HOME='/home/runner/work/_temp/7614ed7f-e062-4005-b5d5-dc2aaa3908b2' before making global git config changes
+2026-10-27T12:19:58.6789143Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-27T12:19:58.6790786Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/opencode-mobile-private/opencode-mobile-private
+2026-10-27T12:19:58.6922506Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-27T12:19:58.7057300Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-27T12:19:58.7792901Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-27T12:19:58.7918968Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-27T12:19:58.8797642Z Cleaning up orphan processes
+2026-10-27T12:19:58.9341751Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683, actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+

@@ -1,0 +1,15 @@
+
+> opencode-mobile-private-edition@1.0.98 private:prebuild
+> node scripts/private/prebuild.mjs
+
+- Clearing android
+✔ Cleared android code
+- Creating native directory (./android)
+✔ Created native directory
+- Updating package.json
+✔ Updated package.json | no changes
+- Running prebuild
+Expo-secure-store tried to apply Android Auto Backup rules, but other backup rules are already present. Refer to the expo-secure-store docs (https://docs.expo.dev/versions/latest/sdk/securestore/) to configure your backup rules.
+- Running prebuild
+✔ Finished prebuild
+Private Android project generated. No APK has been built yet.

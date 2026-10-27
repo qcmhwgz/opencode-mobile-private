@@ -1,0 +1,8 @@
+
+> opencode-mobile-private-edition@1.0.98 test:fake-server:self
+> node ./tests/fake-opencode/self-test.mjs
+
+Fake OpenCode server listening on http://127.0.0.1:4196 (happy-path)
+Fake OpenCode V2 server listening on http://127.0.0.1:4197 (happy-path)
+Fake OpenCode 1.18.3 server self-test passed.
+Fake OpenCode 2.0 server self-test passed.

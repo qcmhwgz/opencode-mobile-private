@@ -1,0 +1,9 @@
+{
+  "fixtureOnly": true,
+  "userReleaseApkSigned": false,
+  "wrongCertificateRejected": true,
+  "v2SignatureVerified": true,
+  "v3SignatureVerified": true,
+  "sha256Matched": true,
+  "disposablePrivateKeyDeletedAfterTest": true
+}

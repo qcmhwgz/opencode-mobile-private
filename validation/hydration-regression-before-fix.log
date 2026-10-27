@@ -1,0 +1,54 @@
+
+ RUN  v5.0.3 /Users/wq/Documents/Codex/2026-10-27/referenced-chatgpt-conversation-this-is-an/outputs/OpenCode-Mobile-Private-Edition
+
+ ❯ tests/vitest/transcript-policy.test.ts (14 tests | 2 failed) 174ms
+   ❯ transcript refresh policy (14)
+     × retains outer session hydration when a nested empty transcript read finishes 55ms
+     × ignores hydration cleanup belonging to a runtime before reset 14ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/vitest/transcript-policy.test.ts > transcript refresh policy > retains outer session hydration when a nested empty transcript read finishes
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/vitest/transcript-policy.test.ts:80:49
+     78|     await value.refreshMessages('s');
+     79|     runtime.flush();
+     80|     expect(runtime.value.hydratingSessionIds.s).toBe(true);
+       |                                                 ^
+     81|     finishOpen();
+     82|     runtime.flush();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/vitest/transcript-policy.test.ts > transcript refresh policy > ignores hydration cleanup belonging to a runtime before reset
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/vitest/transcript-policy.test.ts:93:49
+     91|     finishOld();
+     92|     runtime.flush();
+     93|     expect(runtime.value.hydratingSessionIds.s).toBe(true);
+       |                                                 ^
+     94|     finishCurrent();
+     95|     runtime.flush();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 12 passed (14)
+   Start at  18:52:47
+   Duration  500ms (import 42%, tests 39%, transform 19%)
+

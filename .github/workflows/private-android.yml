@@ -1,0 +1,90 @@
+name: Private Android candidate (unsigned)
+on:
+  workflow_dispatch:
+    inputs:
+      freeze_native_dependencies:
+        description: 'First trusted build only: generate native locks for review; do not treat this as a verified release'
+        type: boolean
+        default: false
+  pull_request:
+permissions:
+  contents: read
+env:
+  EXPO_NO_TELEMETRY: '1'
+  EXPO_NO_DOTENV: '1'
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '22.21.1'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: npm run test:ci:static
+      - run: npm run private:test
+      - run: npm run test:fake-server:self
+      - run: npx --no-install playwright install --with-deps chromium
+      - run: npm run test:e2e:web
+        env:
+          CI: 'true'
+          EXPO_PUBLIC_E2E_MODE: '1'
+  unsigned-apk:
+    if: github.event_name == 'workflow_dispatch'
+    needs: validate
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '22.21.1'
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00 # v4.7.1
+        with:
+          distribution: temurin
+          java-version: '17.0.17+10'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Build unsigned arm64 candidate
+        run: |
+          if [ "$FREEZE_NATIVE" = "true" ]; then
+            npm run private:build -- --freeze-dependencies
+          else
+            npm run private:build
+          fi
+        env:
+          FREEZE_NATIVE: ${{ inputs.freeze_native_dependencies }}
+      - name: Verify unsigned state and audit APK
+        env:
+          FREEZE_NATIVE: ${{ inputs.freeze_native_dependencies }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          APK=android/app/build/outputs/apk/release/app-release-unsigned.apk
+          test -s "$APK"
+          BUILD_TOOLS="$ANDROID_HOME/build-tools/36.0.0"
+          if "$BUILD_TOOLS/apksigner" verify "$APK"; then
+            echo 'Refusing an unexpectedly signed CI artifact'
+            exit 1
+          fi
+          python3 scripts/private/audit-apk.py "$APK"
+          mkdir -p output
+          cp "$APK" output/OpenCode-Mobile-Private-unsigned.apk
+          cp private-apk-audit.json output/
+          cp private-source.json package-lock.json private-native-inputs.json output/
+          mkdir -p output/native-dependencies
+          cp -R config/private/gradle-locks output/native-dependencies/
+          cp config/private/verification-metadata.xml output/native-dependencies/
+          printf '%s\n' "$FREEZE_NATIVE" > output/NATIVE_LOCK_BOOTSTRAP.txt
+          git rev-parse HEAD > output/SOURCE_COMMIT.txt
+          (cd output && sha256sum OpenCode-Mobile-Private-unsigned.apk > SHA256SUMS)
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: opencode-mobile-private-unsigned-${{ github.sha }}
+          path: output/
+          if-no-files-found: error
+          retention-days: 7

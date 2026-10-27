@@ -1,0 +1,1 @@
+Private Edition: fixed WireGuard server, local signing, no Cloud Link, store updates, speech or push notifications.

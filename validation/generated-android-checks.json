@@ -1,0 +1,18 @@
+{
+  "generatedProjectOnly": true,
+  "mergedApkAuditPerformed": false,
+  "appAttributes": {
+    "allowBackup": "false",
+    "usesCleartextTraffic": "false",
+    "debuggable": "false",
+    "fullBackupContent": "false"
+  },
+  "declaredPermissionsAfterRemovalMarkers": [
+    "android.permission.ACCESS_NETWORK_STATE",
+    "android.permission.INTERNET"
+  ],
+  "launcherOnlyIntents": true,
+  "nativeGuardInstalledBeforeReact": true,
+  "secureWindowConfigured": true,
+  "fixedGradleChecksumConfigured": true
+}

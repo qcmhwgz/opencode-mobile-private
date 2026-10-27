@@ -1,0 +1,486 @@
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type Dispatch, type SetStateAction } from 'react';
+import type { PendingPermissionRequest, PendingQuestionRequest } from '@/lib/opencode/client';
+import { toTranscriptEntry, type SessionMessageRecord } from '@/lib/opencode/format';
+import { isTranscriptDisplayMessage } from '@/lib/opencode/transcript';
+import type { SessionStatus } from '@/lib/opencode/types';
+import type { VoiceRecoveryAction } from '@/lib/voice/speech-errors';
+import { stopSpeaking } from '@/lib/voice/speech-output';
+import { useSpeechInput } from '@/lib/voice/use-speech-input';
+import { createWakePhraseSession, normalizeWakePhrase } from '@/lib/voice/wake-phrase';
+import { playWakePhraseCue } from '@/lib/voice/wake-feedback';
+import { stopWorkingSoundAsync } from '@/lib/voice/working-sound';
+import { CONVERSATION_COMMAND_TIMEOUT_MS, CONVERSATION_FINAL_RESULT_SETTLE_MS, CONVERSATION_KEEP_AWAKE_TAG,
+  type ChatContextValue, type ChatPreferences, type ConnectionState, type ConversationPhase } from '@/providers/opencode-provider-types';
+import { useConversationKeepAwake } from '@/providers/use-conversation-keep-awake';
+import { applyConversationFeedback } from '@/providers/conversation/feedback';
+import { useConversationListeningEffects } from '@/providers/conversation/use-conversation-listening';
+import { useConversationPlayback } from '@/providers/conversation/use-conversation-playback';
+import { useConversationConnectionFeedback } from '@/providers/conversation/use-conversation-connection';
+import { useConversationSnapshot } from '@/providers/conversation/use-conversation-snapshot';
+
+export function useConversationState({ connection, chatPreferences, currentSessionId, setCurrentSessionId,
+  sessionStatuses, messagesBySession, pendingPermissionsBySession, pendingQuestionsBySession,
+  sendingState, ensureActiveSession, sendPrompt: sendPromptAction,
+}: {
+  connection: ConnectionState;
+  chatPreferences: ChatPreferences;
+  currentSessionId?: string;
+  setCurrentSessionId: Dispatch<SetStateAction<string | undefined>>;
+  sessionStatuses: Record<string, SessionStatus>;
+  messagesBySession: Record<string, SessionMessageRecord[]>;
+  pendingPermissionsBySession: Record<string, PendingPermissionRequest[]>;
+  pendingQuestionsBySession: Record<string, PendingQuestionRequest[]>;
+  sendingState: ChatContextValue['sendingState'];
+  ensureActiveSession: () => Promise<string | undefined>;
+  sendPrompt: ChatContextValue['sendPrompt'];
+}) {
+  const sendPromptRef = useRef(sendPromptAction);
+  useLayoutEffect(() => { sendPromptRef.current = sendPromptAction; }, [sendPromptAction]);
+  const sendPrompt = useCallback<ChatContextValue['sendPrompt']>((...args) => sendPromptRef.current(...args), []);
+  const [conversationPhase, setConversationPhase] = useState<ConversationPhase>('off');
+  const [conversationSessionId, setConversationSessionId] = useState<string>();
+  const [queuedConversationPrompt, setQueuedConversationPrompt] = useState<string>();
+  const [pendingConversationTurn, setPendingConversationTurn] = useState<string>();
+  const [conversationFeedback, setConversationFeedback] = useState<string>();
+  const [conversationFeedbackAction, setConversationFeedbackAction] = useState<VoiceRecoveryAction>('none');
+  const [conversationLatestHeardText, setConversationLatestHeardText] = useState<string>();
+  const conversationPhaseRef = useRef<ConversationPhase>('off');
+  const assistantReplyBaselineIdRef = useRef<string | undefined>(undefined);
+  const conversationResumeTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const conversationFinalResultTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const conversationCommandTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const conversationListeningRestartTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const conversationCancelRequestedRef = useRef(false);
+  const conversationStartingRef = useRef(false);
+  const conversationSubmittingRef = useRef(false);
+  const conversationWakePhrase = normalizeWakePhrase(chatPreferences.conversationWakePhrase);
+  // Every arm starts a fresh session. The phrase used for that turn is fixed at
+  // arm time, so editing the setting never rewrites an in-flight command.
+  const wakePhraseSessionRef = useRef(createWakePhraseSession(conversationWakePhrase));
+  const speechContextualStrings = useMemo(() => [conversationWakePhrase], [conversationWakePhrase]);
+  const flushPendingConversationResultRef = useRef<() => void>(() => undefined);
+  const clearConversationResultTimeout = useCallback(() => {
+    if (conversationFinalResultTimeoutRef.current) {
+      clearTimeout(conversationFinalResultTimeoutRef.current);
+      conversationFinalResultTimeoutRef.current = undefined;
+    }
+  }, []);
+  const clearConversationCommandTimeout = useCallback(() => {
+    if (conversationCommandTimeoutRef.current) {
+      clearTimeout(conversationCommandTimeoutRef.current);
+      conversationCommandTimeoutRef.current = undefined;
+    }
+  }, []);
+  const clearPendingConversationResult = useCallback(() => {
+    wakePhraseSessionRef.current.reset();
+    clearConversationResultTimeout();
+    clearConversationCommandTimeout();
+  }, [clearConversationCommandTimeout, clearConversationResultTimeout]);
+  const scheduleConversationResult = useCallback(() => {
+    clearConversationResultTimeout();
+    if (conversationPhaseRef.current !== 'listening' || !wakePhraseSessionRef.current.command()) return;
+    conversationFinalResultTimeoutRef.current = setTimeout(() => {
+      conversationFinalResultTimeoutRef.current = undefined;
+      flushPendingConversationResultRef.current();
+    }, CONVERSATION_FINAL_RESULT_SETTLE_MS);
+  }, [clearConversationResultTimeout]);
+  const startConversationCommandTimeout = useCallback(() => {
+    clearConversationCommandTimeout();
+    if (conversationPhaseRef.current !== 'listening') return;
+    conversationCommandTimeoutRef.current = setTimeout(() => {
+      conversationCommandTimeoutRef.current = undefined;
+      if (conversationPhaseRef.current !== 'listening' || wakePhraseSessionRef.current.command()) return;
+      clearPendingConversationResult();
+      conversationPhaseRef.current = 'armed';
+      setConversationPhase('armed');
+      setConversationLatestHeardText(undefined);
+      applyConversationFeedback(setConversationFeedback, setConversationFeedbackAction, 'I did not catch a command. Say the wake phrase and try again.');
+    }, CONVERSATION_COMMAND_TIMEOUT_MS);
+  }, [clearConversationCommandTimeout, clearPendingConversationResult, setConversationFeedback, setConversationFeedbackAction]);
+
+  const speechInput = useSpeechInput({
+    contextualStrings: speechContextualStrings,
+    levelStep: 2,
+    locale: chatPreferences.speechLocale,
+    onEnd: () => {
+      if (conversationPhaseRef.current === 'armed') {
+        // The recognizer restarts while armed; a phrase split across that
+        // boundary is intentionally dropped rather than merged with new noise.
+        wakePhraseSessionRef.current.reset();
+        return;
+      }
+      if (conversationPhaseRef.current !== 'listening') {
+        return;
+      }
+
+      wakePhraseSessionRef.current.checkpoint();
+      if (!wakePhraseSessionRef.current.command()) {
+        // Keep the matched phrase and let the listening effect restart the
+        // recognizer. The command window stays open without asking the user to
+        // repeat the phrase, which matters on platforms that end a segment.
+        if (!conversationCommandTimeoutRef.current) {
+          startConversationCommandTimeout();
+        }
+        return;
+      }
+      scheduleConversationResult();
+    },
+    onSpeechStart: () => {
+      clearConversationResultTimeout();
+      if (conversationPhaseRef.current === 'listening') {
+        clearConversationCommandTimeout();
+      }
+    },
+    onResult: (transcript, isFinal) => {
+      const phase = conversationPhaseRef.current;
+      if (phase !== 'armed' && phase !== 'listening') {
+        return;
+      }
+
+      const result = wakePhraseSessionRef.current.push(transcript, isFinal);
+      if (!result.matched) {
+        return;
+      }
+
+      if (conversationPhaseRef.current === 'armed') {
+        conversationPhaseRef.current = 'listening';
+        setConversationPhase('listening');
+        playWakePhraseCue();
+      }
+
+      const command = result.command.trim();
+      if (!command) {
+        if (!conversationCommandTimeoutRef.current) {
+          startConversationCommandTimeout();
+        }
+        return;
+      }
+
+      clearConversationCommandTimeout();
+      setConversationLatestHeardText(command);
+      // A new interim is unfinished speech, even if an earlier segment was final.
+      clearConversationResultTimeout();
+      if (isFinal) scheduleConversationResult();
+    },
+    preferOnDevice: chatPreferences.preferOnDeviceRecognition,
+    volumeUpdateIntervalMillis: 400,
+  });
+  const {
+    abort: abortSpeechInput,
+    error: speechInputError,
+    errorAction: speechInputErrorAction,
+    errorCode: speechInputErrorCode,
+    isListening: isConversationListening,
+    isStarting: isConversationListeningStarting,
+    level: conversationListeningLevel,
+    start: startSpeechInput,
+  } = speechInput;
+
+  const flushPendingConversationResult = useCallback(() => {
+    const transcript = wakePhraseSessionRef.current.command().trim();
+    clearPendingConversationResult();
+    if (!transcript || conversationPhaseRef.current !== 'listening') {
+      return;
+    }
+
+    conversationPhaseRef.current = 'submitting';
+    conversationSubmittingRef.current = true;
+    abortSpeechInput();
+    setPendingConversationTurn(transcript);
+    setConversationPhase('submitting');
+  }, [abortSpeechInput, clearPendingConversationResult]);
+  useLayoutEffect(() => { flushPendingConversationResultRef.current = flushPendingConversationResult; }, [flushPendingConversationResult]);
+
+  const getLatestConversationAssistantEntry = useCallback(
+    (sessionId?: string) => {
+      if (!sessionId) {
+        return undefined;
+      }
+
+      const transcript = (messagesBySession[sessionId] || []).map(toTranscriptEntry).filter((entry) => isTranscriptDisplayMessage(entry));
+      return [...transcript].reverse().find((entry) => entry.role === 'assistant' && entry.text.trim());
+    },
+    [messagesBySession],
+  );
+
+  const latestAssistantRef = useRef(getLatestConversationAssistantEntry);
+  useLayoutEffect(() => { latestAssistantRef.current = getLatestConversationAssistantEntry; }, [getLatestConversationAssistantEntry]);
+
+  const clearConversationFeedback = useCallback(() => {
+    applyConversationFeedback(setConversationFeedback, setConversationFeedbackAction, undefined);
+  }, []);
+
+  const stopConversationMode = useCallback(async () => {
+    clearPendingConversationResult();
+    if (conversationResumeTimeoutRef.current) {
+      clearTimeout(conversationResumeTimeoutRef.current);
+      conversationResumeTimeoutRef.current = undefined;
+    }
+    if (conversationListeningRestartTimeoutRef.current) {
+      clearTimeout(conversationListeningRestartTimeoutRef.current);
+      conversationListeningRestartTimeoutRef.current = undefined;
+    }
+
+    conversationCancelRequestedRef.current = true;
+    conversationSubmittingRef.current = false;
+    conversationPhaseRef.current = 'off';
+    abortSpeechInput();
+    await stopSpeaking().catch(() => undefined);
+    await stopWorkingSoundAsync().catch(() => undefined);
+    setPendingConversationTurn(undefined);
+    setQueuedConversationPrompt(undefined);
+    setConversationLatestHeardText(undefined);
+    setConversationPhase('off');
+    setConversationSessionId(undefined);
+  }, [abortSpeechInput, clearPendingConversationResult]);
+
+  const startConversationListening = useCallback(async (sessionId?: string, options?: { preserveCommandWindow?: boolean }) => {
+    const preserve = Boolean(options?.preserveCommandWindow);
+    if (!sessionId && !conversationSessionId) {
+      return false;
+    }
+
+    if (!preserve) {
+      clearPendingConversationResult();
+      wakePhraseSessionRef.current = createWakePhraseSession(conversationWakePhrase);
+      setConversationLatestHeardText(undefined);
+    }
+    if (conversationResumeTimeoutRef.current) {
+      clearTimeout(conversationResumeTimeoutRef.current);
+      conversationResumeTimeoutRef.current = undefined;
+    }
+    if (conversationListeningRestartTimeoutRef.current) {
+      clearTimeout(conversationListeningRestartTimeoutRef.current);
+      conversationListeningRestartTimeoutRef.current = undefined;
+    }
+
+    conversationCancelRequestedRef.current = false;
+    conversationSubmittingRef.current = false;
+    if (!preserve) {
+      setPendingConversationTurn(undefined);
+      setQueuedConversationPrompt(undefined);
+    }
+    await stopWorkingSoundAsync().catch(() => undefined);
+
+    if (conversationCancelRequestedRef.current) return false;
+
+    if (!preserve) {
+      // Set the logical phase before starting so a result emitted immediately
+      // after the native start is routed through the phrase gate instead of
+      // being dropped as stale output.
+      conversationPhaseRef.current = 'armed';
+      setConversationPhase('armed');
+    }
+    const started = await startSpeechInput({ continuous: true });
+    // The ref can change while the native start resolves (stop, background, or
+    // an immediately matched phrase); widen it back to the full union.
+    if (conversationCancelRequestedRef.current || (conversationPhaseRef.current as ConversationPhase) === 'off') {
+      abortSpeechInput();
+      return false;
+    }
+    if (!started) {
+      conversationPhaseRef.current = 'off';
+      setConversationPhase('off');
+      return false;
+    }
+
+    return true;
+  }, [abortSpeechInput, clearPendingConversationResult, conversationSessionId, conversationWakePhrase, startSpeechInput]);
+
+  const shouldRestartConversation = useCallback(() => {
+    const phase = conversationPhaseRef.current;
+    return phase === 'armed' || (phase === 'listening' && !wakePhraseSessionRef.current.command());
+  }, []);
+
+  const toggleConversationMode = useCallback(async () => {
+    if (conversationStartingRef.current) return;
+    if (conversationPhase !== 'off') {
+      await stopConversationMode();
+      return;
+    }
+
+    if (connection.status !== 'connected') {
+      applyConversationFeedback(setConversationFeedback, setConversationFeedbackAction, 'Connect to OpenCode before starting conversation mode.');
+      return;
+    }
+
+    if (sendingState.active) {
+      applyConversationFeedback(setConversationFeedback, setConversationFeedbackAction, 'Wait for the current reply to finish before starting conversation mode.');
+      return;
+    }
+
+    const pendingInteractionCount = currentSessionId
+      ? (pendingPermissionsBySession[currentSessionId] || []).length + (pendingQuestionsBySession[currentSessionId] || []).length
+      : 0;
+    if (pendingInteractionCount > 0) {
+      applyConversationFeedback(setConversationFeedback, setConversationFeedbackAction, 'Answer the current request before starting conversation mode.');
+      return;
+    }
+
+    conversationStartingRef.current = true;
+    try {
+      const sessionId = currentSessionId || (await ensureActiveSession());
+      if (!sessionId) return;
+
+      abortSpeechInput();
+      await stopSpeaking().catch(() => undefined);
+      await stopWorkingSoundAsync().catch(() => undefined);
+      setCurrentSessionId(sessionId);
+      setConversationSessionId(sessionId);
+      applyConversationFeedback(setConversationFeedback, setConversationFeedbackAction, undefined);
+      setPendingConversationTurn(undefined);
+      setQueuedConversationPrompt(undefined);
+      assistantReplyBaselineIdRef.current = getLatestConversationAssistantEntry(sessionId)?.id;
+      const started = await startConversationListening(sessionId);
+      if (!started) setConversationSessionId(undefined);
+    } finally {
+      conversationStartingRef.current = false;
+    }
+  }, [
+    abortSpeechInput,
+    connection.status,
+    conversationPhase,
+    currentSessionId,
+    ensureActiveSession,
+    getLatestConversationAssistantEntry,
+    pendingPermissionsBySession,
+    pendingQuestionsBySession,
+    sendingState.active,
+    setCurrentSessionId,
+    startConversationListening,
+    stopConversationMode,
+  ]);
+
+  useEffect(() => {
+    conversationPhaseRef.current = conversationPhase;
+    if (conversationPhase !== 'submitting') {
+      conversationSubmittingRef.current = false;
+    }
+  }, [conversationPhase]);
+
+  useConversationKeepAwake(conversationPhase, CONVERSATION_KEEP_AWAKE_TAG);
+
+  useConversationListeningEffects({
+    conversationPhase,
+    isConversationListening,
+    isConversationListeningStarting,
+    conversationPhaseRef,
+    conversationCancelRequestedRef,
+    conversationSubmittingRef,
+    conversationListeningRestartTimeoutRef,
+    shouldRestartConversation,
+    startConversationListening,
+    abortSpeechInput,
+    speechInputError,
+    speechInputErrorAction,
+    speechInputErrorCode,
+    stopConversationMode,
+    setConversationFeedback,
+    setConversationFeedbackAction,
+  });
+
+  useEffect(() => {
+    if (conversationPhase !== 'submitting' || !pendingConversationTurn || !conversationSessionId) {
+      return;
+    }
+
+    setQueuedConversationPrompt(pendingConversationTurn);
+    setPendingConversationTurn(undefined);
+  }, [conversationPhase, conversationSessionId, pendingConversationTurn]);
+
+  useEffect(() => {
+    if (conversationPhase !== 'submitting' || !queuedConversationPrompt || !conversationSessionId) {
+      return;
+    }
+
+    let cancelled = false;
+
+    const submitPrompt = async () => {
+      try {
+        assistantReplyBaselineIdRef.current = latestAssistantRef.current(conversationSessionId)?.id;
+        await sendPrompt(conversationSessionId, queuedConversationPrompt);
+        if (cancelled) {
+          return;
+        }
+
+        if (conversationCancelRequestedRef.current || conversationPhaseRef.current === 'off') {
+          setQueuedConversationPrompt(undefined);
+          setPendingConversationTurn(undefined);
+          return;
+        }
+
+        setQueuedConversationPrompt(undefined);
+        setConversationPhase('waiting');
+      } catch (error) {
+        if (cancelled) {
+          return;
+        }
+
+        const message = error instanceof Error ? error.message : 'Voice conversation failed while sending your message.';
+        setQueuedConversationPrompt(undefined);
+        setPendingConversationTurn(undefined);
+        applyConversationFeedback(setConversationFeedback, setConversationFeedbackAction, message);
+        await stopConversationMode();
+      }
+    };
+
+    void submitPrompt();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [
+    conversationPhase,
+    conversationSessionId,
+    queuedConversationPrompt,
+    sendPrompt,
+    stopConversationMode,
+  ]);
+
+  useConversationPlayback({
+    chatPreferences,
+    conversationPhase,
+    conversationSessionId,
+    pendingPermissionsBySession,
+    pendingQuestionsBySession,
+    sessionStatuses,
+    sendingState,
+    getLatestConversationAssistantEntry,
+    assistantReplyBaselineIdRef,
+    conversationResumeTimeoutRef,
+    conversationPhaseRef,
+    startConversationListening,
+    stopConversationMode,
+    setConversationPhase,
+    setConversationFeedback,
+    setConversationFeedbackAction,
+  });
+
+  useConversationConnectionFeedback({
+    connection,
+    conversationPhase,
+    setConversationFeedback,
+    setConversationFeedbackAction,
+  });
+
+  const conversation = useConversationSnapshot({
+    conversationFeedback,
+    conversationFeedbackAction,
+    conversationLatestHeardText,
+    conversationListeningLevel,
+    conversationPhase,
+    conversationSessionId,
+    messagesBySession,
+    wakePhrase: conversationWakePhrase,
+  });
+
+  useEffect(() => () => {
+    if (conversationResumeTimeoutRef.current) clearTimeout(conversationResumeTimeoutRef.current);
+    if (conversationFinalResultTimeoutRef.current) clearTimeout(conversationFinalResultTimeoutRef.current);
+    if (conversationCommandTimeoutRef.current) clearTimeout(conversationCommandTimeoutRef.current);
+    if (conversationListeningRestartTimeoutRef.current) clearTimeout(conversationListeningRestartTimeoutRef.current);
+    void stopSpeaking().catch(() => undefined);
+  }, []);
+
+  return { conversation, clearConversationFeedback, toggleConversationMode };
+}

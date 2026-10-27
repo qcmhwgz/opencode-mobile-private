@@ -1,0 +1,10 @@
+{
+  "node": "22.21.1",
+  "java": "17.0.17+10",
+  "androidCompileSdk": 36,
+  "androidBuildTools": "36.0.0",
+  "ndk": "27.1.12297006",
+  "cmake": "3.22.1",
+  "gradle": "9.3.1",
+  "gradleSha256": "b266d5ff6b90eada6dc3b20cb090e3731302e553a27c5d3e4df1f0d76beaff06"
+}

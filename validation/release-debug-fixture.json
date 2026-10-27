@@ -1,0 +1,15 @@
+{
+  "scope": "Resource-only binary fixtures, not the application or a Release build",
+  "results": [
+    {
+      "fixture": "default",
+      "resolvedDebuggable": "false",
+      "rejected": false
+    },
+    {
+      "fixture": "debug",
+      "resolvedDebuggable": "true",
+      "rejected": true
+    }
+  ]
+}

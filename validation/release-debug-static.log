@@ -1,0 +1,30 @@
+
+> opencode-mobile-private-edition@1.0.98 test:ci:static
+> node ./tests/run-static.mjs
+
+
+[static] lint: node node_modules/eslint/bin/eslint.js . --cache --cache-strategy content
+
+[static] typecheck: node node_modules/typescript/bin/tsc --noEmit --incremental --tsBuildInfoFile tsconfig.app.tsbuildinfo
+
+[static] typecheck:tests: node node_modules/typescript/bin/tsc -p tsconfig.tests.json --incremental --tsBuildInfoFile tsconfig.tests.tsbuildinfo
+
+[static] vitest: node node_modules/vitest/vitest.mjs run
+[static] lint: ok (2.3s)
+[static] typecheck:tests: ok (3.6s)
+[static] typecheck: ok (3.9s)
+
+ RUN  v5.0.3 /Users/wq/Documents/Codex/2026-10-27/referenced-chatgpt-conversation-this-is-an/outputs/OpenCode-Mobile-Private-Edition
+
+
+ Test Files  103 passed (103)
+      Tests  644 passed (644)
+   Start at  22:02:29
+   Duration  5.46s (tests 52%, import 40%, transform 8%, worker 1%)
+
+    Isolate  103 workers spawned · ~80ms startup each (spawn + environment, per file)
+             at least ~668ms faster with isolate: false — reuses workers across files instead of one per file
+
+[static] vitest: ok (5.7s)
+
+[static] all static checks passed.

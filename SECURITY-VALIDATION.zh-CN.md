@@ -94,3 +94,14 @@
 
 本轮本地静态门禁已通过：103 个文件、644 项测试（包括 3 项原生输入测试）；另有 26 项私有边界与 7 项 Python 资源测试通过。Android 工程生成通过，未进行本地 Kotlin/R8 编译。
 本轮完整浏览器回归 162/162 通过（3.6 分钟），V1/V2 模拟服务自测通过；未修改 e2e/fake 契约。证据为 `validation/webview-*`。
+
+## 第五轮构建记录与发布调试标记修正
+
+- [运行 #5](https://github.com/qcmhwgz/opencode-mobile-private/actions/runs/40509935099)，源码 `961f7ef1b1e145c0be9b49cc4a189d07d2b60b12`：644 项单元、26 项私有边界、7 项 Python 资源测试及模拟服务自测通过，完整浏览器 **162/162 通过**。
+- 原生日志实际执行 `:expo-dom-webview:compileReleaseKotlin`，证明已切换到源码编译；应用 Kotlin 编译步骤也已执行。构建最终在 `:app:lintVitalRelease` 失败，错误为 `HardcodedDebugMode`：私有插件把 `android:debuggable="false"` 写入源 Manifest。未生成本项目 APK，APK 审计未执行，也未生成可提交的完整原生锁。
+- 已删除 Manifest 中的硬编码调试标记，由 AGP 管理构建类型；Release Gradle 明确设置 `debuggable false`，保留全部发布 lint 检查。最终 APK 检查同时要求 Manifest 标记为缺省或 false，并由 `apkanalyzer manifest debuggable` 确认实际解析为 false；true、资源引用、未知或空解析值均拒绝。
+- 依据 [Android 调试标记说明](https://developer.android.com/privacy-and-security/risks/android-debuggable)，缺省为 false；分析工具命令见 [官方说明](https://developer.android.com/tools/apkanalyzer)。本地两个实际编译的仅资源二进制样本分别得到 false/true，检查器正确接受/拒绝；这些不是应用 APK。
+- 新增调试状态拒绝用例后，Python 资源策略测试为 8 项并通过；静态 644 项、私有 26 项和工程生成通过。新的完整原生编译与 APK 核验仍待执行。
+- 失败诊断 artifact `12738892729` 已下载，ZIP SHA-256 `ca7776a5ff52f4369dc503d89b131777011b279a9d91364dea64a79fe676fc98` 匹配 GitHub。部分 verification metadata 含 1309 个组件，无 SNAPSHOT、trusted-artifacts 或 ignored-keys 条目，但没有原生锁，也不能称为完整依赖审计。日志位于 `validation/github-run-5-*`。
+
+本次修正后的本地完整浏览器回归 162/162 通过（3.4 分钟），V1/V2 模拟服务自测通过；源码改动未涉及 e2e/fake 契约。

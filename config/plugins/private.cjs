@@ -10,8 +10,9 @@ module.exports = function privateAndroid(config) {
       'android:allowBackup': 'false', 'android:usesCleartextTraffic': 'false',
       'android:networkSecurityConfig': '@xml/private_network_security',
       'android:fullBackupContent': 'false', 'android:dataExtractionRules': '@xml/private_data_extraction',
-      'android:debuggable': 'false',
     });
+    // AGP sets the build-type flag; a literal Manifest flag fails release lint.
+    delete app.$['android:debuggable'];
     // No inbound deep links, shares, app links or package discovery.
     delete manifest.queries;
     for (const activity of app.activity ?? []) {
@@ -37,7 +38,7 @@ module.exports = function privateAndroid(config) {
     const source = mod.modResults.contents;
     if (!source.includes('signingConfig signingConfigs.debug')) throw new Error('Release signing template changed; review it');
     // Expo templates otherwise sign release with the bundled debug keystore.
-    mod.modResults.contents = source.replace(/(release\s*\{[\s\S]*?)signingConfig signingConfigs\.debug/, '$1signingConfig = null');
+    mod.modResults.contents = source.replace(/(release\s*\{[\s\S]*?)signingConfig signingConfigs\.debug/, '$1debuggable false\n            signingConfig = null');
     if (!mod.modResults.contents.includes('signingConfig = null')) throw new Error('Unsigned release patch failed');
     return mod;
   });

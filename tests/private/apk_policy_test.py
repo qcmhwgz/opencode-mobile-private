@@ -5,13 +5,20 @@ import xml.etree.ElementTree as ET
 
 PROJECT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(PROJECT / 'scripts/private'))
-from apk_policy import backup_failures, network_failures, resource_failures
+from apk_policy import backup_failures, network_failures, resource_failures, debug_failures
 
 NETWORK = b'<network-security-config><base-config cleartextTrafficPermitted="false"/><domain-config cleartextTrafficPermitted="true"><domain includeSubdomains="false">10.0.0.2</domain></domain-config></network-security-config>'
 BACKUP = (PROJECT / 'config/private/data-extraction-rules.xml').read_bytes()
 
 
 class CompiledResourcePolicyTests(unittest.TestCase):
+    def test_release_debug_state_must_be_confirmed_false(self):
+        for manifest in (None, 'false'):
+            self.assertEqual(debug_failures(manifest, 'false'), [])
+        for manifest, resolved in [('true', 'true'), ('true', 'false'), (None, 'true'), ('false', ''), ('@bool/debug', 'false')]:
+            with self.subTest(manifest=manifest, resolved=resolved):
+                self.assertTrue(debug_failures(manifest, resolved))
+
     def test_complete_backup_exclusions(self):
         self.assertEqual(backup_failures(BACKUP), [])
 

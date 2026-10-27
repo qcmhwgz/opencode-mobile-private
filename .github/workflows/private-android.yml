@@ -86,6 +86,9 @@ jobs:
           set -euo pipefail
           APK=android/app/build/outputs/apk/release/app-release-unsigned.apk
           test -s "$APK"
+          mkdir -p private-native-diagnostics
+          apkanalyzer manifest print "$APK" > private-native-diagnostics/compiled-manifest.xml
+          "$ANDROID_HOME/build-tools/36.0.0/aapt2" dump resources "$APK" > private-native-diagnostics/compiled-resources.txt
           BUILD_TOOLS="$ANDROID_HOME/build-tools/36.0.0"
           if "$BUILD_TOOLS/apksigner" verify "$APK"; then
             echo 'Refusing an unexpectedly signed CI artifact'
@@ -109,6 +112,8 @@ jobs:
           name: private-native-diagnostics-${{ github.sha }}
           path: |
             android/build/reports/
+            android/app/build/reports/
+            private-native-diagnostics/
             android/app/build/outputs/logs/
             android/gradle/verification-metadata.xml
             android/private-locks/

@@ -8,7 +8,7 @@ from pathlib import Path
 import subprocess
 import xml.etree.ElementTree as ET
 import zipfile
-from apk_policy import backup_failures, network_failures, resource_failures
+from apk_policy import backup_failures, network_failures, resource_failures, debug_failures
 
 p = argparse.ArgumentParser()
 p.add_argument('apk', type=Path)
@@ -28,9 +28,11 @@ allowed = {'android.permission.INTERNET', 'android.permission.ACCESS_NETWORK_STA
 for permission in permissions:
     if permission not in allowed:
         failures.append('Unexpected permission: ' + str(permission))
-for key in ['allowBackup', 'debuggable', 'usesCleartextTraffic', 'fullBackupContent']:
+for key in ['allowBackup', 'usesCleartextTraffic', 'fullBackupContent']:
     if app.get(android + key) != 'false':
         failures.append(key + ' must be false')
+resolved_debug = subprocess.run([args.apkanalyzer, 'manifest', 'debuggable', str(args.apk)], check=True, capture_output=True, text=True).stdout.strip()
+failures.extend(debug_failures(app.get(android + 'debuggable'), resolved_debug))
 if app.get(android + 'networkSecurityConfig') is None:
     failures.append('Network security configuration missing')
 resource_checks = {}
@@ -73,7 +75,7 @@ with zipfile.ZipFile(args.apk) as apk:
     if abis != ['arm64-v8a']:
         failures.append('Unexpected ABIs: ' + ','.join(abis))
 report = {'apk': args.apk.name, 'sha256': hashlib.sha256(args.apk.read_bytes()).hexdigest(),
-          'permissions': permissions, 'exported': exported, 'abis': abis, 'resource_checks': resource_checks, 'failures': failures,
+          'debuggable': resolved_debug, 'permissions': permissions, 'exported': exported, 'abis': abis, 'resource_checks': resource_checks, 'failures': failures,
           'limitations': ['No device traffic capture, authenticated server acceptance or signer verification in this check.']}
 args.report.write_text(json.dumps(report, indent=2) + '\n')
 print(json.dumps(report, indent=2))

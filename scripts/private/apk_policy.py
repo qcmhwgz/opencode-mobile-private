@@ -83,3 +83,10 @@ def network_failures(xml, binary_tree=None):
         if domain.tag != 'domain' or not valid_text or domain.attrib != {'includeSubdomains': 'false'} or len(domain):
             failures.append('Unexpected cleartext destination')
     return failures
+
+
+def debug_failures(manifest_value, resolved_value):
+    # Missing is Android's false default; the APK analyzer must confirm it.
+    if manifest_value not in (None, 'false') or resolved_value != 'false':
+        return ['Release APK must resolve to non-debuggable']
+    return []

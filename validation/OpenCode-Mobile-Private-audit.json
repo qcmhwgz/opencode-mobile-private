@@ -1,0 +1,30 @@
+{
+  "apk": "OpenCode-Mobile-Private-unsigned.apk",
+  "sha256": "e2034d866adbc963a3b1a7f6fdb32d52cd4b9c4678abd92462e35712a977ef17",
+  "debuggable": "false",
+  "permissions": [
+    "android.permission.ACCESS_NETWORK_STATE",
+    "android.permission.INTERNET",
+    "app.opencode.mobile.privateedition.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+  ],
+  "exported": [
+    "app.opencode.mobile.privateedition.MainActivity"
+  ],
+  "abis": [
+    "arm64-v8a"
+  ],
+  "resource_checks": {
+    "private_network_security": {
+      "file": "res/Xs.xml",
+      "failures": []
+    },
+    "private_data_extraction": {
+      "file": "res/RZ.xml",
+      "failures": []
+    }
+  },
+  "failures": [],
+  "limitations": [
+    "No device traffic capture, authenticated server acceptance or signer verification in this check."
+  ]
+}

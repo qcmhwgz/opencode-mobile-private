@@ -1,5 +1,7 @@
 # OpenCode Mobile Private Edition
 
+**构建状态：第 8 轮严格构建及 APK 检查已通过，提供 arm64 未签名 Release。正式签名与手机/真实服务器验收待用户本地完成。** 编译提交、摘要和结果见 [BUILD-RESULT.zh-CN.md](BUILD-RESULT.zh-CN.md)。
+
 基于 `alvarolorentedev/opencode-mobile` 的 Android 私有版本。上游提交、客户端依赖和构建工具见 `private-source.json`、`package-lock.json`、`private-toolchain.json`。服务端预期版本为用户提供的 **2.1.4**，真实认证兼容性需以本地探测和手机验收为准。
 
 **现有服务器不需要安装、升级、重启或调整任何组件。** 开发验证仅对真实服务器发出了未认证 GET 请求，返回 401；用户选择稍后自行完成认证探测。测试中的创建会话、审批、命令和终端操作只针对本机假服务。
@@ -38,7 +40,7 @@ npm run private:build
 
 生成目标为 `android/app/build/outputs/apk/release/app-release-unsigned.apk`。流程显式移除了 Expo 模板给 Release 使用调试密钥签名的配置，不读取任何签名 Secrets。
 
-项目已包含从第六轮真实构建取得并审查的主工程依赖锁与校验元数据；严格重建与实际 APK 审计尚待通过。缺少 app 锁或校验元数据时正常构建会停止。仅在重新审查原生依赖输入时使用首次冻结：
+项目已包含从第六轮真实构建取得并审查的主工程依赖锁与校验元数据；第 8 轮严格重建与实际 APK 审计已通过，细节见最终构建记录。缺少 app 锁或校验元数据时正常构建会停止。仅在重新审查原生依赖输入时使用首次冻结：
 
 ```sh
 npm run private:build -- --freeze-dependencies
@@ -50,7 +52,7 @@ npm run private:build -- --freeze-dependencies
 
 已根据用户授权导入私有仓库 [qcmhwgz/opencode-mobile-private](https://github.com/qcmhwgz/opencode-mobile-private)，默认分支为 `main`。首次导入的 Git 文件树与本地源码完全一致。后续开发请以该仓库的最新 `main` 为准；原本地 `private-edition` 分支保留上游历史，与连接器创建的远端提交历史不同，不要直接强制推送覆盖远端。保留许可证，不上传 `node_modules/`、`android/`、密钥、密码、`.env` 或缓存。
 
-在 Actions 选择 **Private Android candidate (unsigned)**，点击 **Run workflow**。第三次运行已通过全部 162 项浏览器测试，但原生构建被依赖锁与 `failOnChangingVersions` 的配置冲突阻止；当前配置已移除冲突策略，继续使用严格依赖锁和 SHA-256 校验，详见 `SECURITY-VALIDATION.zh-CN.md`。CI 浏览器并发限制为 2，先独立打包测试页面；失败时将测试诊断保留 3 天，没有修改测试断言或过期时间，也没有启用自动重试。
+在 Actions 选择 **Private Android candidate (unsigned)**，点击 **Run workflow**，不勾选首次冻结即可执行严格构建。第八次运行已通过全部 162 项浏览器测试、严格原生编译和 APK 检查，详见 `BUILD-RESULT.zh-CN.md`。CI 浏览器并发为 2，先独立打包测试页面；失败诊断保留 3 天，没有修改测试断言或过期时间，也没有启用自动重试。
 
 Actions 权限只有 `contents: read`，官方 actions 固定到提交 SHA，手动运行才构建未签名 arm64 APK。流程先执行静态检查、出站限制测试、假服务测试和浏览器回归，再执行构建、未签名状态检查、合并 Manifest/DEX 检查和 SHA-256 计算。任何门禁失败都不会上传候选 APK。下载的 artifact 是未签名候选，不能直接安装。
 

@@ -1,0 +1,35 @@
+{
+  "project": "OpenCode Mobile Private Edition",
+  "repository": "https://github.com/qcmhwgz/opencode-mobile-private",
+  "apkSourceCommit": "932034b4ed1a5f8ecaaa2c84d738a301afaec3dc",
+  "apkSourceTree": "9d81d77cc23737491ef4bc359a7a12a887901ef7",
+  "localEquivalentSourceCommit": "8562bcf8e9508faceef0eb8d288eb4aea152b1f8",
+  "runId": 40550542419,
+  "runUrl": "https://github.com/qcmhwgz/opencode-mobile-private/actions/runs/40550542419",
+  "runConclusion": "success",
+  "firstFreezeEnabled": false,
+  "artifactId": 12757253658,
+  "artifactZipSHA256": "3e0995cb69e319f5096155635ee72a0ee1473e5a4370172bf703372ab307ac9e",
+  "apkSHA256": "e2034d866adbc963a3b1a7f6fdb32d52cd4b9c4678abd92462e35712a977ef17",
+  "apkBytes": 43776059,
+  "frozenInputFilesMatched": 26,
+  "checks": {
+    "unitTests": 646,
+    "privateBoundaryTests": 26,
+    "resourcePolicyTests": 9,
+    "browserTests": 162,
+    "strictNativeCompile": "passed",
+    "ciApkAudit": "passed",
+    "localApkAudit": "passed",
+    "unsignedStructure": "passed",
+    "zipalign16k": "passed",
+    "elf16kLibraries": 26
+  },
+  "signing": "Unsigned; no user signing key used",
+  "pending": [
+    "Local user-owned release signing and final signer/SHA-256 verification",
+    "Authenticated OpenCode Server 2.1.4 API acceptance",
+    "Android phone/WireGuard reconnect, SSE, PTY and tool approval acceptance",
+    "Device traffic capture, credential storage, screenshot and backup/transfer behavior"
+  ]
+}

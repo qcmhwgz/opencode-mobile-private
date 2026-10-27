@@ -14,7 +14,11 @@ module.exports = function privateAndroid(config) {
     // AGP sets the build-type flag; a literal Manifest flag fails release lint.
     delete app.$['android:debuggable'];
     // No inbound deep links, shares, app links or package discovery.
-    delete manifest.queries;
+    // A deletion in the app source alone does not suppress library queries.
+    manifest.$['xmlns:tools'] = 'http://schemas.android.com/tools';
+    manifest.queries = [{ $: { 'tools:node': 'removeAll' } }];
+    app.receiver = (app.receiver ?? []).filter((receiver) => receiver.$?.['android:name'] !== 'androidx.profileinstaller.ProfileInstallReceiver');
+    app.receiver.push({ $: { 'android:name': 'androidx.profileinstaller.ProfileInstallReceiver', 'tools:node': 'remove' } });
     for (const activity of app.activity ?? []) {
       activity['intent-filter'] = (activity['intent-filter'] ?? []).filter((filter) =>
         (filter.category ?? []).some((category) => category.$?.['android:name'] === 'android.intent.category.LAUNCHER'));

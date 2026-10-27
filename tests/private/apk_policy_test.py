@@ -58,6 +58,17 @@ class CompiledResourcePolicyTests(unittest.TestCase):
         self.assertTrue(resource_failures('@ref/0x7f010000', table, 'private_network_security'))
         self.assertTrue(resource_failures('@ref/0x7f010001', table + '      (v36) (file) res/xml-v36/other.xml type=XML\n', 'private_network_security'))
 
+    def test_shortened_resource_paths_preserve_identity_and_reject_variants(self):
+        table = '    resource 0x7f150009 xml/private_network_security\n      () (file) res/Xs.xml type=XML\n'
+        self.assertEqual(resource_failures('@ref/0x7f150009', table, 'private_network_security'), [])
+        for mutation in (
+            table.replace('res/Xs.xml', '../outside.xml'),
+            table.replace('res/Xs.xml', '/res/Xs.xml'),
+            table.replace('() (file) res/Xs.xml type=XML', '() @0x7f150008'),
+            table + '      (v36) (file) res/Xs.xml type=XML\n',
+        ):
+            self.assertTrue(resource_failures('@ref/0x7f150009', mutation, 'private_network_security'))
+
     def test_omitted_text_requires_aapt2_text_inside_the_domain(self):
         omitted = NETWORK.replace(b'10.0.0.2', b'')
         tree = "E: network-security-config\n    E: domain-config\n        E: domain\n          A: includeSubdomains=false\n            T: '10.0.0.2'\n"

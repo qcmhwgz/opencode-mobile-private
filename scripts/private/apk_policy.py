@@ -8,21 +8,30 @@ STORAGE_DOMAINS = {
 }
 
 
-def resource_failures(reference, table, name):
+def resource_xml_path(reference, table, name):
     matches = list(re.finditer(r'^\s*resource\s+(0x[0-9a-fA-F]+)\s+xml/' + re.escape(name) + r'\s*$', table, re.M))
     if len(matches) != 1:
-        return ['Missing or ambiguous resource: ' + name]
+        return None, ['Missing or ambiguous resource: ' + name]
     entry = matches[0]
     resource_id = entry.group(1)
     if reference not in {'@ref/' + resource_id, '@' + resource_id, '@xml/' + name}:
-        return ['Manifest does not reference audited resource: ' + name]
+        return None, ['Manifest does not reference audited resource: ' + name]
     tail = table[entry.end():]
     next_entry = re.search(r'^\s*resource\s+', tail, re.M)
     block = tail[:next_entry.start()] if next_entry else tail
-    paths = set(re.findall(r'\(file\)\s+(\S+)\s+type=XML', block))
-    if paths != {'res/xml/' + name + '.xml'}:
-        return ['Unexpected resource variants or alias: ' + name]
-    return []
+    configs = re.findall(r'^\s*\(([^)]*)\)\s+([^\n]+)', block, re.M)
+    if len(configs) != 1 or configs[0][0] != '':
+        return None, ['Unexpected resource variants or alias: ' + name]
+    file = re.fullmatch(r'\(file\)\s+(res/(?:[A-Za-z0-9_-]+/)*[A-Za-z0-9_.-]+\.xml)\s+type=XML', configs[0][1].strip())
+    if file is None:
+        return None, ['Unexpected resource variants or alias: ' + name]
+    # R8 may shorten the path. Trust its resource-table binding, then inspect
+    # that exact binary XML; a filename alone never proves the policy.
+    return file.group(1), []
+
+
+def resource_failures(reference, table, name):
+    return resource_xml_path(reference, table, name)[1]
 
 
 def backup_failures(xml):

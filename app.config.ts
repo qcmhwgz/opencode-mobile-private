@@ -246,7 +246,8 @@ config.scheme = 'opencodeprivate';
 config.updates = { enabled: false, checkAutomatically: 'NEVER', fallbackToCacheTimeout: 0 };
 config.android = { ...config.android, package: 'app.opencode.mobile.privateedition',
   allowBackup: false, permissions: ['android.permission.INTERNET', 'android.permission.ACCESS_NETWORK_STATE'],
-  blockedPermissions: ['android.permission.CAMERA', 'android.permission.RECORD_AUDIO', 'android.permission.MODIFY_AUDIO_SETTINGS',
+  blockedPermissions: ['android.permission.ACCESS_WIFI_STATE', 'android.permission.USE_BIOMETRIC',
+    'android.permission.USE_FINGERPRINT', 'android.permission.CAMERA', 'android.permission.RECORD_AUDIO', 'android.permission.MODIFY_AUDIO_SETTINGS',
     'android.permission.READ_EXTERNAL_STORAGE', 'android.permission.WRITE_EXTERNAL_STORAGE',
     'android.permission.READ_MEDIA_IMAGES', 'android.permission.READ_MEDIA_VIDEO', 'android.permission.READ_MEDIA_AUDIO',
     'android.permission.SYSTEM_ALERT_WINDOW', 'android.permission.REQUEST_INSTALL_PACKAGES',

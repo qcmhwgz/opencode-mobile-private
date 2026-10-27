@@ -16,3 +16,5 @@ CI produces only unsigned candidates, requires passing gates, and records depend
 DOM WebView 的 Kotlin 补丁必须配合 Expo autolinking 的 Android `buildFromSource: ["expo-sharing", "expo-dom-webview"]`。匹配对象为原生项目名；准备脚本拒绝缺失配置或源文件 SHA-256 改动，包括已打补丁后的非预期改动。最终构建日志须确认 WebView 从源码编译，不能仅凭 node_modules 文件已修改断言补丁进入 APK。
 
 Release 调试状态由 Gradle 的 `debuggable false` 设置，源 Manifest 不硬编码此标记，以保留 Android 发布 lint。最终 APK 审计额外运行 `apkanalyzer manifest debuggable`，只有结果明确为 false 且 Manifest 未启用调试时才通过。
+
+Manifest 合并规则显式移除 Wi-Fi 详情、生物识别权限、库加入的 package queries 和 ProfileInstallReceiver。APK 资源路径按资源 ID 与资源表解析，支持 R8 路径缩短，仍要求唯一默认 XML 配置和完整内容策略检查。

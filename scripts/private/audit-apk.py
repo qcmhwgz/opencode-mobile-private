@@ -8,7 +8,7 @@ from pathlib import Path
 import subprocess
 import xml.etree.ElementTree as ET
 import zipfile
-from apk_policy import backup_failures, network_failures, resource_failures, debug_failures
+from apk_policy import backup_failures, network_failures, resource_xml_path, debug_failures
 
 p = argparse.ArgumentParser()
 p.add_argument('apk', type=Path)
@@ -38,22 +38,28 @@ if app.get(android + 'networkSecurityConfig') is None:
 resource_checks = {}
 table = subprocess.run([args.aapt2, 'dump', 'resources', str(args.apk)], check=True, capture_output=True, text=True).stdout
 for resource, checker in [('private_network_security', network_failures), ('private_data_extraction', backup_failures)]:
+    attribute = 'networkSecurityConfig' if resource == 'private_network_security' else 'dataExtractionRules'
+    file, issues = resource_xml_path(app.get(android + attribute), table, resource)
+    if issues:
+        resource_checks[resource] = {'failures': issues}
+        failures.extend(issues)
+        continue
     try:
-        decoded = subprocess.run([args.apkanalyzer, 'resources', 'xml', '--file', 'res/xml/' + resource + '.xml', str(args.apk)], check=True, capture_output=True).stdout
+        decoded = subprocess.run([args.apkanalyzer, 'resources', 'xml', '--file', file, str(args.apk)], check=True, capture_output=True).stdout
         if resource == 'private_network_security':
-            binary_tree = subprocess.run([args.aapt2, 'dump', 'xmltree', '--file', 'res/xml/' + resource + '.xml', str(args.apk)], check=True, capture_output=True, text=True).stdout
+            binary_tree = subprocess.run([args.aapt2, 'dump', 'xmltree', '--file', file, str(args.apk)], check=True, capture_output=True, text=True).stdout
             issues = checker(decoded, binary_tree)
         else:
             issues = checker(decoded)
-        attribute = 'networkSecurityConfig' if resource == 'private_network_security' else 'dataExtractionRules'
-        issues.extend(resource_failures(app.get(android + attribute), table, resource))
-        resource_checks[resource] = {'failures': issues}
+        resource_checks[resource] = {'file': file, 'failures': issues}
         failures.extend(issues)
     except (subprocess.CalledProcessError, ET.ParseError) as error:
         failures.append('Unable to validate compiled XML: ' + resource)
         resource_checks[resource] = {'error': type(error).__name__}
 if root.get('package') != 'app.opencode.mobile.privateedition':
     failures.append('Unexpected package ID')
+if root.find('queries') is not None:
+    failures.append('Package visibility queries must be absent')
 exported = []
 for node in app:
     if node.get(android + 'exported') == 'true':

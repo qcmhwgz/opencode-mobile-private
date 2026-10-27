@@ -1,0 +1,20 @@
+........F
+======================================================================
+FAIL: test_shortened_resource_paths_preserve_identity_and_reject_variants (apk_policy_test.CompiledResourcePolicyTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/wq/Documents/Codex/2026-10-27/referenced-chatgpt-conversation-this-is-an/outputs/OpenCode-Mobile-Private-Edition/tests/private/apk_policy_test.py", line 63, in test_shortened_resource_paths_preserve_identity_and_reject_variants
+    self.assertEqual(resource_failures('@ref/0x7f150009', table, 'private_network_security'), [])
+AssertionError: Lists differ: ['Unexpected resource variants or alias: private_network_security'] != []
+
+First list contains 1 additional elements.
+First extra element 0:
+'Unexpected resource variants or alias: private_network_security'
+
+- ['Unexpected resource variants or alias: private_network_security']
++ []
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.003s
+
+FAILED (failures=1)

@@ -1,0 +1,7 @@
+{
+  "scope": "Run 7 failed-audit diagnostic APK only",
+  "zipIntegrity": true,
+  "jarSignatureFiles": [],
+  "apkSigningBlockPresent": false,
+  "unsigned": true
+}

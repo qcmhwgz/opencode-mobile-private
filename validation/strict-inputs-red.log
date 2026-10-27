@@ -1,0 +1,35 @@
+
+ RUN  v5.0.3 /Users/wq/Documents/Codex/2026-10-27/referenced-chatgpt-conversation-this-is-an/outputs/OpenCode-Mobile-Private-Edition
+
+ ❯ tests/vitest/private-native-inputs.test.ts (5 tests | 2 failed) 233ms
+   × rejects incomplete strict native inputs before running prebuild: lock 51ms
+   × rejects incomplete strict native inputs before running prebuild: verification 51ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/vitest/private-native-inputs.test.ts > rejects incomplete strict native inputs before running prebuild: lock
+ FAIL  tests/vitest/private-native-inputs.test.ts > rejects incomplete strict native inputs before running prebuild: verification
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/vitest/private-native-inputs.test.ts:61:54
+     59|   const result = spawnSync(process.execPath, [resolve(project, 'script…
+     60|   expect(result.status).not.toBe(0);
+     61|   expect(existsSync(join(root, 'prebuild-started'))).toBe(false);
+       |                                                      ^
+     62| });
+     63|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 3 passed (5)
+   Start at  00:22:53
+   Duration  335ms (tests 93%, transform 4%, import 2%, worker 1%)
+

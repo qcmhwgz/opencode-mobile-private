@@ -1,0 +1,41 @@
+{
+  "checks": [
+    {
+      "source": "https://dl.google.com/dl/android/maven2/com/android/tools/build/transform-api/2.0.0-deprecated-use-gradle-api/transform-api-2.0.0-deprecated-use-gradle-api.jar",
+      "sha256": "4de4a3d05e1c534c2db9e4588bf34082bb2bd232d8abb9727c430290ce225740",
+      "bytes": 261
+    },
+    {
+      "source": "https://dl.google.com/dl/android/maven2/com/android/tools/build/transform-api/2.0.0-deprecated-use-gradle-api/transform-api-2.0.0-deprecated-use-gradle-api.pom",
+      "sha256": "7c62f3856e8abca1d79257925f26c12668693f5d95904056bbac88605cfd8575",
+      "bytes": 1108
+    },
+    {
+      "source": "https://repo.maven.apache.org/maven2/com/android/tools/build/transform-api/2.0.0-deprecated-use-gradle-api/transform-api-2.0.0-deprecated-use-gradle-api.jar",
+      "sha256": "e8b4151ae1679f1abe7a14ee371ac9b3c651ae7b63290d1f586bdd0f78face9a",
+      "bytes": 261
+    },
+    {
+      "source": "https://repo.maven.apache.org/maven2/com/android/tools/build/transform-api/2.0.0-deprecated-use-gradle-api/transform-api-2.0.0-deprecated-use-gradle-api.pom",
+      "sha256": "d49d179f707d3f3a00b2a7d36136b54aa8d44fa22770703cd82fe52fb39e22eb",
+      "bytes": 1083
+    },
+    {
+      "source": "https://plugins.gradle.org/m2/org/jetbrains/kotlin/jvm/org.jetbrains.kotlin.jvm.gradle.plugin/2.1.20/org.jetbrains.kotlin.jvm.gradle.plugin-2.1.20.pom",
+      "sha256": "abc4c3875e3f97553a176a90f51788ec0f5eae8e1d26423ea8ebdbf8aa6a1786",
+      "bytes": 673
+    },
+    {
+      "source": "https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/jvm/org.jetbrains.kotlin.jvm.gradle.plugin/2.1.20/org.jetbrains.kotlin.jvm.gradle.plugin-2.1.20.pom",
+      "sha256": "5ccb905a796717218c1bb4eed8bb31fc674c5803cdd54c23753ead380f7a11b5",
+      "bytes": 1397
+    }
+  ],
+  "allThreeAlternativeChecksumPairsMatchedOfficialRepositories": true,
+  "transformJarUncompressedPayloadsIdentical": true,
+  "pomCoordinatesAndDependenciesEqual": {
+    "google-transform-api.pom vs central-transform-api.pom": true,
+    "plugins-kotlin-marker.pom vs central-kotlin-marker.pom": true
+  },
+  "scope": "Targeted review of all three alternative-checksum entries, not provenance verification of every dependency"
+}

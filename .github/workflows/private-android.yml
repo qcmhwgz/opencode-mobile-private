@@ -7,6 +7,8 @@ on:
         type: boolean
         default: false
   pull_request:
+  push:
+    branches: [main]
 permissions:
   contents: read
 env:
@@ -53,7 +55,7 @@ jobs:
           if-no-files-found: ignore
           retention-days: 3
   unsigned-apk:
-    if: github.event_name == 'workflow_dispatch'
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'push'
     needs: validate
     runs-on: ubuntu-24.04
     timeout-minutes: 90
@@ -69,6 +71,26 @@ jobs:
           distribution: temurin
           java-version: '17.0.17+10'
       - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Prepare pinned APK inspection tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          SDK_MANAGER="$(command -v sdkmanager || true)"
+          if [ ! -x "$SDK_MANAGER" ]; then
+            SDK_MANAGER="${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager"
+          fi
+          if [ ! -x "$SDK_MANAGER" ]; then
+            for candidate in "$ANDROID_HOME"/cmdline-tools/*/bin/sdkmanager; do
+              if [ -x "$candidate" ]; then SDK_MANAGER="$candidate"; break; fi
+            done
+          fi
+          test -x "$SDK_MANAGER"
+          "$SDK_MANAGER" --install 'cmdline-tools;19.0' 'build-tools;36.0.0' 'platforms;android-36'
+          APK_ANALYZER="${ANDROID_HOME}/cmdline-tools/19.0/bin/apkanalyzer"
+          test -x "$APK_ANALYZER"
+          "$APK_ANALYZER" --help > /dev/null
+          test -x "${ANDROID_HOME}/build-tools/36.0.0/aapt2"
+          printf 'PRIVATE_APKANALYZER=%s\n' "$APK_ANALYZER" >> "$GITHUB_ENV"
       - name: Build unsigned arm64 candidate
         run: |
           if [ "$FREEZE_NATIVE" = "true" ]; then
@@ -77,24 +99,24 @@ jobs:
             npm run private:build
           fi
         env:
-          FREEZE_NATIVE: ${{ inputs.freeze_native_dependencies }}
+          FREEZE_NATIVE: ${{ inputs.freeze_native_dependencies || false }}
       - name: Verify unsigned state and audit APK
         env:
-          FREEZE_NATIVE: ${{ inputs.freeze_native_dependencies }}
+          FREEZE_NATIVE: ${{ inputs.freeze_native_dependencies || false }}
         shell: bash
         run: |
           set -euo pipefail
           APK=android/app/build/outputs/apk/release/app-release-unsigned.apk
           test -s "$APK"
           mkdir -p private-native-diagnostics
-          apkanalyzer manifest print "$APK" > private-native-diagnostics/compiled-manifest.xml
+          "$PRIVATE_APKANALYZER" manifest print "$APK" > private-native-diagnostics/compiled-manifest.xml
           "$ANDROID_HOME/build-tools/36.0.0/aapt2" dump resources "$APK" > private-native-diagnostics/compiled-resources.txt
           BUILD_TOOLS="$ANDROID_HOME/build-tools/36.0.0"
           if "$BUILD_TOOLS/apksigner" verify "$APK"; then
             echo 'Refusing an unexpectedly signed CI artifact'
             exit 1
           fi
-          python3 scripts/private/audit-apk.py "$APK" --aapt2 "$BUILD_TOOLS/aapt2"
+          python3 scripts/private/audit-apk.py "$APK" --apkanalyzer "$PRIVATE_APKANALYZER" --aapt2 "$BUILD_TOOLS/aapt2"
           mkdir -p output
           cp "$APK" output/OpenCode-Mobile-Private-unsigned.apk
           cp private-apk-audit.json output/
@@ -114,6 +136,7 @@ jobs:
             android/build/reports/
             android/app/build/reports/
             private-native-diagnostics/
+            android/app/build/outputs/apk/release/app-release-unsigned.apk
             android/app/build/outputs/logs/
             android/gradle/verification-metadata.xml
             android/private-locks/

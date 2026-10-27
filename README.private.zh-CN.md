@@ -18,7 +18,7 @@
 
 ## 本机构建
 
-需要 Node 22.21.1、JDK 17.0.17+10 和 Android SDK。固定工具版本见 `private-toolchain.json`。先在终端切换到本项目目录：
+需要 Node 22.21.1、JDK 17.0.17+10 和 Android SDK（Command-line Tools 19.0）。固定工具版本见 `private-toolchain.json`。先在终端切换到本项目目录：
 
 ```sh
 npm ci --ignore-scripts --no-audit --no-fund
@@ -38,7 +38,7 @@ npm run private:build
 
 生成目标为 `android/app/build/outputs/apk/release/app-release-unsigned.apk`。流程显式移除了 Expo 模板给 Release 使用调试密钥签名的配置，不读取任何签名 Secrets。
 
-如果尚未随项目提供原生依赖锁和校验元数据，正常构建会停止。首次可信构建使用：
+项目已包含从第六轮真实构建取得并审查的主工程依赖锁与校验元数据；严格重建与实际 APK 审计尚待通过。缺少 app 锁或校验元数据时正常构建会停止。仅在重新审查原生依赖输入时使用首次冻结：
 
 ```sh
 npm run private:build -- --freeze-dependencies
@@ -112,3 +112,5 @@ python3 scripts/private/probe-local.py
 ## 许可证
 
 本派生版本保留上游 Apache-2.0 许可证与原始来源。修改说明见 `NOTICE`、本文件和各修改文件头。上游使用说明保存在 `README.upstream.md`，其中的云服务和商店发布流程不适用于本私有版。
+
+主分支 main 的新提交会自动执行完整验证与未签名严格构建；手动运行也默认为严格模式。只有显式勾选首次冻结选项才重新生成依赖基线。

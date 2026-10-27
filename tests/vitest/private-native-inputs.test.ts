@@ -1,5 +1,5 @@
 import { afterEach, expect, it } from 'vitest';
-import { mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -45,4 +45,18 @@ it('rejects changes to an already-patched native input', () => {
   expect(f.run().status).toBe(0);
   writeFileSync(f.file, readFileSync(f.file, 'utf8') + '\n// changed native input\n');
   expect(f.run().status).not.toBe(0);
+});
+
+
+it.each(['lock', 'verification'])('rejects incomplete strict native inputs before running prebuild: %s', (missing) => {
+  const root = mkdtempSync(join(tmpdir(), 'private-build-input-'));
+  folders.push(root);
+  mkdirSync(join(root, 'config/private/gradle-locks'), { recursive: true });
+  mkdirSync(join(root, 'scripts/private'), { recursive: true });
+  if (missing !== 'lock') writeFileSync(join(root, 'config/private/gradle-locks/_app.lockfile'), '# fixture');
+  if (missing !== 'verification') writeFileSync(join(root, 'config/private/verification-metadata.xml'), '<fixture/>');
+  writeFileSync(join(root, 'scripts/private/prebuild.mjs'), "import { writeFileSync } from 'node:fs'; writeFileSync('prebuild-started', 'unexpected');");
+  const result = spawnSync(process.execPath, [resolve(project, 'scripts/private/build.mjs')], { cwd: root, encoding: 'utf8' });
+  expect(result.status).not.toBe(0);
+  expect(existsSync(join(root, 'prebuild-started'))).toBe(false);
 });

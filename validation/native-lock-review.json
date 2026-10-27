@@ -1,0 +1,19 @@
+{
+  "sourceRun": 40518328699,
+  "sourceCommit": "9e6fbc5a2859405283665b06b18c431fa923ade4",
+  "diagnosticZipSHA256": "52078568e418b828f7537cfbd65f14e2a52f9ed8078f004c7e36fbc629d787d0",
+  "lockfiles": 21,
+  "lockedCoordinates": 614,
+  "metadataComponents": 1309,
+  "allLockedCoordinatesCovered": true,
+  "sha256Entries": 2313,
+  "alternativeHashes": 3,
+  "noDynamicOrSnapshotVersions": true,
+  "noTrustedArtifactOrIgnoredKeyExceptions": true,
+  "strictBuildCompleted": false,
+  "limitations": [
+    "Bootstrap baseline review; not independent provenance verification of every dependency",
+    "Included build source is pinned by npm lock and dependency artifacts by verification metadata; auxiliary generated lockfiles outside Android private-locks were not captured",
+    "Actual APK audit did not run because CI could not locate apkanalyzer"
+  ]
+}

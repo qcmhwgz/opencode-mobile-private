@@ -2,7 +2,7 @@
 
 日期：2026-10-27，Asia/Shanghai。项目：OpenCode Mobile Private Edition。
 
-**当前交付的是源码与构建配置，不是已完成的 Release APK。** 本地原生工具链下载失败；GitHub 已完成工具下载，但第三轮构建在依赖锁配置处失败。尚未生成本项目 APK、原生 Gradle 依赖锁及完整校验元数据。正常严格构建会拒绝缺少原生锁的输入；首次可信构建/Actions bootstrap 的具体步骤见构建说明。不能把本记录称为最终安全审计通过证明。
+**当前可交付的仍是源码与构建配置。** 第六轮 Actions 已成功完成原生 Release 编译与发布 lint，runner 上生成 APK；随后因找不到 `apkanalyzer` 而未执行产物核验，未发布或下载可核验的应用 APK。21 份主工程原生依赖锁及 SHA-256 校验元数据已从真实构建取得并审查，严格重建和实际 APK 审计仍待完成。不能把本记录称为最终安全审计通过证明。
 
 ## 已执行
 
@@ -33,9 +33,9 @@
 
 ## 尚未执行或尚未完成
 
-- **原生 Release APK 编译、安装和 R8 后行为验证**：本地 Gradle/NDK 下载失败；GitHub 第三轮已下载工具，但依赖锁配置冲突导致编译停止，该配置已修正，待新构建验证。Android JS 导出成功不能替代 APK 编译。
-- **完整原生依赖冻结与供应链校验**：已提供严格锁和校验机制，但原生首次构建未完成，因此未提供已验证的 Gradle 锁/verification metadata。Actions 的 bootstrap 仅用来生成需审查的候选，不能冒充已审计的 Release。
-- **合并 APK 权限、DEX、导出组件审计**：检查脚本已提供，未对本项目 APK 执行，因为 APK 尚不存在。
+- **原生严格重建、安装和 R8 后行为验证**：第六轮 bootstrap 原生 Release 编译成功；严格重建和设备行为未验证，APK 分析步骤未实际运行。
+- **完整供应链验收**：实际 bootstrap 已生成 21 份主工程依赖锁与 SHA-256 元数据，已审查并纳入源码。尚未完成严格重建，也未独立核验每一个依赖的来源。
+- **合并 APK 权限、DEX、导出组件审计**：检查脚本已提供；本项目 APK 在 runner 上生成后，工具定位失败，尚未实际执行 APK 审计。
 - **用户正式签名与最终 APK SHA-256**：用户选择自己保管密钥并本地签名。未接收、生成或上传用户正式密钥，未产生最终 APK 指纹/摘要。签名自测仅为临时样本。
 - **真实 OpenCode Server 2.1.4 认证接口兼容性**：用户选择稍后本地执行 GET-only 探测。固定客户端 SDK 为 2.0.16；假服务器和未认证 401 不能证明该版本组合完全兼容。
 - **手机/WireGuard/Android 原生安全测试**：没有连接测试手机。尚未验证活动 VPN 检测与分流路由、SSE/PTY 长连接、后台恢复、真实审批、密码存储、截屏/备份/迁移限制，以及冷启动/外链/附件/OAuth 等场景的按应用流量。
@@ -105,3 +105,14 @@
 - 失败诊断 artifact `12738892729` 已下载，ZIP SHA-256 `ca7776a5ff52f4369dc503d89b131777011b279a9d91364dea64a79fe676fc98` 匹配 GitHub。部分 verification metadata 含 1309 个组件，无 SNAPSHOT、trusted-artifacts 或 ignored-keys 条目，但没有原生锁，也不能称为完整依赖审计。日志位于 `validation/github-run-5-*`。
 
 本次修正后的本地完整浏览器回归 162/162 通过（3.4 分钟），V1/V2 模拟服务自测通过；源码改动未涉及 e2e/fake 契约。
+
+## 第六轮与严格重建准备（2026-10-28 更新）
+
+- [运行 #6](https://github.com/qcmhwgz/opencode-mobile-private/actions/runs/40518328699)，源码 `9e6fbc5a2859405283665b06b18c431fa923ade4`：644 单元、26 私有边界、8 Python 资源测试通过，浏览器 **162/162 通过**。原生构建 `BUILD SUCCESSFUL in 34m 35s`，841 个任务执行；此前的发布调试标记 lint 问题已消除。
+- 后续核验因 `apkanalyzer: command not found` 退出 127，未验证未签名状态、实际权限/XML/DEX/ABI，也未上传候选 APK。不能把构建成功等同于产物通过审计。诊断 ZIP `12744776224` 摘要 `52078568e418b828f7537cfbd65f14e2a52f9ed8078f004c7e36fbc629d787d0` 已在本地复核。
+- 修正 CI：原生编译前安装固定 `cmdline-tools;19.0`、build-tools 36.0.0 和平台 36，测试分析工具可执行及 help，再以显式绝对路径执行分析。后续失败诊断会保留未通过的未签名 APK（私有仓库、3 天、诊断用途），正式候选 artifact 仍须所有检查通过才能上传。
+- 导入 21 份主工程依赖锁、614 个精确坐标；1309 个 metadata 组件、2313 个 artifact SHA-256 条目。锁内坐标全部有对应元数据，无动态/SNAPSHOT 版本、trusted-artifacts 或 ignored-keys 例外。Included build 的源码由 npm lock 固定，依赖 artifact 由 metadata 约束；主工程之外生成的辅助 Gradle 锁未收集，不能宣称所有构建文件都已锁定。
+- 3 个多摘要条目均已从 Google Maven、Maven Central、Gradle 插件仓库下载核对；JAR 解包内容相同，POM 坐标和依赖相同，记录见 `validation/native-alternative-checksums.json`。这是针对性来源核验，不是每个依赖的独立来源审计。
+- 缺少 `_app.lockfile` 或 verification metadata 时，正常构建在 prebuild 前停止。两个实际构建入口测试先失败后通过。当前静态门禁为 646 项；其他本地验证结果见 `validation/locked-tools-*`。新的严格构建尚未启动；提交到 main 后将自动启动严格构建，首次冻结仅保留手动选项。
+
+本轮本地最终门禁：646 项单元、26 项私有边界、8 项 Python 策略、V1/V2 模拟服务自测及 162/162 浏览器回归全部通过；工程生成确认依赖锁和 metadata 正确复制到 Android 工程。

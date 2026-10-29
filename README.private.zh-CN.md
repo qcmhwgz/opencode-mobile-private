@@ -1,6 +1,6 @@
 # OpenCode Mobile Private Edition
 
-**当前修复源码：1.0.99 / versionCode 99，新 APK 构建与手机验收另行记录。第 8 轮产物 1.0.98 虽通过静态 APK 检查，但现已复现 Android 启动崩溃，不应继续作为可用安装版交付。** 历史构建记录见 [BUILD-RESULT.zh-CN.md](BUILD-RESULT.zh-CN.md)，缺陷与修复见 [启动修复记录](docs/private-android-startup-2.2.0.md)。
+**1.0.99 / versionCode 99 的第 9 轮严格构建与实际 APK 静态核验已通过，产物未签名；手机启动和真实 2.2.0 认证验收待完成。** 结果见 [1.0.99 构建记录](BUILD-RESULT-1.0.99.zh-CN.md)。第 8 轮产物 1.0.98 虽通过静态 APK 检查，但现已复现 Android 启动崩溃，不应继续作为可用安装版交付。缺陷与修复见 [启动修复记录](docs/private-android-startup-2.2.0.md)。
 
 基于 `alvarolorentedev/opencode-mobile` 的 Android 私有版本。上游提交、客户端依赖和构建工具见 `private-source.json`、`package-lock.json`、`private-toolchain.json`。服务端预期版本按用户 2026-10-29 更新为 **2.2.0**，真实认证兼容性需以本地探测和手机验收为准。
 

@@ -1,6 +1,6 @@
 # Private Android startup fix and OpenCode 2.2.0 review
 
-2026-10-29. Fixed source: 1.0.99 / Android versionCode 99. New APK build and physical-device validation must be recorded separately.
+2026-10-29. Fixed source: 1.0.99 / Android versionCode 99. Strict unsigned build #9 and actual APK static checks passed; see `../BUILD-RESULT-1.0.99.zh-CN.md`. Physical-device startup and authenticated server acceptance remain pending.
 
 The user reported the Expo Router error screen: `Something went wrong / undefined is not a function`. The Android root navigator mounts `useNotificationRoute`. Private Edition replaces `expo-notifications` with a local stub, but version 1.0.98 did not export `addNotificationResponseReceivedListener` or `getLastNotificationResponseAsync`. Mounting the actual hook with the actual stub and `Platform.OS = android` fails without any server or network. The fix supplies an inert subscription with cleanup and a last-response read returning null. Notifications remain disabled and no native module, permission or external connection is restored.
 

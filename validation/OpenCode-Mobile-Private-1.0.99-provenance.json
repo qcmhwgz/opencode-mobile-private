@@ -1,0 +1,43 @@
+{
+  "project": "OpenCode Mobile Private Edition",
+  "versionName": "1.0.99",
+  "versionCode": 99,
+  "repository": "https://github.com/qcmhwgz/opencode-mobile-private",
+  "apkSourceCommit": "c608799bbcdca3afac96193cb6bd18b34d8b506a",
+  "apkSourceTree": "8bbe94b019420529672143c328dcc3668f3d1ee6",
+  "localEquivalentSourceCommit": "7ff23f5bd53da79ea7eb53d1079d8a9bc0c2a121",
+  "runId": 40880121745,
+  "runUrl": "https://github.com/qcmhwgz/opencode-mobile-private/actions/runs/40880121745",
+  "runConclusion": "success",
+  "firstFreezeEnabled": false,
+  "artifactId": 12901153859,
+  "artifactZipSHA256": "648fc27bfe3cd2f7f2ff1cc6ffc55e2080d5dc68bd00ef0b9aebcb048c7fa1a5",
+  "apkSHA256": "93e6ff321113d06f4eef40a507d663752242e1420bf880a4c87f4b73921dae7b",
+  "apkBytes": 43776207,
+  "frozenInputFilesMatched": 26,
+  "checks": {
+    "unitTests": 648,
+    "privateBoundaryTests": 27,
+    "resourcePolicyTests": 9,
+    "browserTests": 162,
+    "androidHookRegression": "red then green; actual hook and stub, no server",
+    "strictNativeCompile": "passed",
+    "ciApkAudit": "passed",
+    "localApkAudit": "passed",
+    "unsignedStructure": "passed",
+    "zipalign16k": "passed",
+    "elf16kLibraries": 26
+  },
+  "signing": "Unsigned. No user signing key was accessed for this APK. Local helper expects the previous verified release certificate.",
+  "previousSignedRelease": {
+    "versionCode": 98,
+    "v2v3SignatureVerified": true,
+    "certificateSHA256": "6ea1674e2e2a4195ce78af51d7094b234d2a64632a89bfa4d7d1e2b41f5f2458"
+  },
+  "pending": [
+    "User-owned local signing of versionCode 99 and final signed SHA-256",
+    "Physical-device startup after the Android notification-stub fix",
+    "Authenticated live OpenCode 2.2.0 project/session/SSE/diff/PTY/approval acceptance",
+    "Phone WireGuard TCP reachability and device traffic/credential/backup tests"
+  ]
+}

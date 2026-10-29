@@ -1,7 +1,7 @@
 {
   "checkedAt": "2026-10-29",
   "clientBuildUnderReview": "1.0.98 (versionCode 98)",
-  "fixedSourceVersion": "1.0.99 (versionCode 99; new APK not yet built)",
+  "fixedSourceVersion": "1.0.99 (versionCode 99; strict unsigned APK built and audited)",
   "sdk": "@opencode/client 2.0.16",
   "serverVersionReportedByUser": "2.2.0",
   "liveVersionAuthenticated": false,
@@ -106,7 +106,7 @@
     "androidStartupRegression": "red then green",
     "originalAndroidHookReproducer": "red then green",
     "fullLocalValidation": "passed",
-    "newReleaseBuild": "pending",
+    "newReleaseBuild": "success",
     "authenticatedProbe": "not run",
     "deviceBoot": "not run",
     "serverMutation": false,
@@ -114,7 +114,24 @@
     "pythonPolicyTests": 9,
     "fakeServerSelfTests": "passed",
     "browserTests": 162,
-    "contractDetection220Fixture": "passed; mocked transport only"
+    "contractDetection220Fixture": "passed; mocked transport only",
+    "ciStaticTests": 648,
+    "ciPrivateTests": 27,
+    "ciPolicyTests": 9,
+    "ciBrowserTests": 162,
+    "localApkAudit": "passed",
+    "binaryVerification": "passed; unsigned, ZIP/ELF 16 KB alignment"
   },
-  "userCrashTiming": "Reported shortly after opening the APK; consistent with the reproduced Android startup path."
+  "userCrashTiming": "Reported shortly after opening the APK; consistent with the reproduced Android startup path.",
+  "release": {
+    "runId": 40880121745,
+    "runUrl": "https://github.com/qcmhwgz/opencode-mobile-private/actions/runs/40880121745",
+    "sourceCommit": "c608799bbcdca3afac96193cb6bd18b34d8b506a",
+    "sourceTree": "8bbe94b019420529672143c328dcc3668f3d1ee6",
+    "apkSHA256": "93e6ff321113d06f4eef40a507d663752242e1420bf880a4c87f4b73921dae7b",
+    "apkBytes": 43776207,
+    "signed": false,
+    "physicalDeviceStartupAcceptance": "pending",
+    "authenticated220Acceptance": "pending"
+  }
 }

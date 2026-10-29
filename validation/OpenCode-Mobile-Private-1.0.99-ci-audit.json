@@ -1,0 +1,30 @@
+{
+  "apk": "app-release-unsigned.apk",
+  "sha256": "93e6ff321113d06f4eef40a507d663752242e1420bf880a4c87f4b73921dae7b",
+  "debuggable": "false",
+  "permissions": [
+    "android.permission.ACCESS_NETWORK_STATE",
+    "android.permission.INTERNET",
+    "app.opencode.mobile.privateedition.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+  ],
+  "exported": [
+    "app.opencode.mobile.privateedition.MainActivity"
+  ],
+  "abis": [
+    "arm64-v8a"
+  ],
+  "resource_checks": {
+    "private_network_security": {
+      "file": "res/Xs.xml",
+      "failures": []
+    },
+    "private_data_extraction": {
+      "file": "res/RZ.xml",
+      "failures": []
+    }
+  },
+  "failures": [],
+  "limitations": [
+    "No device traffic capture, authenticated server acceptance or signer verification in this check."
+  ]
+}

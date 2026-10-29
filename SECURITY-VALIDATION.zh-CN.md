@@ -127,3 +127,11 @@
 ## 第八轮最终结果
 
 [第 8 轮](https://github.com/qcmhwgz/opencode-mobile-private/actions/runs/40550542419) 在提交 `932034b4ed1a5f8ecaaa2c84d738a301afaec3dc` 上全部成功。646 单元、26 私有边界、9 Python 策略、162/162 浏览器回归及严格原生编译通过；APK 检查失败列表为空。最终 APK 无三项多余权限、package queries 或 ProfileInstallReceiver，备份和网络 XML 实际内容通过检查。本地下载复核及未签名/16KB 检查通过；详见 BUILD-RESULT 和 validation/OpenCode-Mobile-Private-*。历史各轮失败记录保留为过程证据。
+
+## 2026-10-29：1.0.98 Android 启动缺陷与 2.2.0 核对
+
+用户报告 `Something went wrong / undefined is not a function`。用真实 `hooks/use-notification-route.ts` 和真实私有通知替代模块，在 Android 平台的 hook 驱动中无需任何网络即可复现 `Notifications.addNotificationResponseReceivedListener is not a function`。替代模块还缺少下一步调用的 `getLastNotificationResponseAsync`。补齐无副作用监听订阅（含 remove）与返回 null 的读取后，原始复现和新增回归通过。通知仍被禁用，未恢复原生通知模块或权限。
+
+这暴露了之前验证范围的缺口：162 项浏览器回归跳过 Android 专用分支，APK 静态策略通过也不代表真机启动通过。尚未取得用户设备堆栈，不能宣称已确认该设备上的唯一根因或真机修复验收完成。修复源码版本为 1.0.99 / versionCode 99；实际 APK 构建另行记录。
+
+按官方 v2.0.16、v2.1.4、v2.2.0 OpenAPI 对照，2.0.16 中的 136 个 API 方法与路径均仍存在于 2.2.0；选查项目、会话、消息、审批、PTY 核心字段未发现本次版本移除。2.2.0 新增的 FileDiff.Info.more 与 Model.Info.type 需大 Diff/非聊天模型场景验收；不能以静态对照宣布全部兼容。只读探测原来写死 2.1.4，现改为读取声明目标 2.2.0，并允许环境变量覆盖。Mac 不带凭据 GET /api/info 返回 401，未获取认证版本或执行真实功能验收。未修改、升级或重启 OpenCode 服务。

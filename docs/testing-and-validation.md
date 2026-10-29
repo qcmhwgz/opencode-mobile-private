@@ -1,5 +1,9 @@
 # Testing And Validation
 
+## Private Edition Android startup lifecycle
+
+`tests/private/android-notification-startup.test.ts` mounts and cleans up the real notification-routing hook with the real notification stub and Android platform. It catches missing platform-only APIs before release. Browser tests return early from this hook and do not cover the Android branch. It reproduces the 1.0.98 missing-listener crash without a server; it does not replace physical-device startup validation. `tests/vitest/probe-version.test.ts` runs the actual GET-only probe with intercepted fetch to check the declared target and explicit version override, without sending live requests.
+
 # Testing And Validation
 
 All static and unit/contract suites now run under Vitest from `tests/vitest/`

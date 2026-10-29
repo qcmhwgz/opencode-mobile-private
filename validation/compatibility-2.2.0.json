@@ -1,0 +1,120 @@
+{
+  "checkedAt": "2026-10-29",
+  "clientBuildUnderReview": "1.0.98 (versionCode 98)",
+  "fixedSourceVersion": "1.0.99 (versionCode 99; new APK not yet built)",
+  "sdk": "@opencode/client 2.0.16",
+  "serverVersionReportedByUser": "2.2.0",
+  "liveVersionAuthenticated": false,
+  "liveMacProbe": {
+    "method": "GET",
+    "path": "/api/info",
+    "status": 401,
+    "authenticated": false
+  },
+  "sources": [
+    "https://github.com/anomalyco/opencode/blob/v2.0.16/packages/protocol/openapi.json",
+    "https://github.com/anomalyco/opencode/blob/v2.1.4/packages/protocol/openapi.json",
+    "https://github.com/anomalyco/opencode/blob/v2.2.0/packages/protocol/openapi.json",
+    "https://github.com/anomalyco/opencode/releases/tag/v2.2.0"
+  ],
+  "schemaComparison": {
+    "sdkBaselineOperations": 136,
+    "server220Operations": 156,
+    "removedSdkBaselineOperations": [],
+    "coreOperations": [
+      {
+        "operation": "GET /api/info",
+        "presentIn220": true
+      },
+      {
+        "operation": "GET /api/project",
+        "presentIn220": true
+      },
+      {
+        "operation": "GET /api/session",
+        "presentIn220": true
+      },
+      {
+        "operation": "GET /api/session/{sessionID}/message",
+        "presentIn220": true
+      },
+      {
+        "operation": "GET /api/session/{sessionID}/diff",
+        "presentIn220": true
+      },
+      {
+        "operation": "GET /api/event",
+        "presentIn220": true
+      },
+      {
+        "operation": "GET /api/pty",
+        "presentIn220": true
+      },
+      {
+        "operation": "POST /api/pty/{ptyID}/connect-token",
+        "presentIn220": true
+      },
+      {
+        "operation": "GET /api/pty/{ptyID}/connect",
+        "presentIn220": true
+      },
+      {
+        "operation": "GET /api/permission/request",
+        "presentIn220": true
+      },
+      {
+        "operation": "POST /api/session/{sessionID}/permission/{requestID}/reply",
+        "presentIn220": true
+      },
+      {
+        "operation": "POST /api/session/{sessionID}/prompt",
+        "presentIn220": true
+      }
+    ],
+    "limitation": "Path/method presence and selected response schema inspection do not prove semantic compatibility, authenticated server behavior or Android runtime safety.",
+    "note": "Selected Project, Session.Info, Session.Inbox.User, Permission.Request, Form.Detail, Pty properties/required fields are unchanged between 2.1.4 and 2.2.0; references and deeper semantics still need review."
+  },
+  "confirmedDefects": [
+    {
+      "id": "android-notification-startup",
+      "cause": "RootNavigator invokes useNotificationRoute on Android. The private notification stub omitted addNotificationResponseReceivedListener and getLastNotificationResponseAsync.",
+      "reproducedWith": "Actual hook + actual private stub, Android platform, no network or server required",
+      "before": "TypeError: Notifications.addNotificationResponseReceivedListener is not a function",
+      "after": "Regression and original reproducer pass after adding inert subscription cleanup and null last-response APIs",
+      "deviceCrashAttribution": "Strong candidate matching the reported error; no device stack obtained, so exact on-device exception not yet attributed."
+    },
+    {
+      "id": "probe-version-hardcoded",
+      "cause": "The GET-only probe used an exact 2.1.4 comparison independently of the APK.",
+      "fix": "Read expected server version from private-source.json (2.2.0), allow OPENCODE_PROBE_EXPECTED_VERSION override, include expected version in report."
+    }
+  ],
+  "knownCompatibilityReviewItems": [
+    {
+      "item": "FileDiff.Info.more",
+      "change": "2.2.0 adds optional more=true; current normalization drops this field.",
+      "impact": "Need to validate large/partial VCS diff presentation; not established as the reported startup crash cause."
+    },
+    {
+      "item": "Model.Info.type",
+      "change": "2.2.0 adds an optional model type and model-list filtering.",
+      "impact": "Need to validate catalog/model selection where non-chat models are configured."
+    }
+  ],
+  "executed": {
+    "privateTests": 27,
+    "androidStartupRegression": "red then green",
+    "originalAndroidHookReproducer": "red then green",
+    "fullLocalValidation": "passed",
+    "newReleaseBuild": "pending",
+    "authenticatedProbe": "not run",
+    "deviceBoot": "not run",
+    "serverMutation": false,
+    "staticUnitTests": 648,
+    "pythonPolicyTests": 9,
+    "fakeServerSelfTests": "passed",
+    "browserTests": 162,
+    "contractDetection220Fixture": "passed; mocked transport only"
+  },
+  "userCrashTiming": "Reported shortly after opening the APK; consistent with the reproduced Android startup path."
+}

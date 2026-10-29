@@ -2,7 +2,7 @@
   "upstream": "https://github.com/alvarolorentedev/opencode-mobile",
   "commit": "ec50c075845517f051e3a3b251150c15723a4489",
   "upstreamVersion": "1.0.98",
-  "serverExpectedVersion": "2.1.4",
+  "serverExpectedVersion": "2.2.0",
   "allowedOrigin": "http://10.0.0.2:47119",
   "node": "22.21.1",
   "signing": "local-user-owned-key"

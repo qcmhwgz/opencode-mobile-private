@@ -1,0 +1,1 @@
+Fix the Android startup crash when notifications are disabled in Private Edition. Keep notification delivery, cloud connections and updates disabled. Update the local probe's expected server version to 2.2.0; authenticated server and physical-device validation remain pending.

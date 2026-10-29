@@ -1,14 +1,14 @@
 # OpenCode Mobile Private Edition
 
-**构建状态：第 8 轮严格构建及 APK 检查已通过，提供 arm64 未签名 Release。正式签名与手机/真实服务器验收待用户本地完成。** 编译提交、摘要和结果见 [BUILD-RESULT.zh-CN.md](BUILD-RESULT.zh-CN.md)。
+**当前修复源码：1.0.99 / versionCode 99，新 APK 构建与手机验收另行记录。第 8 轮产物 1.0.98 虽通过静态 APK 检查，但现已复现 Android 启动崩溃，不应继续作为可用安装版交付。** 历史构建记录见 [BUILD-RESULT.zh-CN.md](BUILD-RESULT.zh-CN.md)，缺陷与修复见 [启动修复记录](docs/private-android-startup-2.2.0.md)。
 
-基于 `alvarolorentedev/opencode-mobile` 的 Android 私有版本。上游提交、客户端依赖和构建工具见 `private-source.json`、`package-lock.json`、`private-toolchain.json`。服务端预期版本为用户提供的 **2.1.4**，真实认证兼容性需以本地探测和手机验收为准。
+基于 `alvarolorentedev/opencode-mobile` 的 Android 私有版本。上游提交、客户端依赖和构建工具见 `private-source.json`、`package-lock.json`、`private-toolchain.json`。服务端预期版本按用户 2026-10-29 更新为 **2.2.0**，真实认证兼容性需以本地探测和手机验收为准。
 
 **现有服务器不需要安装、升级、重启或调整任何组件。** 开发验证仅对真实服务器发出了未认证 GET 请求，返回 401；用户选择稍后自行完成认证探测。测试中的创建会话、审批、命令和终端操作只针对本机假服务。
 
 ## 保留与限制
 
-保留项目、已有会话与历史分页、SSE 与轮询恢复、Diff、PTY 终端、工具权限审批及问题回答。SDK 固定为 `@opencode/client 2.0.16`；假服务测试不能代替对真实 2.1.4 的验证。
+保留项目、已有会话与历史分页、SSE 与轮询恢复、Diff、PTY 终端、工具权限审批及问题回答。SDK 固定为 `@opencode/client 2.0.16`；假服务测试不能代替对真实 2.2.0 的验证。
 
 原生 HTTP/XHR/Expo Fetch/终端 WebSocket 限制为 `10.0.0.2:47119`，拒绝自动重定向和系统代理，检查存在活动 VPN，并使用绑定该 VPN 的 SocketFactory。手机需要开启已有 WireGuard，并让该应用和目标地址经过 VPN。无需在本应用内保存 WireGuard 私钥。VPN 绑定、断线和分流行为仍需在你的手机上验收。
 
@@ -58,6 +58,10 @@ Actions 权限只有 `contents: read`，官方 actions 固定到提交 SHA，手
 
 不配置 Android 签名 Secrets。若原生锁尚未生成，可先在可信本机完成冻结，或手动运行 Actions 并选中 `freeze_native_dependencies`。首次运行只生成需审查的候选及 `native-dependencies/`；将其中的锁和校验元数据审查后提交到 `config/private/`，再不勾选该项运行严格构建。正常 Actions 会拒绝缺少锁的构建。
 
+## Android 启动修复与 2.2.0 核对
+
+1.0.98 的通知替代模块遗漏了 Android 启动路由调用的两个 API，会在不连接服务器时复现函数不存在的错误。1.0.99 补齐无副作用的监听生命周期和空通知读取；不恢复通知模块、权限或外部通信。实际 Android hook 与替代模块的回归先失败后通过。此前浏览器回归跳过这条原生分支，不能据其通过推断真机启动已通过。
+
 ## 本地签名
 
 使用你自己保管的 JKS/PKCS12 密钥。已有安装若要覆盖升级，必须保持相同应用 ID 和证书；本应用 ID 为 `app.opencode.mobile.privateedition`，不覆盖上游官方应用。密钥不交给聊天或 GitHub，丢失后不能用新密钥直接覆盖旧安装。
@@ -93,7 +97,7 @@ python3 scripts/private/audit-apk.py output/OpenCode-Mobile-Private-release.apk 
 
 此检查需要 SDK 的 `apkanalyzer`，它核查合并后的权限、导出组件、ABI 和若干禁止的原生命名空间。它不能替代真机渗透测试或流量捕获。
 
-## 真实 2.1.4 的只读探测
+## 真实 2.2.0 的只读探测
 
 在能连接该地址的电脑上运行：
 
@@ -101,7 +105,7 @@ python3 scripts/private/audit-apk.py output/OpenCode-Mobile-Private-release.apk 
 python3 scripts/private/probe-local.py
 ```
 
-输入已有服务器密码；可选输入已有会话 ID。脚本只发 GET，拒绝重定向，不创建会话、不发提示词、不批准工具、不创建终端、不修改设置。报告只保存接口状态、字段名、SSE 收到字节数和版本，不保存响应内容、凭据或聊天正文。此脚本只是读取和响应形状检查，不能证明所有 SDK 调用均兼容。
+预期版本来自 `private-source.json`，默认 2.2.0；可通过 `OPENCODE_PROBE_EXPECTED_VERSION` 显式覆盖。版本不符只表示与声明目标不一致，不能单独证明 API 不兼容。输入已有服务器密码；可选输入已有会话 ID。脚本只发 GET，拒绝重定向，不创建会话、不发提示词、不批准工具、不创建终端、不修改设置。报告只保存接口状态、字段名、SSE 收到字节数和版本，不保存响应内容、凭据或聊天正文。此脚本只是读取和响应形状检查，不能证明所有 SDK 调用均兼容。
 
 ## 手机上尚需验收
 

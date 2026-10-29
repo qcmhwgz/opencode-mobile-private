@@ -1,7 +1,9 @@
 // GET-only acceptance probe. Password comes from the environment, never argv or output.
 import { Buffer } from 'node:buffer';
-import { writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
 const origin = 'http://10.0.0.2:47119';
+const source = JSON.parse(readFileSync(new URL('../../private-source.json', import.meta.url), 'utf8'));
+const expectedServerVersion = process.env.OPENCODE_PROBE_EXPECTED_VERSION || source.serverExpectedVersion;
 const password = process.env.OPENCODE_PROBE_PASSWORD;
 const username = process.env.OPENCODE_PROBE_USERNAME || 'opencode';
 const directory = process.env.OPENCODE_PROBE_DIRECTORY;
@@ -30,7 +32,7 @@ async function get(path, stream = false, optional = false) {
     const json = await response.json();
     if (path === '/api/info') {
       result.version = json.data?.version ?? json.version;
-      result.expectedVersion = result.version === '2.1.4';
+      result.expectedVersion = result.version === expectedServerVersion;
     }
     result.shape = Array.isArray(json) ? 'array' : Object.keys(json).sort().join(',');
     return json;
@@ -51,7 +53,7 @@ if (session && /^[\w-]+$/.test(session)) {
   await get(`/api/session/${encodeURIComponent(session)}/diff`);
   await get(`/api/session/${encodeURIComponent(session)}/form`);
 }
-const report = { date: new Date().toISOString(), origin, authenticated: Boolean(password), projectScoped: Boolean(directory), readOnly: true, results,
+const report = { date: new Date().toISOString(), origin, expectedServerVersion, authenticated: Boolean(password), projectScoped: Boolean(directory), readOnly: true, results,
   limitation: 'GET shape/status checks only; no prompt, approval reply, PTY creation or device test was performed.' };
 const output = process.env.OPENCODE_PROBE_REPORT || 'private-probe-report.json';
 writeFileSync(output, JSON.stringify(report, null, 2) + '\n', { mode: 0o600 });
